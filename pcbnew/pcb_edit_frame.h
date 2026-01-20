@@ -554,6 +554,7 @@ public:
      * @param aCommit commit that should store the changes.
      */
     void ExchangeFootprint( FOOTPRINT* aExisting, FOOTPRINT* aNew, BOARD_COMMIT& aCommit,
+                            bool matchPadPositions,
                             bool deleteExtraTexts = true,
                             bool resetTextLayers = true,
                             bool resetTextEffects = true,

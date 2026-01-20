@@ -52,6 +52,7 @@ set( QA_PCBNEW_SRCS
     test_headless_board_context.cpp
     test_footprint.cpp
     test_footprint_load_save.cpp
+    test_footprint_realignment.cpp
     test_fp_lib_load_save.cpp
     test_io_mgr.cpp
     test_lset.cpp

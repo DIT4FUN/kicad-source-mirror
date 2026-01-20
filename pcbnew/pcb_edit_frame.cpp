@@ -46,6 +46,7 @@
 #include <bitmaps.h>
 #include <confirm.h>
 #include <footprint.h>
+#include <footprint_utils.h>
 #include <lset.h>
 #include <trace_helpers.h>
 #include <pcbnew_id.h>
@@ -2436,6 +2437,8 @@ int PCB_EDIT_FRAME::ShowExchangeFootprintsDialog( FOOTPRINT* aFootprint, bool aU
  * copy text settings from aSrc to aDest
  * @param aSrc is the PCB_TEXT source
  * @param aDest is the PCB_TEXT target
+ * @param aPosShift is the position shift to apply to aDest
+ * @param aAngleShift is the angle shift to apply to aDest
  * @param aResetText is true to keep the default target text (false to use the aSrc text)
  * @param aResetTextLayers is true to keep the default target layers setting
  * (false to use the aSrc setting)
@@ -2443,9 +2446,9 @@ int PCB_EDIT_FRAME::ShowExchangeFootprintsDialog( FOOTPRINT* aFootprint, bool aU
  * (false to use the aSrc effect)
  * @param aUpdated is a refrence to a bool to keep trace of changes
  */
-static void processTextItem( const PCB_TEXT& aSrc, PCB_TEXT& aDest,
-                             bool aResetText, bool aResetTextLayers, bool aResetTextEffects,
-                             bool aResetTextPositions, bool* aUpdated )
+static void processTextItem( const PCB_TEXT& aSrc, PCB_TEXT& aDest, const VECTOR2I& aPosShift,
+                             const EDA_ANGLE& aAngleShift, bool aResetText, bool aResetTextLayers,
+                             bool aResetTextEffects, bool aResetTextPositions, bool* aUpdated )
 {
     if( aResetText )
         *aUpdated |= aSrc.GetText() != aDest.GetText();
@@ -2471,21 +2474,27 @@ static void processTextItem( const PCB_TEXT& aSrc, PCB_TEXT& aDest,
         *aUpdated |= aSrc.GetVertJustify() != aDest.GetVertJustify();
         *aUpdated |= aSrc.GetTextSize() != aDest.GetTextSize();
         *aUpdated |= aSrc.GetTextThickness() != aDest.GetTextThickness();
-        *aUpdated |= aSrc.GetTextAngle() != aDest.GetTextAngle();
     }
     else
     {
+        EDA_ANGLE origAngle = aDest.GetTextAngle();
         aDest.SetAttributes( aSrc );
+        aDest.SetTextAngle( origAngle ); // apply rotation as part of position shift
     }
 
     if( aResetTextPositions )
     {
         *aUpdated |= aSrc.GetFPRelativePosition() != origPos;
+        *aUpdated |= aSrc.GetTextAngle() != aDest.GetTextAngle();
+
         aDest.SetFPRelativePosition( origPos );
     }
     else
     {
-        aDest.SetFPRelativePosition( aSrc.GetFPRelativePosition() );
+        VECTOR2I rotatedShift = GetRotated( aSrc.GetFPRelativePosition() - aPosShift, -aAngleShift );
+
+        aDest.SetFPRelativePosition( rotatedShift );
+        aDest.SetTextAngle( aSrc.GetTextAngle() );
     }
 
     aDest.SetLocked( aSrc.IsLocked() );
@@ -2565,6 +2574,7 @@ static std::vector<std::pair<T*, T*>> matchItemsBySimilarity( const std::vector<
 
 void PCB_EDIT_FRAME::ExchangeFootprint( FOOTPRINT* aExisting, FOOTPRINT* aNew,
                                         BOARD_COMMIT& aCommit,
+                                        bool matchPadPositions,
                                         bool deleteExtraTexts,
                                         bool resetTextLayers,
                                         bool resetTextEffects,
@@ -2590,13 +2600,30 @@ void PCB_EDIT_FRAME::ExchangeFootprint( FOOTPRINT* aExisting, FOOTPRINT* aNew,
 
     aNew->SetParent( GetBoard() );
 
-    PlaceFootprint( aNew, false, aExisting->GetPosition() );
+    // This is the position and angle shift to apply to the new footprint if the footprint
+    // has a change anchor point or rotation compared to the existing footprint.
+    VECTOR2I  posShift( 0, 0 );
+    EDA_ANGLE angleShift = ANGLE_0;
+
+    VECTOR2I  position = aExisting->GetPosition();
+    EDA_ANGLE orientation = aExisting->GetOrientation();
+
+    if( matchPadPositions )
+    {
+        if( ComputeFootprintShift( *aExisting, *aNew, posShift, angleShift ) )
+        {
+            position += posShift;
+            orientation += angleShift;
+        }
+    }
+
+    PlaceFootprint( aNew, false, position );
 
     if( aNew->GetLayer() != aExisting->GetLayer() )
         aNew->Flip( aNew->GetPosition(), GetPcbNewSettings()->m_FlipDirection );
 
-    if( aNew->GetOrientation() != aExisting->GetOrientation() )
-        aNew->SetOrientation( aExisting->GetOrientation() );
+    if( aNew->GetOrientation() != orientation )
+        aNew->SetOrientation( orientation );
 
     aNew->SetLocked( aExisting->IsLocked() );
 
@@ -2847,7 +2874,7 @@ void PCB_EDIT_FRAME::ExchangeFootprint( FOOTPRINT* aExisting, FOOTPRINT* aNew,
             if( newTextItem )
             {
                 handledTextItems.insert( newTextItem );
-                processTextItem( *oldTextItem, *newTextItem, resetTextContent, resetTextLayers,
+                processTextItem( *oldTextItem, *newTextItem, posShift, angleShift, resetTextContent, resetTextLayers,
                                  resetTextEffects, resetTextPositions, aUpdated );
             }
             else if( deleteExtraTexts )
@@ -2883,11 +2910,11 @@ void PCB_EDIT_FRAME::ExchangeFootprint( FOOTPRINT* aExisting, FOOTPRINT* aNew,
     }
 
     // Copy reference. The initial text is always used, never resetted
-    processTextItem( aExisting->Reference(), aNew->Reference(), false, resetTextLayers,
+    processTextItem( aExisting->Reference(), aNew->Reference(), posShift, angleShift, false, resetTextLayers,
                      resetTextEffects, resetTextPositions, aUpdated );
 
     // Copy value
-    processTextItem( aExisting->Value(), aNew->Value(),
+    processTextItem( aExisting->Value(), aNew->Value(), posShift, angleShift,
                      // reset value text only when it is a proxy for the footprint ID
                      // (cf replacing value "MountingHole-2.5mm" with "MountingHole-4.0mm")
                      aExisting->GetValue() == aExisting->GetFPID().GetLibItemName().wx_str(),
@@ -2914,7 +2941,7 @@ void PCB_EDIT_FRAME::ExchangeFootprint( FOOTPRINT* aExisting, FOOTPRINT* aNew,
         if( newField )
         {
             handledFields.insert( newField );
-            processTextItem( *oldField, *newField, resetTextContent, resetTextLayers,
+            processTextItem( *oldField, *newField, posShift, angleShift, resetTextContent, resetTextLayers,
                              resetTextEffects, resetTextPositions, aUpdated );
         }
         else if( deleteExtraTexts )
