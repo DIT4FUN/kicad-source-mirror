@@ -148,6 +148,8 @@ public:
     virtual API_PLUGIN_MANAGER& GetPluginManager() const { return *m_plugin_manager; }
 
     KICAD_API_SERVER& GetApiServer() { return *m_api_server; }
+
+    KICAD_API_SERVER* ApiServerOrNull() const { return m_api_server.get(); }
 #endif
 
     virtual void SetTextEditor( const wxString& aFileName );

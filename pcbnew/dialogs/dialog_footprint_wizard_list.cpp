@@ -61,6 +61,8 @@ void DIALOG_FOOTPRINT_WIZARD_LIST::initLists()
     // Current wizard selection, empty or first
     m_footprintWizard = NULL;
 
+    // TODO(JE)
+#if 0
     int n_wizards = FOOTPRINT_WIZARD_LIST::GetWizardsCount();
 
     if( n_wizards )
@@ -90,7 +92,7 @@ void DIALOG_FOOTPRINT_WIZARD_LIST::initLists()
         m_footprintGeneratorsGrid->SetCellValue( ii, FP_GEN_ROW_NAME, name );
         m_footprintGeneratorsGrid->SetCellValue( ii, FP_GEN_ROW_DESCR, description );
     }
-
+#endif
     m_footprintGeneratorsGrid->AutoSizeColumns();
 
     // Auto-expand the description column
@@ -137,7 +139,10 @@ void DIALOG_FOOTPRINT_WIZARD_LIST::onUpdatePythonModulesClick( wxCommandEvent& e
 void DIALOG_FOOTPRINT_WIZARD_LIST::OnCellFpGeneratorClick( wxGridEvent& event )
 {
     int click_row = event.GetRow();
+    // TODO(JE)
+#if 0
     m_footprintWizard = FOOTPRINT_WIZARD_LIST::GetWizard( click_row );
+#endif
     m_footprintGeneratorsGrid->SelectRow( event.GetRow(), false );
 
     // Move the grid cursor to the active line, mainly for aesthetic reasons:

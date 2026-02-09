@@ -69,6 +69,8 @@ void FOOTPRINT_WIZARD_FRAME::RegenerateFootprint()
     GetBoard()->DeleteAllFootprints();
 
     // Creates the footprint
+    // TODO(JE)
+#if 0
     wxString   msg;
     FOOTPRINT* footprint = footprintWizard->GetFootprint( &msg );
     DisplayBuildMessage( msg );
@@ -79,6 +81,7 @@ void FOOTPRINT_WIZARD_FRAME::RegenerateFootprint()
         GetBoard()->Add( footprint, ADD_MODE::APPEND );
         footprint->SetPosition( VECTOR2I( 0, 0 ) );
     }
+#endif
 
     updateView();
     GetCanvas()->Refresh();
@@ -96,30 +99,14 @@ FOOTPRINT_WIZARD* FOOTPRINT_WIZARD_FRAME::GetMyWizard()
     if( m_wizardName.Length() == 0 )
         return nullptr;
 
-    FOOTPRINT_WIZARD* footprintWizard = FOOTPRINT_WIZARD_LIST::GetWizard( m_wizardName );
-
-    if( !footprintWizard )
-    {
-        wxMessageBox( _( "Couldn't reload footprint wizard" ) );
-        return nullptr;
-    }
-
-    return footprintWizard;
+    // TODO(JE)
+    return nullptr;
 }
 
 
 FOOTPRINT* FOOTPRINT_WIZARD_FRAME::GetBuiltFootprint()
 {
-    FOOTPRINT_WIZARD* footprintWizard = FOOTPRINT_WIZARD_LIST::GetWizard( m_wizardName );
-
-    if( footprintWizard && m_modal_ret_val )
-    {
-        wxString   msg;
-        FOOTPRINT* footprint = footprintWizard->GetFootprint( &msg );
-        DisplayBuildMessage( msg );
-
-        return footprint;
-    }
+    // TODO(JE)
 
     return nullptr;
 }
@@ -136,10 +123,13 @@ void FOOTPRINT_WIZARD_FRAME::SelectFootprintWizard()
 
     if( footprintWizard )
     {
+        // TODO(JE)
+#if 0
         m_wizardName = footprintWizard->GetName();
         m_wizardDescription = footprintWizard->GetDescription();
 
         footprintWizard->ResetParameters();
+#endif
     }
     else
     {
@@ -168,7 +158,10 @@ void FOOTPRINT_WIZARD_FRAME::DefaultParameters()
     if ( footprintWizard == nullptr )
         return;
 
+    // TODO(JE)
+#if 0
     footprintWizard->ResetParameters();
+#endif
 
     // Reload
     ReCreateParameterList();
@@ -222,6 +215,8 @@ void FOOTPRINT_WIZARD_FRAME::ParametersUpdated( wxGridEvent& event )
     if( lock_update_prms )
         return;
 
+    // TODO(JE)
+#if 0
     wxArrayString   prmValues = footprintWizard->GetParameterValues( m_parameterGridPage );
     bool            has_changed = false;
     int             count = m_parameterGrid->GetNumberRows();
@@ -260,7 +255,7 @@ void FOOTPRINT_WIZARD_FRAME::ParametersUpdated( wxGridEvent& event )
         lock_update_prms = true;
         ReCreateParameterList();
     }
-
+#endif
     // unlock ParametersUpdated() now the update is finished
     lock_update_prms = false;
 }

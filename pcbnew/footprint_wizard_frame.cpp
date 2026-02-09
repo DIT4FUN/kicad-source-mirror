@@ -365,6 +365,9 @@ void FOOTPRINT_WIZARD_FRAME::ReCreatePageList()
     if( !footprintWizard )
         return;
 
+    // TODO(JE)
+#if 0
+
     m_pageList->Clear();
     int max_page = footprintWizard->GetNumParameterPages();
 
@@ -373,7 +376,7 @@ void FOOTPRINT_WIZARD_FRAME::ReCreatePageList()
         wxString name = footprintWizard->GetParameterPageName( i );
         m_pageList->Append( name );
     }
-
+#endif
     m_pageList->SetSelection( 0, true );
 
     ReCreateParameterList();
@@ -388,6 +391,8 @@ void FOOTPRINT_WIZARD_FRAME::ReCreateParameterList()
     if( m_parameterGrid == nullptr )
         return;
 
+    // TODO(JE)
+#if 0
     FOOTPRINT_WIZARD* footprintWizard = GetMyWizard();
 
     if( footprintWizard == nullptr )
@@ -474,7 +479,7 @@ void FOOTPRINT_WIZARD_FRAME::ReCreateParameterList()
         // Set the 'Value'
         m_parameterGrid->SetCellValue( i, WIZ_COL_VALUE, value );
     }
-
+#endif
     ResizeParamColumns();
 }
 

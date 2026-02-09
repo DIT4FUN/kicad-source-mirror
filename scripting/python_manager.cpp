@@ -182,6 +182,38 @@ long PYTHON_MANAGER::Execute( const std::vector<wxString>& aArgs,
 }
 
 
+long PYTHON_MANAGER::ExecuteSync( const std::vector<wxString>& aArgs,
+                                  wxString* aStdout, wxString* aStderr,
+                                  const wxExecuteEnv* aEnv )
+{
+    wxString argsStr;
+
+    for( const wxString& arg : aArgs )
+        argsStr << arg << " ";
+
+    wxLogTrace( traceApi, wxString::Format( "Execute sync: %s %s", m_interpreterPath, argsStr ) );
+    wxArrayString out, err;
+    wxString cmd = wxString::Format( "%s %s", m_interpreterPath, argsStr );
+    long ret = wxExecute( cmd, out, err, wxEXEC_BLOCK, aEnv );
+
+    wxString strOut, strErr;
+
+    if( aStdout )
+    {
+        for( const wxString& line : out )
+            *aStdout << line << "\n";
+    }
+
+    if( aStderr )
+    {
+        for( const wxString& line : err )
+            *aStderr << line << "\n";
+    }
+
+    return ret;
+}
+
+
 wxString PYTHON_MANAGER::FindPythonInterpreter()
 {
     // First, attempt to use a Python we distribute with KiCad

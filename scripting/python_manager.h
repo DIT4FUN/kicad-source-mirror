@@ -47,6 +47,10 @@ public:
                   const wxExecuteEnv* aEnv = nullptr,
                   bool aSaveOutput = false );
 
+    long ExecuteSync( const std::vector<wxString>& aArgs,
+                      wxString* aStdout = nullptr, wxString* aStderr = nullptr,
+                      const wxExecuteEnv* aEnv = nullptr );
+
     wxString GetInterpreterPath() const { return m_interpreterPath; }
     void SetInterpreterPath( const wxString& aPath ) { m_interpreterPath = aPath; }
 

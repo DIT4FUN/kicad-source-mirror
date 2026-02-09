@@ -151,30 +151,19 @@ void SCRIPTING_TOOL::ReloadPlugins()
     }
     catch( ... )
     {}
-}
-
-
-int SCRIPTING_TOOL::reloadPlugins( const TOOL_EVENT& aEvent )
-{
-    // Reload Python plugins if they are newer than the already loaded, and load new plugins
-    // Remove all action plugins so that we don't keep references to old versions
-    ACTION_PLUGINS::UnloadAll();
-
-    try
-    {
-        PyLOCK lock;
-        callLoadPlugins();
-    }
-    catch( ... )
-    {
-        return -1;
-    }
 
 #ifdef KICAD_IPC_API
     // TODO move this elsewhere when SWIG plugins are removed
     if( Pgm().GetCommonSettings()->m_Api.enable_server )
         Pgm().GetPluginManager().ReloadPlugins();
 #endif
+
+}
+
+
+int SCRIPTING_TOOL::reloadPlugins( const TOOL_EVENT& aEvent )
+{
+    ReloadPlugins();
 
     if( !m_isFootprintEditor )
     {

@@ -522,7 +522,6 @@ set( PCBNEW_COMMON_SRCS
 set( PCBNEW_SCRIPTING_PYTHON_HELPERS
     ${CMAKE_SOURCE_DIR}/common/swig/wx_python_helpers.cpp
     python/scripting/pcbnew_action_plugins.cpp
-    python/scripting/pcbnew_footprint_wizards.cpp
     python/scripting/pcbnew_scripting_helpers.cpp
     python/scripting/pcbnew_scripting.cpp
     python/scripting/pcbnew_utils_3d.cpp

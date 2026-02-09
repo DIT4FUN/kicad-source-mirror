@@ -21,6 +21,7 @@ set( QA_API_SRCS
     test_api_proto.cpp
     test_api_e2e.cpp
     test_api_jobs.cpp
+    test_api_wizards.cpp
     )
 
 add_executable( qa_api
