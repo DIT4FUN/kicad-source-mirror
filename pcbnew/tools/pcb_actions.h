@@ -623,8 +623,6 @@ public:
     /// Footprint wizard frame actions:
     static TOOL_ACTION showWizards;
     static TOOL_ACTION resetWizardPrms;
-    static TOOL_ACTION selectPreviousWizardPage;
-    static TOOL_ACTION selectNextWizardPage;
     static TOOL_ACTION exportFpToEditor;
 };
 

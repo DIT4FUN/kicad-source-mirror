@@ -38,18 +38,8 @@
 
 class wxSashLayoutWindow;
 class wxSashEvent;
-class wxListBox;
-class WX_GRID;
-class wxGridEvent;
 class FOOTPRINT_EDIT_FRAME;
-
-
-enum WizardParameterColumnNames
-{
-    WIZ_COL_NAME = 0,
-    WIZ_COL_VALUE,
-    WIZ_COL_UNITS
-};
+class FOOTPRINT_WIZARD_PROPERTIES_PANEL;
 
 class FOOTPRINT_WIZARD_FRAME : public PCB_BASE_EDIT_FRAME
 {
@@ -74,20 +64,17 @@ public:
     void SelectCurrentWizard( wxCommandEvent& aDummy ); // Open the wizard selector dialog
 
     void DefaultParameters();           // Reset the initial (default) values of the wizard prms
-    void SelectWizardPreviousPage();    // Select the previous parameter page for wizards having
-                                        // more than one parameter page
-    void SelectWizardNextPage();        // Select the next parameter page for wizards having
-                                        // more than one parameter page
 
     /**
      * Will let the caller exit from the wait loop, and get the built footprint.
      */
     void ExportSelectedFootprint( wxCommandEvent& aEvent );
 
-private:
+    void RebuildWizardParameters();
+    void OnWizardParametersChanged();
 
+private:
     void                OnSize( wxSizeEvent& event ) override;
-    void                OnGridSize( wxSizeEvent& aSizeEvent );
 
     /**
      * Redraw the message panel.
@@ -108,27 +95,13 @@ private:
     void OnSashDrag( wxSashEvent& event );
 
     /**
-     * Create or recreate the list of parameter pages for the current wizard.
-     *
-     * This list is sorted
-     */
-    void ReCreatePageList();
-
-    /**
      * Create the list of parameters for the current page.
      */
     void ReCreateParameterList();
 
     /**
-     * Expand the 'Value' column to fill available.
-     */
-    void ResizeParamColumns();
-
-    /**
      * Prepare the grid where parameters are displayed.
      */
-    void initParameterGrid();
-
     /**
      * Show the list of footprint wizards available into the system.
      */
@@ -155,7 +128,6 @@ private:
     void DisplayWizardInfos();
 
     void doCloseWindow() override;
-    void ClickOnPageList( wxCommandEvent& event );
 
     void LoadSettings( APP_SETTINGS_BASE* aCfg ) override;
     void SaveSettings( APP_SETTINGS_BASE* aCfg ) override;
@@ -168,10 +140,6 @@ private:
      */
     void OnActivate( wxActivateEvent& event );
 
-    /**
-     * Update the footprint python parameters values from the values in grid.
-     */
-    void ParametersUpdated( wxGridEvent& event );
 
     /// @copydoc PCB_BASE_FRAME::Update3DView
     void Update3DView( bool aMarkDirty, bool aRefresh, const wxString* aTitle = nullptr ) override;
@@ -184,18 +152,15 @@ protected:
     wxString        m_wizardStatus;         ///< current wizard status
 
 private:
-    wxPanel*        m_parametersPanel;      ///< Panel for the page list and parameter grid
-    wxListBox*      m_pageList;             ///< The list of pages
-    WX_GRID*        m_parameterGrid;        ///< The list of parameters
-    int             m_parameterGridPage;    ///< the page currently displayed by m_parameterGrid
-                                            ///< it is most of time the m_pageList selection, but
-                                            ///< can differ during transitions between pages.
+    FOOTPRINT_WIZARD_PROPERTIES_PANEL* m_parametersPanel; ///< Panel for the parameter grid
     wxTextCtrl*     m_buildMessageBox;
 
     wxString        m_auiPerspective;       ///< Encoded string describing the AUI layout
     std::unique_ptr<nlohmann::json> m_viewerAuiState;
 
     bool            m_wizardListShown;      ///< A show-once flag for the wizard list
+
+
 };
 
 

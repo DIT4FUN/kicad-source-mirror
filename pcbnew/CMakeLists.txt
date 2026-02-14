@@ -485,6 +485,7 @@ set( PCBNEW_CLASS_SRCS
 
     widgets/appearance_controls.cpp
     widgets/appearance_controls_base.cpp
+    widgets/footprint_wizard_properties_panel.cpp
     widgets/panel_footprint_chooser.cpp
     widgets/panel_selection_filter.cpp
     widgets/panel_selection_filter_base.cpp

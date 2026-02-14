@@ -29,9 +29,6 @@
 #include <pcbnew_id.h>
 #include <wildcards_and_files_ext.h>
 #include <dialogs/dialog_footprint_wizard_list.h>
-#include <base_units.h>
-#include <widgets/wx_grid.h>
-#include <wx/listbox.h>
 #include <wx/msgdlg.h>
 #include <tool/tool_manager.h>
 #include "footprint_wizard_frame.h"
@@ -140,7 +137,6 @@ void FOOTPRINT_WIZARD_FRAME::SelectFootprintWizard()
     RegenerateFootprint();
     Zoom_Automatique( false );
     DisplayWizardInfos();
-    ReCreatePageList();
     ReCreateParameterList();
 }
 
@@ -170,93 +166,15 @@ void FOOTPRINT_WIZARD_FRAME::DefaultParameters()
 }
 
 
-void FOOTPRINT_WIZARD_FRAME::SelectWizardPreviousPage()
+void FOOTPRINT_WIZARD_FRAME::RebuildWizardParameters()
 {
-    int page = m_pageList->GetSelection() - 1;
-
-    if( page < 0 )
-        page = 0;
-
-    m_pageList->SetSelection( page, true );
-
-    wxCommandEvent event;
-    ClickOnPageList( event );
-}
-
-void FOOTPRINT_WIZARD_FRAME::SelectWizardNextPage()
-{
-    int page = m_pageList->GetSelection() + 1;
-
-    if( (int)m_pageList->GetCount() <= page )
-        page = m_pageList->GetCount() - 1;
-
-    m_pageList->SetSelection( page, true );
-
-    wxCommandEvent event;
-    ClickOnPageList( event );
+    ReCreateParameterList();
 }
 
 
-// This is a flag to avoid reentering of ParametersUpdated
-// that can happen in some cases
-static bool lock_update_prms = false;
-
-
-void FOOTPRINT_WIZARD_FRAME::ParametersUpdated( wxGridEvent& event )
+void FOOTPRINT_WIZARD_FRAME::OnWizardParametersChanged()
 {
-    FOOTPRINT_WIZARD* footprintWizard = GetMyWizard();
-
-    if( !footprintWizard )
-        return;
-
-    if( m_parameterGridPage < 0 )
-        return;
-
-    if( lock_update_prms )
-        return;
-
-    // TODO(JE)
-#if 0
-    wxArrayString   prmValues = footprintWizard->GetParameterValues( m_parameterGridPage );
-    bool            has_changed = false;
-    int             count = m_parameterGrid->GetNumberRows();
-
-    for( int prm_id = 0; prm_id < count; ++prm_id )
-    {
-        wxString value = m_parameterGrid->GetCellValue( prm_id, WIZ_COL_VALUE );
-
-        if( prmValues[prm_id] != value )
-        {
-            has_changed = true;
-            prmValues[prm_id] = value;
-        }
-    }
-
-    if( has_changed )
-    {
-         wxString res = footprintWizard->SetParameterValues( m_parameterGridPage, prmValues );
-
-        if( !res.IsEmpty() )
-            wxMessageBox( res );
-
-        RegenerateFootprint();
-        DisplayWizardInfos();
-
-        // The python script can have modified some other parameters.
-        // So rebuild the current parameter list with new values, just in case.
-        //
-        // On wxWidgets 3.0.5, ReCreateParameterList() generates a EVT_GRID_CMD_CELL_CHANGED
-        // that call ParametersUpdated() and creating an infinite loop
-        // Note also it happens **only for languages using a comma** instead of a point
-        // for floating point separator
-        // It does not happen on wxWidgets 3.1.4
-        //
-        // So lock the next call.
-        lock_update_prms = true;
-        ReCreateParameterList();
-    }
-#endif
-    // unlock ParametersUpdated() now the update is finished
-    lock_update_prms = false;
+    RegenerateFootprint();
+    DisplayWizardInfos();
 }
 

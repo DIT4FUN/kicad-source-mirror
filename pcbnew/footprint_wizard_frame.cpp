@@ -41,7 +41,6 @@
 #include <gal/gal_display_options.h>
 #include <widgets/msgpanel.h>
 #include <bitmaps.h>
-#include <grid_tricks.h>
 #include <board.h>
 #include <project/net_settings.h>
 #include <footprint.h>
@@ -49,7 +48,10 @@
 #include <footprint_editor_settings.h>
 #include <pcbnew_id.h>
 #include <widgets/aui_json_serializer.h>
+#include <widgets/footprint_wizard_properties_panel.h>
 
+#include <nlohmann/json.hpp>
+#include <wx/wupdlock.h>
 #include <pgm_base.h>
 #include <settings/color_settings.h>
 #include <settings/settings_manager.h>
@@ -76,10 +78,6 @@ BEGIN_EVENT_TABLE( FOOTPRINT_WIZARD_FRAME, PCB_BASE_EDIT_FRAME )
     EVT_TOOL( ID_FOOTPRINT_WIZARD_SELECT_WIZARD, FOOTPRINT_WIZARD_FRAME::SelectCurrentWizard )
     EVT_TOOL( ID_FOOTPRINT_WIZARD_DONE, FOOTPRINT_WIZARD_FRAME::ExportSelectedFootprint )
 
-    // listbox events
-    EVT_LISTBOX( ID_FOOTPRINT_WIZARD_PAGE_LIST, FOOTPRINT_WIZARD_FRAME::ClickOnPageList )
-    EVT_GRID_CMD_CELL_CHANGED( ID_FOOTPRINT_WIZARD_PARAMETER_LIST,
-                               FOOTPRINT_WIZARD_FRAME::ParametersUpdated )
 END_EVENT_TABLE()
 
 
@@ -165,27 +163,9 @@ FOOTPRINT_WIZARD_FRAME::FOOTPRINT_WIZARD_FRAME( KIWAY* aKiway, wxWindow* aParent
     RecreateToolbars();
 
     // Create the parameters panel
-    m_parametersPanel = new wxPanel( this, wxID_ANY );
+    m_parametersPanel = new FOOTPRINT_WIZARD_PROPERTIES_PANEL( this, this );
 
-    m_pageList = new wxListBox( m_parametersPanel, ID_FOOTPRINT_WIZARD_PAGE_LIST,
-                                wxDefaultPosition, wxDefaultSize, 0, nullptr,
-                                wxLB_HSCROLL | wxNO_BORDER );
-
-    auto divider = new wxStaticLine( m_parametersPanel, wxID_ANY,
-                                     wxDefaultPosition, wxDefaultSize, wxLI_VERTICAL );
-
-    m_parameterGrid = new WX_GRID( m_parametersPanel, ID_FOOTPRINT_WIZARD_PARAMETER_LIST );
-    initParameterGrid();
-    m_parameterGrid->PushEventHandler( new GRID_TRICKS( m_parameterGrid ) );
-
-    ReCreatePageList();
-
-    wxBoxSizer* parametersSizer = new wxBoxSizer( wxHORIZONTAL );
-    parametersSizer->Add( m_pageList, 0, wxEXPAND, 5 );
-    parametersSizer->Add( divider, 0, wxEXPAND, 5 );
-    parametersSizer->Add( m_parameterGrid, 1, wxEXPAND, 5 );
-    m_parametersPanel->SetSizer( parametersSizer );
-    m_parametersPanel->Layout();
+    ReCreateParameterList();
 
     // Create the build message box
     m_buildMessageBox = new wxTextCtrl( this, wxID_ANY, wxEmptyString,
@@ -233,9 +213,6 @@ FOOTPRINT_WIZARD_FRAME::FOOTPRINT_WIZARD_FRAME( KIWAY* aKiway, wxWindow* aParent
 
 FOOTPRINT_WIZARD_FRAME::~FOOTPRINT_WIZARD_FRAME()
 {
-    // Delete the GRID_TRICKS.
-    m_parameterGrid->PopEventHandler( true );
-
     GetCanvas()->StopDrawing();
     // Be sure any event cannot be fired after frame deletion:
     GetCanvas()->SetEvtHandlerEnabled( false );
@@ -271,15 +248,6 @@ void FOOTPRINT_WIZARD_FRAME::ExportSelectedFootprint( wxCommandEvent& aEvent )
 {
     DismissModal( true );
     Close();
-}
-
-
-void FOOTPRINT_WIZARD_FRAME::OnGridSize( wxSizeEvent& aSizeEvent )
-{
-    // Resize the parameter columns
-    ResizeParamColumns();
-
-    aSizeEvent.Skip();
 }
 
 
@@ -327,192 +295,16 @@ void FOOTPRINT_WIZARD_FRAME::UpdateMsgPanel()
 }
 
 
-void  FOOTPRINT_WIZARD_FRAME::initParameterGrid()
+void FOOTPRINT_WIZARD_FRAME::ReCreateParameterList()
 {
-    m_parameterGridPage = -1;
-
-    // Prepare the grid where parameters are displayed
-
-    m_parameterGrid->CreateGrid( 0, 3 );
-
-    m_parameterGrid->SetColLabelValue( WIZ_COL_NAME, _( "Parameter" ) );
-    m_parameterGrid->SetColLabelValue( WIZ_COL_VALUE, _( "Value" ) );
-    m_parameterGrid->SetColLabelValue( WIZ_COL_UNITS, _( "Units" ) );
-
-    m_parameterGrid->SetColLabelSize( 22 );
-    m_parameterGrid->SetColLabelAlignment( wxALIGN_LEFT, wxALIGN_CENTRE );
-    m_parameterGrid->AutoSizeColumns();
-
-    m_parameterGrid->AutoSizeRows();
-    m_parameterGrid->SetRowLabelSize( 0 );
-
-    m_parameterGrid->DisableDragGridSize();
-    m_parameterGrid->DisableDragColSize();
-
-    m_parameterGrid->Connect( wxEVT_SIZE,
-                              wxSizeEventHandler( FOOTPRINT_WIZARD_FRAME::OnGridSize ),
-                              nullptr, this );
-}
-
-
-void FOOTPRINT_WIZARD_FRAME::ReCreatePageList()
-{
-    if( m_pageList == nullptr )
+    if( !m_parametersPanel )
         return;
 
-    FOOTPRINT_WIZARD* footprintWizard = GetMyWizard();
+    m_parametersPanel->RebuildParameters( GetMyWizard() );
 
-    if( !footprintWizard )
-        return;
-
-    // TODO(JE)
-#if 0
-
-    m_pageList->Clear();
-    int max_page = footprintWizard->GetNumParameterPages();
-
-    for( int i = 0; i < max_page; i++ )
-    {
-        wxString name = footprintWizard->GetParameterPageName( i );
-        m_pageList->Append( name );
-    }
-#endif
-    m_pageList->SetSelection( 0, true );
-
-    ReCreateParameterList();
     ReCreateHToolbar();
     DisplayWizardInfos();
     GetCanvas()->Refresh();
-}
-
-
-void FOOTPRINT_WIZARD_FRAME::ReCreateParameterList()
-{
-    if( m_parameterGrid == nullptr )
-        return;
-
-    // TODO(JE)
-#if 0
-    FOOTPRINT_WIZARD* footprintWizard = GetMyWizard();
-
-    if( footprintWizard == nullptr )
-        return;
-
-    wxWindowUpdateLocker updateLock( m_parameterGrid );
-
-    m_parameterGrid->ClearGrid();
-    m_parameterGridPage = m_pageList->GetSelection();
-
-    if( m_parameterGridPage < 0 )   // Should not happen
-        return;
-
-    // Get the list of names, values, types, hints and designators
-    wxArrayString designatorsList = footprintWizard->GetParameterDesignators( m_parameterGridPage );
-    wxArrayString namesList       = footprintWizard->GetParameterNames( m_parameterGridPage );
-    wxArrayString valuesList      = footprintWizard->GetParameterValues( m_parameterGridPage );
-    wxArrayString typesList       = footprintWizard->GetParameterTypes( m_parameterGridPage );
-    wxArrayString hintsList       = footprintWizard->GetParameterHints( m_parameterGridPage );
-
-    // Dimension the wxGrid
-    m_parameterGrid->ClearRows();
-    m_parameterGrid->AppendRows( namesList.size() );
-
-    wxString designator, name, value, units, hint;
-
-    for( unsigned int i = 0; i < namesList.size(); i++ )
-    {
-        designator  = designatorsList[i];
-        name        = namesList[i];
-        value       = valuesList[i];
-        units       = typesList[i];
-        hint        = hintsList[i];
-
-        m_parameterGrid->SetRowLabelValue( i, designator );
-
-        // Set the 'Name'
-        m_parameterGrid->SetCellValue( i, WIZ_COL_NAME, name );
-        m_parameterGrid->SetReadOnly( i, WIZ_COL_NAME );
-
-        // Boolean parameters are displayed using a checkbox
-        if( units == WIZARD_PARAM_UNITS_BOOL )
-        {
-            // Set to ReadOnly as we delegate interactivity to GRID_TRICKS
-            m_parameterGrid->SetReadOnly( i, WIZ_COL_VALUE );
-            m_parameterGrid->SetCellRenderer( i, WIZ_COL_VALUE, new wxGridCellBoolRenderer );
-        }
-        // Parameters that can be selected from a list of multiple options
-        else if( units.Contains( "," ) )  // Indicates list of available options
-        {
-            wxStringTokenizer tokenizer( units, "," );
-            wxArrayString options;
-
-            while( tokenizer.HasMoreTokens() )
-                options.Add( tokenizer.GetNextToken() );
-
-            m_parameterGrid->SetCellEditor( i, WIZ_COL_VALUE, new wxGridCellChoiceEditor( options ) );
-
-            units = wxT( "" );
-        }
-        else if( units == WIZARD_PARAM_UNITS_INTEGER )    // Integer parameters
-        {
-            m_parameterGrid->SetCellEditor( i, WIZ_COL_VALUE, new wxGridCellNumberEditor );
-        }
-        else if( ( units == WIZARD_PARAM_UNITS_MM )      ||
-                 ( units == WIZARD_PARAM_UNITS_MILS )    ||
-                 ( units == WIZARD_PARAM_UNITS_FLOAT )   ||
-                 ( units == WIZARD_PARAM_UNITS_RADIANS ) ||
-                 ( units == WIZARD_PARAM_UNITS_DEGREES ) ||
-                 ( units == WIZARD_PARAM_UNITS_PERCENT ) )
-        {
-            // Non-integer numerical parameters
-            m_parameterGrid->SetCellEditor( i, WIZ_COL_VALUE, new wxGridCellFloatEditor );
-
-            // Convert separators to the locale-specific character
-            value.Replace( ",", wxNumberFormatter::GetDecimalSeparator() );
-            value.Replace( ".", wxNumberFormatter::GetDecimalSeparator() );
-        }
-
-        // Set the 'Units'
-        m_parameterGrid->SetCellValue( i, WIZ_COL_UNITS, units );
-        m_parameterGrid->SetReadOnly( i, WIZ_COL_UNITS );
-
-        // Set the 'Value'
-        m_parameterGrid->SetCellValue( i, WIZ_COL_VALUE, value );
-    }
-#endif
-    ResizeParamColumns();
-}
-
-void FOOTPRINT_WIZARD_FRAME::ResizeParamColumns()
-{
-    // Parameter grid is not yet configured
-    if( ( m_parameterGrid == nullptr ) || ( m_parameterGrid->GetNumberCols() == 0 ) )
-        return;
-
-    // first auto-size the columns to ensure enough space around text
-    m_parameterGrid->AutoSizeColumns();
-
-    // Auto-size the value column
-    int width = m_parameterGrid->GetClientSize().GetWidth() -
-                m_parameterGrid->GetRowLabelSize() -
-                m_parameterGrid->GetColSize( WIZ_COL_NAME ) -
-                m_parameterGrid->GetColSize( WIZ_COL_UNITS );
-
-    if( width > m_parameterGrid->GetColMinimalAcceptableWidth() )
-    {
-        m_parameterGrid->SetColSize( WIZ_COL_VALUE, width );
-    }
-}
-
-
-void FOOTPRINT_WIZARD_FRAME::ClickOnPageList( wxCommandEvent& event )
-{
-    if( m_pageList->GetSelection() >= 0 )
-    {
-        ReCreateParameterList();
-        GetCanvas()->Refresh();
-        DisplayWizardInfos();
-    }
 }
 
 
@@ -584,7 +376,7 @@ void FOOTPRINT_WIZARD_FRAME::OnActivate( wxActivateEvent& event )
     if( footprintWizardsChanged )
     {
         // If we are here, the library list has changed, rebuild it
-        ReCreatePageList();
+        ReCreateParameterList();
         DisplayWizardInfos();
     }
 #endif

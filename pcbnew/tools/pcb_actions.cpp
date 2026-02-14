@@ -2806,20 +2806,6 @@ TOOL_ACTION PCB_ACTIONS::resetWizardPrms( TOOL_ACTION_ARGS()
         .Tooltip( _( "Reset wizard parameters to default" ) )
         .Icon( BITMAPS::reload ) );
 
-TOOL_ACTION PCB_ACTIONS::selectPreviousWizardPage( TOOL_ACTION_ARGS()
-        .Name( "pcbnew.FpWizard.selectPreviousWizardPage" )
-        .Scope( AS_GLOBAL )
-        .FriendlyName( _( "Select previous wizard page" ) )
-        .Tooltip( _( "Select previous parameters page" ) )
-        .Icon( BITMAPS::lib_previous ) );
-
-TOOL_ACTION PCB_ACTIONS::selectNextWizardPage( TOOL_ACTION_ARGS()
-        .Name( "pcbnew.FpWizard.selectNextWizardPage" )
-        .Scope( AS_GLOBAL )
-        .FriendlyName( _( "Select next wizard page" ) )
-        .Tooltip( _( "Select next parameters page" ) )
-        .Icon( BITMAPS::lib_next ) );
-
 TOOL_ACTION PCB_ACTIONS::exportFpToEditor( TOOL_ACTION_ARGS()
         .Name( "pcbnew.FpWizard.exportFpToEditor" )
         .Scope( AS_GLOBAL )
