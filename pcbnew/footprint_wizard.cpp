@@ -89,8 +89,16 @@ bool FOOTPRINT_WIZARD_MANAGER::RefreshInfo( FOOTPRINT_WIZARD* aWizard )
     wxCHECK( aWizard, false );
     API_PLUGIN_MANAGER& manager = Pgm().GetPluginManager();
 
+    const wxLanguageInfo* lang = wxLocale::GetLanguageInfo( Pgm().GetSelectedLanguageIdentifier() );
+
+    std::vector<wxString> args = {
+        wxS( "--get-info" ),
+        wxS( "--lang" ),
+        lang->CanonicalName
+    };
+
     wxString out, err;
-    int ret = manager.InvokeActionSync( aWizard->Identifier(), { wxS( "--get-info" ) }, &out, &err );
+    int ret = manager.InvokeActionSync( aWizard->Identifier(), args, &out, &err );
 
     if( ret != 0 )
         return false;
@@ -113,7 +121,14 @@ tl::expected<FOOTPRINT*, wxString> FOOTPRINT_WIZARD_MANAGER::Generate( FOOTPRINT
     wxCHECK( aWizard, tl::unexpected( _( "Unexpected error with footprint wizard" ) ) );
     API_PLUGIN_MANAGER& manager = Pgm().GetPluginManager();
 
-    std::vector<wxString> args = { wxS( "--generate" ), wxS( "--params" ) };
+    const wxLanguageInfo* lang = wxLocale::GetLanguageInfo( Pgm().GetSelectedLanguageIdentifier() );
+
+    std::vector<wxString> args = {
+        wxS( "--generate" ),
+        wxS( "--lang" ),
+        lang->CanonicalName,
+        wxS( "--params" )
+    };
 
     kiapi::common::types::WizardParameterList params;
 

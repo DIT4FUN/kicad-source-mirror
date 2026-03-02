@@ -182,9 +182,9 @@ FOOTPRINT_WIZARD_FRAME::FOOTPRINT_WIZARD_FRAME( KIWAY* aKiway, wxWindow* aParent
                       .BestSize( -1, m_msgFrameHeight ) );
 
     m_auimgr.AddPane( m_parametersPanel, EDA_PANE().Palette().Name( "Params" ).Left().Position(0)
-                      .Caption( _( "Parameters" ) ).MinSize( 360, 180 ) );
+                      .Caption( _( "Parameters" ) ).MinSize( 600, 180 ) );
     m_auimgr.AddPane( m_buildMessageBox, EDA_PANE().Palette().Name( "Output" ).Left().Position(1)
-                      .CaptionVisible( false ).MinSize( 360, -1 ) );
+                      .CaptionVisible( false ).MinSize( 120, -1 ) );
 
     m_auimgr.AddPane( GetCanvas(), wxAuiPaneInfo().Name( "DrawFrame" ).CentrePane() );
 

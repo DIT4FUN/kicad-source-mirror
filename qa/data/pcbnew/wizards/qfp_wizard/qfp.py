@@ -58,6 +58,7 @@ def _parameter_definitions() -> list[WizardParameter]:
             32,
             min_value=4,
             multiple=4,
+            description="Total number of pads (must be a multiple of 4)"
         ),
         WizardParameter.create(
             "e",
@@ -474,6 +475,11 @@ def parse_args(argv: list[str]):
     parser.add_argument(
         "--params",
         type=str
+    )
+    parser.add_argument(
+        "--lang",
+        type=str,
+        help="Optional language/locale hint (unused by this example)",
     )
     return parser.parse_args(argv)
 
