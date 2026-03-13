@@ -41,7 +41,23 @@
 #include <pcb_track.h>
 #include <pcbnew_id.h>
 #include <pcb_marker.h>
+#include <kiway.h>
 #include <drc/drc_item.h>
+#include <jobs/job_export_pcb_3d.h>
+#include <jobs/job_export_pcb_dxf.h>
+#include <jobs/job_export_pcb_drill.h>
+#include <jobs/job_export_pcb_gencad.h>
+#include <jobs/job_export_pcb_gerber.h>
+#include <jobs/job_export_pcb_gerbers.h>
+#include <jobs/job_export_pcb_ipc2581.h>
+#include <jobs/job_export_pcb_ipcd356.h>
+#include <jobs/job_export_pcb_odb.h>
+#include <jobs/job_export_pcb_pdf.h>
+#include <jobs/job_export_pcb_pos.h>
+#include <jobs/job_export_pcb_ps.h>
+#include <jobs/job_export_pcb_stats.h>
+#include <jobs/job_export_pcb_svg.h>
+#include <jobs/job_pcb_render.h>
 #include <layer_ids.h>
 #include <project.h>
 #include <tool/tool_manager.h>
@@ -121,6 +137,35 @@ API_HANDLER_PCB::API_HANDLER_PCB( PCB_EDIT_FRAME* aFrame ) :
             &API_HANDLER_PCB::handleSetBoardEditorAppearanceSettings );
     registerHandler<InjectDrcError, InjectDrcErrorResponse>(
             &API_HANDLER_PCB::handleInjectDrcError );
+
+        registerHandler<RunBoardJobExport3D, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExport3D );
+        registerHandler<RunBoardJobExportRender, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportRender );
+        registerHandler<RunBoardJobExportSvg, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportSvg );
+        registerHandler<RunBoardJobExportDxf, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportDxf );
+        registerHandler<RunBoardJobExportPdf, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportPdf );
+        registerHandler<RunBoardJobExportPs, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportPs );
+        registerHandler<RunBoardJobExportGerbers, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportGerbers );
+        registerHandler<RunBoardJobExportDrill, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportDrill );
+        registerHandler<RunBoardJobExportPosition, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportPosition );
+        registerHandler<RunBoardJobExportGencad, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportGencad );
+        registerHandler<RunBoardJobExportIpc2581, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportIpc2581 );
+        registerHandler<RunBoardJobExportIpcD356, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportIpcD356 );
+        registerHandler<RunBoardJobExportODB, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportODB );
+        registerHandler<RunBoardJobExportStats, types::RunJobResponse>(
+            &API_HANDLER_PCB::handleRunBoardJobExportStats );
 }
 
 
@@ -1792,4 +1837,630 @@ HANDLER_RESULT<InjectDrcErrorResponse> API_HANDLER_PCB::handleInjectDrcError(
     response.mutable_marker()->set_value( marker->GetUUID().AsStdString() );
 
     return response;
+}
+
+
+std::optional<ApiResponseStatus> ValidateUnitsInchMm( types::Units aUnits,
+                                                      const std::string& aCommandName )
+{
+    if( aUnits == types::Units::U_INCH || aUnits == types::Units::U_MM
+        || aUnits == types::Units::U_UNKNOWN )
+    {
+        return std::nullopt;
+    }
+
+    ApiResponseStatus e;
+    e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+    e.set_error_message( fmt::format( "{} supports only inch and mm units", aCommandName ) );
+    return e;
+}
+
+
+std::optional<ApiResponseStatus>
+ValidatePaginationModeForSingleOrPerFile( kiapi::board::jobs::BoardJobPaginationMode aMode,
+                                          const std::string& aCommandName )
+{
+    if( aMode == kiapi::board::jobs::BoardJobPaginationMode::BJPM_UNKNOWN
+        || aMode == kiapi::board::jobs::BoardJobPaginationMode::BJPM_ALL_LAYERS_ONE_PAGE
+        || aMode == kiapi::board::jobs::BoardJobPaginationMode::BJPM_EACH_LAYER_OWN_FILE )
+    {
+        return std::nullopt;
+    }
+
+    ApiResponseStatus e;
+    e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+    e.set_error_message( fmt::format( "{} does not support EACH_LAYER_OWN_PAGE pagination mode",
+                                      aCommandName ) );
+    return e;
+}
+
+
+std::optional<ApiResponseStatus> ApplyBoardPlotSettings( const BoardPlotSettings& aSettings,
+                                                         JOB_EXPORT_PCB_PLOT& aJob )
+{
+    for( int layer : aSettings.layers() )
+    {
+        PCB_LAYER_ID layerId = FromProtoEnum<PCB_LAYER_ID, board::types::BoardLayer>(
+                static_cast<board::types::BoardLayer>( layer ) );
+
+        if( layerId == PCB_LAYER_ID::UNDEFINED_LAYER )
+        {
+            ApiResponseStatus e;
+            e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+            e.set_error_message( "Board plot settings contain an invalid layer" );
+            return e;
+        }
+
+        aJob.m_plotLayerSequence.push_back( layerId );
+    }
+
+    for( int layer : aSettings.common_layers() )
+    {
+        PCB_LAYER_ID layerId = FromProtoEnum<PCB_LAYER_ID, board::types::BoardLayer>(
+                static_cast<board::types::BoardLayer>( layer ) );
+
+        if( layerId == PCB_LAYER_ID::UNDEFINED_LAYER )
+        {
+            ApiResponseStatus e;
+            e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+            e.set_error_message( "Board plot settings contain an invalid common layer" );
+            return e;
+        }
+
+        aJob.m_plotOnAllLayersSequence.push_back( layerId );
+    }
+
+    aJob.m_colorTheme = wxString::FromUTF8( aSettings.color_theme() );
+    aJob.m_drawingSheet = wxString::FromUTF8( aSettings.drawing_sheet() );
+    aJob.m_variant = wxString::FromUTF8( aSettings.variant() );
+
+    aJob.m_mirror = aSettings.mirror();
+    aJob.m_blackAndWhite = aSettings.black_and_white();
+    aJob.m_negative = aSettings.negative();
+    aJob.m_scale = aSettings.scale();
+
+    aJob.m_sketchPadsOnFabLayers = aSettings.sketch_pads_on_fab_layers();
+    aJob.m_hideDNPFPsOnFabLayers = aSettings.hide_dnp_footprints_on_fab_layers();
+    aJob.m_sketchDNPFPsOnFabLayers = aSettings.sketch_dnp_footprints_on_fab_layers();
+    aJob.m_crossoutDNPFPsOnFabLayers = aSettings.crossout_dnp_footprints_on_fab_layers();
+
+    aJob.m_plotFootprintValues = aSettings.plot_footprint_values();
+    aJob.m_plotRefDes = aSettings.plot_reference_designators();
+    aJob.m_plotDrawingSheet = aSettings.plot_drawing_sheet();
+    aJob.m_subtractSolderMaskFromSilk = aSettings.subtract_solder_mask_from_silk();
+    aJob.m_plotPadNumbers = aSettings.plot_pad_numbers();
+
+    aJob.m_drillShapeOption = FromProtoEnum<DRILL_MARKS>( aSettings.drill_marks() );
+
+    aJob.m_useDrillOrigin = aSettings.use_drill_origin();
+    aJob.m_checkZonesBeforePlot = aSettings.check_zones_before_plot();
+
+    return std::nullopt;
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> ExecuteBoardJob( PCB_EDIT_FRAME* aFrame, JOB& aJob )
+{
+    types::RunJobResponse response;
+    WX_STRING_REPORTER reporter;
+    int exitCode = aFrame->Kiway().ProcessJob( KIWAY::FACE_PCB, &aJob, &reporter );
+
+    for( const JOB_OUTPUT& output : aJob.GetOutputs() )
+        response.add_output_path( output.m_outputPath.ToUTF8() );
+
+    if( exitCode == 0 )
+    {
+        response.set_status( types::JobStatus::JS_SUCCESS );
+        return response;
+    }
+
+    response.set_status( types::JobStatus::JS_ERROR );
+    response.set_message( fmt::format( "Board export job '{}' failed with exit code {}: {}",
+                                       aJob.GetType(), exitCode,
+                                       reporter.GetMessages().ToStdString() ) );
+    return response;
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExport3D(
+        const HANDLER_CONTEXT<RunBoardJobExport3D>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_3D job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    job.m_format = FromProtoEnum<JOB_EXPORT_PCB_3D::FORMAT>( aCtx.Request.format() );
+
+    job.m_variant = wxString::FromUTF8( aCtx.Request.variant() );
+    job.m_3dparams.m_NetFilter = wxString::FromUTF8( aCtx.Request.net_filter() );
+    job.m_3dparams.m_ComponentFilter = wxString::FromUTF8( aCtx.Request.component_filter() );
+
+    job.m_hasUserOrigin = aCtx.Request.has_user_origin();
+    job.m_3dparams.m_Origin = VECTOR2D( aCtx.Request.origin().x_nm(), aCtx.Request.origin().y_nm() );
+
+    job.m_3dparams.m_Overwrite = aCtx.Request.overwrite();
+    job.m_3dparams.m_UseGridOrigin = aCtx.Request.use_grid_origin();
+    job.m_3dparams.m_UseDrillOrigin = aCtx.Request.use_drill_origin();
+    job.m_3dparams.m_UseDefinedOrigin = aCtx.Request.use_defined_origin() || aCtx.Request.has_user_origin();
+    job.m_3dparams.m_UsePcbCenterOrigin = aCtx.Request.use_pcb_center_origin();
+
+    job.m_3dparams.m_IncludeUnspecified = aCtx.Request.include_unspecified();
+    job.m_3dparams.m_IncludeDNP = aCtx.Request.include_dnp();
+    job.m_3dparams.m_SubstModels = aCtx.Request.substitute_models();
+
+    job.m_3dparams.m_BoardOutlinesChainingEpsilon = aCtx.Request.board_outlines_chaining_epsilon();
+    job.m_3dparams.m_BoardOnly = aCtx.Request.board_only();
+    job.m_3dparams.m_CutViasInBody = aCtx.Request.cut_vias_in_body();
+    job.m_3dparams.m_ExportBoardBody = aCtx.Request.export_board_body();
+    job.m_3dparams.m_ExportComponents = aCtx.Request.export_components();
+    job.m_3dparams.m_ExportTracksVias = aCtx.Request.export_tracks_and_vias();
+    job.m_3dparams.m_ExportPads = aCtx.Request.export_pads();
+    job.m_3dparams.m_ExportZones = aCtx.Request.export_zones();
+    job.m_3dparams.m_ExportInnerCopper = aCtx.Request.export_inner_copper();
+    job.m_3dparams.m_ExportSilkscreen = aCtx.Request.export_silkscreen();
+    job.m_3dparams.m_ExportSoldermask = aCtx.Request.export_soldermask();
+    job.m_3dparams.m_FuseShapes = aCtx.Request.fuse_shapes();
+    job.m_3dparams.m_FillAllVias = aCtx.Request.fill_all_vias();
+    job.m_3dparams.m_OptimizeStep = aCtx.Request.optimize_step();
+    job.m_3dparams.m_ExtraPadThickness = aCtx.Request.extra_pad_thickness();
+
+    job.m_vrmlUnits = FromProtoEnum<JOB_EXPORT_PCB_3D::VRML_UNITS>( aCtx.Request.vrml_units() );
+
+    job.m_vrmlModelDir = wxString::FromUTF8( aCtx.Request.vrml_model_dir() );
+    job.m_vrmlRelativePaths = aCtx.Request.vrml_relative_paths();
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportRender(
+        const HANDLER_CONTEXT<RunBoardJobExportRender>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_PCB_RENDER job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    job.m_format = FromProtoEnum<JOB_PCB_RENDER::FORMAT>( aCtx.Request.format() );
+    job.m_quality = FromProtoEnum<JOB_PCB_RENDER::QUALITY>( aCtx.Request.quality() );
+    job.m_bgStyle = FromProtoEnum<JOB_PCB_RENDER::BG_STYLE>( aCtx.Request.background_style() );
+
+    job.m_width = aCtx.Request.width();
+    job.m_height = aCtx.Request.height();
+    job.m_appearancePreset = aCtx.Request.appearance_preset();
+    job.m_useBoardStackupColors = aCtx.Request.use_board_stackup_colors();
+
+    job.m_side = FromProtoEnum<JOB_PCB_RENDER::SIDE>( aCtx.Request.side() );
+
+    job.m_zoom = aCtx.Request.zoom();
+    job.m_perspective = aCtx.Request.perspective();
+
+    job.m_rotation = UnpackVector3D( aCtx.Request.rotation() );
+    job.m_pan = UnpackVector3D( aCtx.Request.pan() );
+    job.m_pivot = UnpackVector3D( aCtx.Request.pivot() );
+
+    job.m_proceduralTextures = aCtx.Request.procedural_textures();
+    job.m_floor = aCtx.Request.floor();
+    job.m_antiAlias = aCtx.Request.anti_alias();
+    job.m_postProcess = aCtx.Request.post_process();
+
+    job.m_lightTopIntensity = UnpackVector3D( aCtx.Request.light_top_intensity() );
+    job.m_lightBottomIntensity = UnpackVector3D( aCtx.Request.light_bottom_intensity() );
+    job.m_lightCameraIntensity = UnpackVector3D( aCtx.Request.light_camera_intensity() );
+    job.m_lightSideIntensity = UnpackVector3D( aCtx.Request.light_side_intensity() );
+    job.m_lightSideElevation = aCtx.Request.light_side_elevation();
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportSvg(
+        const HANDLER_CONTEXT<RunBoardJobExportSvg>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_SVG job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    if( std::optional<ApiResponseStatus> err = ApplyBoardPlotSettings( aCtx.Request.plot_settings(), job ) )
+        return tl::unexpected( *err );
+
+    job.m_fitPageToBoard = aCtx.Request.fit_page_to_board();
+    job.m_precision = aCtx.Request.precision();
+
+        if( std::optional<ApiResponseStatus> paginationError =
+            ValidatePaginationModeForSingleOrPerFile( aCtx.Request.page_mode(),
+                                                      "RunBoardJobExportSvg" ) )
+    {
+        return tl::unexpected( *paginationError );
+    }
+
+    job.m_genMode = FromProtoEnum<JOB_EXPORT_PCB_SVG::GEN_MODE>( aCtx.Request.page_mode() );
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportDxf(
+        const HANDLER_CONTEXT<RunBoardJobExportDxf>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_DXF job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    if( std::optional<ApiResponseStatus> err = ApplyBoardPlotSettings( aCtx.Request.plot_settings(), job ) )
+        return tl::unexpected( *err );
+
+    job.m_plotGraphicItemsUsingContours = aCtx.Request.plot_graphic_items_using_contours();
+    job.m_polygonMode = aCtx.Request.polygon_mode();
+
+    if( std::optional<ApiResponseStatus> unitError =
+            ValidateUnitsInchMm( aCtx.Request.units(), "RunBoardJobExportDxf" ) )
+    {
+        return tl::unexpected( *unitError );
+    }
+
+    job.m_dxfUnits = FromProtoEnum<JOB_EXPORT_PCB_DXF::DXF_UNITS>( aCtx.Request.units() );
+
+        if( std::optional<ApiResponseStatus> paginationError =
+            ValidatePaginationModeForSingleOrPerFile( aCtx.Request.page_mode(),
+                                                      "RunBoardJobExportDxf" ) )
+    {
+        return tl::unexpected( *paginationError );
+    }
+
+    job.m_genMode = FromProtoEnum<JOB_EXPORT_PCB_DXF::GEN_MODE>( aCtx.Request.page_mode() );
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportPdf(
+        const HANDLER_CONTEXT<RunBoardJobExportPdf>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_PDF job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    if( std::optional<ApiResponseStatus> err = ApplyBoardPlotSettings( aCtx.Request.plot_settings(), job ) )
+        return tl::unexpected( *err );
+
+    job.m_pdfFrontFPPropertyPopups = aCtx.Request.front_footprint_property_popups();
+    job.m_pdfBackFPPropertyPopups = aCtx.Request.back_footprint_property_popups();
+    job.m_pdfMetadata = aCtx.Request.include_metadata();
+    job.m_pdfSingle = aCtx.Request.single_document();
+    job.m_pdfBackgroundColor = wxString::FromUTF8( aCtx.Request.background_color() );
+
+    job.m_pdfGenMode = FromProtoEnum<JOB_EXPORT_PCB_PDF::GEN_MODE>( aCtx.Request.page_mode() );
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportPs(
+        const HANDLER_CONTEXT<RunBoardJobExportPs>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_PS job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    if( std::optional<ApiResponseStatus> err = ApplyBoardPlotSettings( aCtx.Request.plot_settings(), job ) )
+        return tl::unexpected( *err );
+
+        if( std::optional<ApiResponseStatus> paginationError =
+            ValidatePaginationModeForSingleOrPerFile( aCtx.Request.page_mode(),
+                                                      "RunBoardJobExportPs" ) )
+    {
+        return tl::unexpected( *paginationError );
+    }
+
+    job.m_genMode = FromProtoEnum<JOB_EXPORT_PCB_PS::GEN_MODE>( aCtx.Request.page_mode() );
+
+    job.m_trackWidthCorrection = aCtx.Request.track_width_correction();
+    job.m_XScaleAdjust = aCtx.Request.x_scale_adjust();
+    job.m_YScaleAdjust = aCtx.Request.y_scale_adjust();
+    job.m_forceA4 = aCtx.Request.force_a4();
+    job.m_useGlobalSettings = aCtx.Request.use_global_settings();
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportGerbers(
+        const HANDLER_CONTEXT<RunBoardJobExportGerbers>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    if( aCtx.Request.layers().empty() )
+    {
+        ApiResponseStatus e;
+        e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+        e.set_error_message( "RunBoardJobExportGerbers requires at least one layer" );
+        return tl::unexpected( e );
+    }
+
+    JOB_EXPORT_PCB_GERBERS job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    for( int layer : aCtx.Request.layers() )
+    {
+        PCB_LAYER_ID layerId =
+                FromProtoEnum<PCB_LAYER_ID, board::types::BoardLayer>(
+                        static_cast<board::types::BoardLayer>( layer ) );
+
+        if( layerId == PCB_LAYER_ID::UNDEFINED_LAYER )
+        {
+            ApiResponseStatus e;
+            e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+            e.set_error_message( "RunBoardJobExportGerbers contains an invalid layer" );
+            return tl::unexpected( e );
+        }
+
+        job.m_plotLayerSequence.push_back( layerId );
+    }
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportDrill(
+        const HANDLER_CONTEXT<RunBoardJobExportDrill>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_DRILL job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    job.m_format = FromProtoEnum<JOB_EXPORT_PCB_DRILL::DRILL_FORMAT>( aCtx.Request.format() );
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportPosition(
+        const HANDLER_CONTEXT<RunBoardJobExportPosition>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_POS job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    job.m_useDrillPlaceFileOrigin = aCtx.Request.use_drill_place_file_origin();
+    job.m_smdOnly = aCtx.Request.smd_only();
+    job.m_excludeFootprintsWithTh = aCtx.Request.exclude_footprints_with_th();
+    job.m_excludeDNP = aCtx.Request.exclude_dnp();
+    job.m_excludeBOM = aCtx.Request.exclude_from_bom();
+    job.m_negateBottomX = aCtx.Request.negate_bottom_x();
+    job.m_singleFile = aCtx.Request.single_file();
+    job.m_nakedFilename = aCtx.Request.naked_filename();
+    job.m_gerberBoardEdge = aCtx.Request.include_board_edge_for_gerber();
+    job.m_variant = wxString::FromUTF8( aCtx.Request.variant() );
+
+    job.m_side = FromProtoEnum<JOB_EXPORT_PCB_POS::SIDE>( aCtx.Request.side() );
+
+    if( std::optional<ApiResponseStatus> unitError =
+            ValidateUnitsInchMm( aCtx.Request.units(), "RunBoardJobExportPosition" ) )
+    {
+        return tl::unexpected( *unitError );
+    }
+
+    job.m_units = FromProtoEnum<JOB_EXPORT_PCB_POS::UNITS>( aCtx.Request.units() );
+    job.m_format = FromProtoEnum<JOB_EXPORT_PCB_POS::FORMAT>( aCtx.Request.format() );
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportGencad(
+        const HANDLER_CONTEXT<RunBoardJobExportGencad>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_GENCAD job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    job.m_flipBottomPads = aCtx.Request.flip_bottom_pads();
+    job.m_useIndividualShapes = aCtx.Request.use_individual_shapes();
+    job.m_storeOriginCoords = aCtx.Request.store_origin_coords();
+    job.m_useDrillOrigin = aCtx.Request.use_drill_origin();
+    job.m_useUniquePins = aCtx.Request.use_unique_pins();
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportIpc2581(
+        const HANDLER_CONTEXT<RunBoardJobExportIpc2581>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_IPC2581 job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    job.m_drawingSheet = wxString::FromUTF8( aCtx.Request.drawing_sheet() );
+    job.m_variant = wxString::FromUTF8( aCtx.Request.variant() );
+    job.m_precision = aCtx.Request.precision();
+    job.m_compress = aCtx.Request.compress();
+    job.m_colInternalId = wxString::FromUTF8( aCtx.Request.internal_id_column() );
+    job.m_colMfgPn = wxString::FromUTF8( aCtx.Request.manufacturer_part_number_column() );
+    job.m_colMfg = wxString::FromUTF8( aCtx.Request.manufacturer_column() );
+    job.m_colDistPn = wxString::FromUTF8( aCtx.Request.distributor_part_number_column() );
+    job.m_colDist = wxString::FromUTF8( aCtx.Request.distributor_column() );
+    job.m_bomRev = wxString::FromUTF8( aCtx.Request.bom_revision() );
+
+    if( std::optional<ApiResponseStatus> unitError =
+            ValidateUnitsInchMm( aCtx.Request.units(), "RunBoardJobExportIpc2581" ) )
+    {
+        return tl::unexpected( *unitError );
+    }
+
+    job.m_units = FromProtoEnum<JOB_EXPORT_PCB_IPC2581::IPC2581_UNITS>( aCtx.Request.units() );
+    job.m_version = FromProtoEnum<JOB_EXPORT_PCB_IPC2581::IPC2581_VERSION>( aCtx.Request.version() );
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportIpcD356(
+        const HANDLER_CONTEXT<RunBoardJobExportIpcD356>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_IPCD356 job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportODB(
+        const HANDLER_CONTEXT<RunBoardJobExportODB>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_ODB job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    job.m_drawingSheet = wxString::FromUTF8( aCtx.Request.drawing_sheet() );
+    job.m_variant = wxString::FromUTF8( aCtx.Request.variant() );
+    job.m_precision = aCtx.Request.precision();
+
+    if( std::optional<ApiResponseStatus> unitError =
+            ValidateUnitsInchMm( aCtx.Request.units(), "RunBoardJobExportODB" ) )
+    {
+        return tl::unexpected( *unitError );
+    }
+
+    job.m_units = FromProtoEnum<JOB_EXPORT_PCB_ODB::ODB_UNITS>( aCtx.Request.units() );
+    job.m_compressionMode = FromProtoEnum<JOB_EXPORT_PCB_ODB::ODB_COMPRESSION>( aCtx.Request.compression() );
+
+    return ExecuteBoardJob( frame(), job );
+}
+
+
+HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportStats(
+        const HANDLER_CONTEXT<RunBoardJobExportStats>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    HANDLER_RESULT<bool> documentValidation = validateDocument( aCtx.Request.job_settings().document() );
+
+    if( !documentValidation )
+        return tl::unexpected( documentValidation.error() );
+
+    JOB_EXPORT_PCB_STATS job;
+    job.m_filename = frame()->GetCurrentFileName();
+    job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
+
+    job.m_format = FromProtoEnum<JOB_EXPORT_PCB_STATS::OUTPUT_FORMAT>( aCtx.Request.format() );
+
+    if( std::optional<ApiResponseStatus> unitError =
+            ValidateUnitsInchMm( aCtx.Request.units(), "RunBoardJobExportStats" ) )
+    {
+        return tl::unexpected( *unitError );
+    }
+
+    job.m_units = FromProtoEnum<JOB_EXPORT_PCB_STATS::UNITS>( aCtx.Request.units() );
+
+    job.m_excludeFootprintsWithoutPads = aCtx.Request.exclude_footprints_without_pads();
+    job.m_subtractHolesFromBoardArea = aCtx.Request.subtract_holes_from_board_area();
+    job.m_subtractHolesFromCopperAreas = aCtx.Request.subtract_holes_from_copper_areas();
+
+    return ExecuteBoardJob( frame(), job );
 }

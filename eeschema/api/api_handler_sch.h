@@ -23,6 +23,7 @@
 
 #include <api/api_handler_editor.h>
 #include <api/common/commands/editor_commands.pb.h>
+#include <api/schematic/schematic_jobs.pb.h>
 #include <kiid.h>
 
 using namespace kiapi;
@@ -66,6 +67,24 @@ protected:
 private:
     HANDLER_RESULT<commands::GetOpenDocumentsResponse> handleGetOpenDocuments(
             const HANDLER_CONTEXT<commands::GetOpenDocuments>& aCtx );
+
+        HANDLER_RESULT<types::RunJobResponse> handleRunSchematicJobExportSvg(
+            const HANDLER_CONTEXT<kiapi::schematic::jobs::RunSchematicJobExportSvg>& aCtx );
+
+        HANDLER_RESULT<types::RunJobResponse> handleRunSchematicJobExportDxf(
+            const HANDLER_CONTEXT<kiapi::schematic::jobs::RunSchematicJobExportDxf>& aCtx );
+
+        HANDLER_RESULT<types::RunJobResponse> handleRunSchematicJobExportPdf(
+            const HANDLER_CONTEXT<kiapi::schematic::jobs::RunSchematicJobExportPdf>& aCtx );
+
+        HANDLER_RESULT<types::RunJobResponse> handleRunSchematicJobExportPs(
+            const HANDLER_CONTEXT<kiapi::schematic::jobs::RunSchematicJobExportPs>& aCtx );
+
+        HANDLER_RESULT<types::RunJobResponse> handleRunSchematicJobExportNetlist(
+            const HANDLER_CONTEXT<kiapi::schematic::jobs::RunSchematicJobExportNetlist>& aCtx );
+
+        HANDLER_RESULT<types::RunJobResponse> handleRunSchematicJobExportBOM(
+            const HANDLER_CONTEXT<kiapi::schematic::jobs::RunSchematicJobExportBOM>& aCtx );
 
     SCH_EDIT_FRAME* m_frame;
 };

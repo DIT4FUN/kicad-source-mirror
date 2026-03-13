@@ -25,6 +25,7 @@
 
 #include <api/api_handler_editor.h>
 #include <api/board/board_commands.pb.h>
+#include <api/board/board_jobs.pb.h>
 #include <api/board/board_types.pb.h>
 #include <api/common/commands/editor_commands.pb.h>
 #include <api/common/commands/project_commands.pb.h>
@@ -34,6 +35,7 @@
 using namespace kiapi;
 using namespace kiapi::common;
 using namespace kiapi::board::commands;
+using namespace kiapi::board::jobs;
 
 using google::protobuf::Empty;
 
@@ -156,6 +158,48 @@ private:
 
     HANDLER_RESULT<InjectDrcErrorResponse> handleInjectDrcError(
             const HANDLER_CONTEXT<InjectDrcError>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExport3D(
+            const HANDLER_CONTEXT<RunBoardJobExport3D>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportRender(
+            const HANDLER_CONTEXT<RunBoardJobExportRender>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportSvg(
+            const HANDLER_CONTEXT<RunBoardJobExportSvg>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportDxf(
+            const HANDLER_CONTEXT<RunBoardJobExportDxf>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportPdf(
+            const HANDLER_CONTEXT<RunBoardJobExportPdf>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportPs(
+            const HANDLER_CONTEXT<RunBoardJobExportPs>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportGerbers(
+            const HANDLER_CONTEXT<RunBoardJobExportGerbers>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportDrill(
+            const HANDLER_CONTEXT<RunBoardJobExportDrill>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportPosition(
+            const HANDLER_CONTEXT<RunBoardJobExportPosition>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportGencad(
+            const HANDLER_CONTEXT<RunBoardJobExportGencad>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportIpc2581(
+            const HANDLER_CONTEXT<RunBoardJobExportIpc2581>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportIpcD356(
+            const HANDLER_CONTEXT<RunBoardJobExportIpcD356>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportODB(
+            const HANDLER_CONTEXT<RunBoardJobExportODB>& aCtx );
+
+    HANDLER_RESULT<types::RunJobResponse> handleRunBoardJobExportStats(
+            const HANDLER_CONTEXT<RunBoardJobExportStats>& aCtx );
 
 protected:
     std::unique_ptr<COMMIT> createCommit() override;
