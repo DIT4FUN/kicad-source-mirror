@@ -37,6 +37,7 @@
 #include <tool/actions.h>
 #include <properties/property_mgr.h>
 #include <properties/property.h>
+#include <properties/pg_properties.h>
 #include <scintilla_tricks.h>
 #include <pcbexpr_evaluator.h>
 #include <drc/drc_rule_condition.h>
@@ -248,6 +249,84 @@ std::set<wxString> getCommonFootprintFieldNames( const PCB_SELECTION& aSelection
     }
 
     return commonFieldNames;
+}
+
+
+wxString formatFindByPropertiesDisplayValue( PCB_EDIT_FRAME* aFrame, PROPERTY_BASE* aProperty, const wxVariant& aValue )
+{
+    if( aValue.IsNull() )
+        return wxEmptyString;
+
+    if( !aProperty )
+        return aValue.GetString();
+
+    wxVariant     valueCopy = aValue;
+    wxPGProperty* pgProperty = nullptr;
+
+    if( aProperty->TypeHash() == TYPE_HASH( PCB_LAYER_ID ) )
+    {
+        wxASSERT( aProperty->HasChoices() );
+
+        const wxPGChoices& canonicalLayers = aProperty->Choices();
+        wxArrayString      boardLayerNames;
+        wxArrayInt         boardLayerIDs;
+
+        for( int ii = 0; ii < (int) canonicalLayers.GetCount(); ++ii )
+        {
+            int layer = canonicalLayers.GetValue( ii );
+
+            boardLayerNames.push_back( aFrame->GetBoard()->GetLayerName( ToLAYER_ID( layer ) ) );
+            boardLayerIDs.push_back( layer );
+        }
+
+        auto layerProp = new PGPROPERTY_COLORENUM( new wxPGChoices( boardLayerNames, boardLayerIDs ) );
+        layerProp->SetLabel( wxGetTranslation( aProperty->Name() ) );
+        layerProp->SetName( aProperty->Name() );
+        layerProp->SetHelpString( wxGetTranslation( aProperty->Name() ) );
+        layerProp->SetClientData( const_cast<PROPERTY_BASE*>( aProperty ) );
+        pgProperty = layerProp;
+    }
+    else
+    {
+        pgProperty = PGPropertyFactory( aProperty, aFrame );
+    }
+
+    if( pgProperty )
+    {
+        wxString formatted = pgProperty->ValueToString( valueCopy, 0 );
+        delete pgProperty;
+
+        if( !formatted.IsEmpty() )
+            return formatted;
+    }
+
+    return aValue.GetString();
+}
+
+
+wxString normalizeFormattedValueForExpression( PROPERTY_BASE* aProperty, const wxString& aValue )
+{
+    wxString normalized = aValue;
+
+    switch( aProperty->Display() )
+    {
+    case PROPERTY_DISPLAY::PT_COORD:
+    case PROPERTY_DISPLAY::PT_SIZE:
+    case PROPERTY_DISPLAY::PT_TIME:
+        normalized.Replace( wxT( " " ), wxEmptyString );
+        normalized.Replace( wxT( "mils" ), wxT( "mil" ) );
+        break;
+
+    case PROPERTY_DISPLAY::PT_DEGREE:
+    case PROPERTY_DISPLAY::PT_DECIDEGREE:
+        normalized.Replace( wxT( "°" ), wxT( "deg" ) );
+        normalized.Replace( wxT( " " ), wxEmptyString );
+        break;
+
+    default: break;
+    }
+
+    return normalized;
 }
 
 
@@ -516,7 +595,7 @@ void DIALOG_FIND_BY_PROPERTIES::rebuildPropertyGrid()
 
         row.isMixed = different;
         row.displayValue = different ? wxString( wxT( "<...>" ) )
-                                     : ( row.rawValue.IsNull() ? wxString( wxEmptyString ) : row.rawValue.GetString() );
+                                     : formatFindByPropertiesDisplayValue( m_frame, row.property, row.rawValue );
 
         m_propertyRows.push_back( row );
     }
@@ -563,7 +642,7 @@ void DIALOG_FIND_BY_PROPERTIES::rebuildPropertyGrid()
 
         row.isMixed = different;
         row.displayValue = different ? wxString( wxT( "<...>" ) )
-                                     : ( row.rawValue.IsNull() ? wxString( wxEmptyString ) : row.rawValue.GetString() );
+                                     : formatFindByPropertiesDisplayValue( m_frame, row.property, row.rawValue );
 
         m_propertyRows.push_back( row );
     }
@@ -922,10 +1001,35 @@ wxString DIALOG_FIND_BY_PROPERTIES::formatValueForExpression( PROPERTY_BASE* aPr
     if( aValue.GetType() == wxT( "bool" ) )
         return aValue.GetBool() ? wxT( "true" ) : wxT( "false" );
 
+    if( aProp && aProp->HasChoices() )
+    {
+        wxString val = formatFindByPropertiesDisplayValue( m_frame, aProp, aValue );
+
+        val.Replace( wxT( "'" ), wxT( "\\'" ) );
+
+        return wxString::Format( wxT( "'%s'" ), val );
+    }
+
+    if( aProp )
+    {
+        switch( aProp->Display() )
+        {
+        case PROPERTY_DISPLAY::PT_COORD:
+        case PROPERTY_DISPLAY::PT_SIZE:
+        case PROPERTY_DISPLAY::PT_DEGREE:
+        case PROPERTY_DISPLAY::PT_DECIDEGREE:
+        case PROPERTY_DISPLAY::PT_TIME:
+            return normalizeFormattedValueForExpression( aProp,
+                                                         formatFindByPropertiesDisplayValue( m_frame, aProp, aValue ) );
+
+        default: break;
+        }
+    }
+
     if( aValue.GetType() == wxT( "double" ) || aValue.GetType() == wxT( "long" ) )
         return aValue.GetString();
 
-    wxString val = aValue.GetString();
+    wxString val = aProp ? formatFindByPropertiesDisplayValue( m_frame, aProp, aValue ) : aValue.GetString();
 
     val.Replace( wxT( "'" ), wxT( "\\'" ) );
 
