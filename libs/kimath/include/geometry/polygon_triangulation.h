@@ -257,6 +257,9 @@ private:
                 if( a.x == b.x || aCut <= std::min( a.x, b.x ) || aCut >= std::max( a.x, b.x ) )
                     continue;
 
+                if( count >= 2 )
+                    return false;
+
                 double t = static_cast<double>( aCut - a.x ) / static_cast<double>( b.x - a.x );
                 int    y = static_cast<int>( std::lround( a.y + t * ( b.y - a.y ) ) );
                 aHits[count++] = { ii, VECTOR2I( aCut, y ) };
@@ -266,13 +269,13 @@ private:
                 if( a.y == b.y || aCut <= std::min( a.y, b.y ) || aCut >= std::max( a.y, b.y ) )
                     continue;
 
+                if( count >= 2 )
+                    return false;
+
                 double t = static_cast<double>( aCut - a.y ) / static_cast<double>( b.y - a.y );
                 int    x = static_cast<int>( std::lround( a.x + t * ( b.x - a.x ) ) );
                 aHits[count++] = { ii, VECTOR2I( x, aCut ) };
             }
-
-            if( count > 2 )
-                return false;
         }
 
         return count == 2;
