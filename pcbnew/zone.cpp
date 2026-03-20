@@ -1350,16 +1350,16 @@ void ZONE::swapData( BOARD_ITEM* aImage )
 }
 
 
-void ZONE::CacheTriangulation( PCB_LAYER_ID aLayer )
+void ZONE::CacheTriangulation( PCB_LAYER_ID aLayer, const SHAPE_POLY_SET::TASK_SUBMITTER& aSubmitter )
 {
     if( aLayer == UNDEFINED_LAYER )
     {
         std::lock_guard<std::mutex> lock( m_filledPolysListMutex );
 
         for( auto& [ layer, poly ] : m_FilledPolysList )
-            poly->CacheTriangulation();
+            poly->CacheTriangulation( false, aSubmitter );
 
-        m_Poly->CacheTriangulation( false );
+        m_Poly->CacheTriangulation();
     }
     else
     {
@@ -1378,7 +1378,7 @@ void ZONE::CacheTriangulation( PCB_LAYER_ID aLayer )
         }
 
         if( poly )
-            poly->CacheTriangulation();
+            poly->CacheTriangulation( false, aSubmitter );
     }
 }
 

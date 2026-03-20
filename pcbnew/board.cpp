@@ -1159,12 +1159,18 @@ void BOARD::CacheTriangulation( PROGRESS_REPORTER* aReporter, const std::vector<
 
     returns.reserve( zones.size() );
 
-    auto cache_zones = [aReporter]( ZONE* aZone ) -> size_t
+    SHAPE_POLY_SET::TASK_SUBMITTER submitter =
+            [&tp]( std::function<void()> aTask )
+            {
+                tp.detach_task( std::move( aTask ) );
+            };
+
+    auto cache_zones = [aReporter, &submitter]( ZONE* aZone ) -> size_t
     {
         if( aReporter && aReporter->IsCancelled() )
             return 0;
 
-        aZone->CacheTriangulation();
+        aZone->CacheTriangulation( UNDEFINED_LAYER, submitter );
 
         if( aReporter )
             aReporter->AdvanceProgress();

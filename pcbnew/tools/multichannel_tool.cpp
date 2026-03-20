@@ -1088,7 +1088,7 @@ bool MULTICHANNEL_TOOL::copyRuleAreaContents( RULE_AREA* aRefArea, RULE_AREA* aT
 
     SHAPE_POLY_SET refPoly;
     refPoly.AddOutline( refOutline );
-    refPoly.CacheTriangulation( false );
+    refPoly.CacheTriangulation();
 
     SHAPE_POLY_SET targetPoly;
 
@@ -1096,7 +1096,7 @@ bool MULTICHANNEL_TOOL::copyRuleAreaContents( RULE_AREA* aRefArea, RULE_AREA* aT
     newTargetOutline.Rotate( rot, VECTOR2( 0, 0 ) );
     newTargetOutline.Move( disp );
     targetPoly.AddOutline( newTargetOutline );
-    targetPoly.CacheTriangulation( false );
+    targetPoly.CacheTriangulation();
 
     std::shared_ptr<CONNECTIVITY_DATA> connectivity = board()->GetConnectivity();
     std::map<EDA_GROUP*, EDA_GROUP*>   groupMap;

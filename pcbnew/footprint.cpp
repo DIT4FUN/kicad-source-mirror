@@ -3650,7 +3650,7 @@ void FOOTPRINT::BuildCourtyardCaches( OUTLINE_ERROR_HANDLER* aErrorHandler )
         // polygons.
         m_courtyard_cache->front.Inflate( -maxError, CORNER_STRATEGY::CHAMFER_ACUTE_CORNERS, maxError );
 
-        m_courtyard_cache->front.CacheTriangulation( false );
+        m_courtyard_cache->front.CacheTriangulation();
         auto max = std::max_element( front_width_histogram.begin(), front_width_histogram.end(),
                                      []( const std::pair<int, int>& a, const std::pair<int, int>& b )
                                      {
@@ -3679,7 +3679,7 @@ void FOOTPRINT::BuildCourtyardCaches( OUTLINE_ERROR_HANDLER* aErrorHandler )
         // Touching courtyards, or courtyards -at- the clearance distance are legal.
         m_courtyard_cache->back.Inflate( -maxError, CORNER_STRATEGY::CHAMFER_ACUTE_CORNERS, maxError );
 
-        m_courtyard_cache->back.CacheTriangulation( false );
+        m_courtyard_cache->back.CacheTriangulation();
         auto max = std::max_element( back_width_histogram.begin(), back_width_histogram.end(),
                                      []( const std::pair<int, int>& a, const std::pair<int, int>& b )
                                      {

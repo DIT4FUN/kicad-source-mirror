@@ -1739,7 +1739,7 @@ bool PNS_KICAD_IFACE_BASE::syncZone( PNS::NODE* aWorld, ZONE* aZone, SHAPE_POLY_
     LSET layers = aZone->GetLayerSet();
 
     poly = aZone->Outline();
-    poly->CacheTriangulation( false );
+    poly->CacheTriangulation();
 
     if( !poly->IsTriangulationUpToDate() )
     {

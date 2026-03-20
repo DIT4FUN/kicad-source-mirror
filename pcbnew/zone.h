@@ -622,7 +622,8 @@ public:
      * Create a list of triangles that "fill" the solid areas used for instance to draw
      * these solid areas on OpenGL.
      */
-    void CacheTriangulation( PCB_LAYER_ID aLayer = UNDEFINED_LAYER );
+    void CacheTriangulation( PCB_LAYER_ID aLayer = UNDEFINED_LAYER,
+                             const SHAPE_POLY_SET::TASK_SUBMITTER& aSubmitter = {} );
 
     /**
      * Set the list of filled polygons.
