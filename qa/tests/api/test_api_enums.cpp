@@ -396,6 +396,26 @@ BOOST_AUTO_TEST_CASE( DrillFormat )
     testEnums<JOB_EXPORT_PCB_DRILL::DRILL_FORMAT, kiapi::board::jobs::DrillFormat>();
 }
 
+BOOST_AUTO_TEST_CASE( DrillOrigin )
+{
+    testEnums<JOB_EXPORT_PCB_DRILL::DRILL_ORIGIN, kiapi::board::jobs::DrillOrigin>();
+}
+
+BOOST_AUTO_TEST_CASE( DrillZerosFormat )
+{
+    testEnums<JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT, kiapi::board::jobs::DrillZerosFormat>();
+}
+
+BOOST_AUTO_TEST_CASE( DrillMapFormat )
+{
+    testEnums<JOB_EXPORT_PCB_DRILL::MAP_FORMAT, kiapi::board::jobs::DrillMapFormat>();
+}
+
+BOOST_AUTO_TEST_CASE( DrillUnits )
+{
+    testEnums<JOB_EXPORT_PCB_DRILL::DRILL_UNITS, kiapi::common::types::Units>( true );
+}
+
 BOOST_AUTO_TEST_CASE( PositionSide )
 {
     testEnums<JOB_EXPORT_PCB_POS::SIDE, kiapi::board::jobs::PositionSide>();

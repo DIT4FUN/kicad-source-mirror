@@ -2352,6 +2352,52 @@ HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportDr
 
     job.m_format = FromProtoEnum<JOB_EXPORT_PCB_DRILL::DRILL_FORMAT>( aCtx.Request.format() );
 
+    if( std::optional<ApiResponseStatus> unitError =
+            ValidateUnitsInchMm( aCtx.Request.units(), "RunBoardJobExportDrill" ) )
+    {
+        return tl::unexpected( *unitError );
+    }
+
+    job.m_drillUnits = FromProtoEnum<JOB_EXPORT_PCB_DRILL::DRILL_UNITS>( aCtx.Request.units() );
+    job.m_drillOrigin = FromProtoEnum<JOB_EXPORT_PCB_DRILL::DRILL_ORIGIN>( aCtx.Request.origin() );
+    job.m_zeroFormat = FromProtoEnum<JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT>( aCtx.Request.zeros_format() );
+
+    if( aCtx.Request.has_excellon() )
+    {
+        const ExcellonFormatOptions& excellonOptions = aCtx.Request.excellon();
+
+        if( excellonOptions.has_mirror_y() )
+            job.m_excellonMirrorY = excellonOptions.mirror_y();
+
+        if( excellonOptions.has_minimal_header() )
+            job.m_excellonMinimalHeader = excellonOptions.minimal_header();
+
+        if( excellonOptions.has_combine_pth_npth() )
+            job.m_excellonCombinePTHNPTH = excellonOptions.combine_pth_npth();
+
+        if( excellonOptions.has_route_oval_holes() )
+            job.m_excellonOvalDrillRoute = excellonOptions.route_oval_holes();
+    }
+
+    if( aCtx.Request.map_format() != DrillMapFormat::DMF_UNKNOWN )
+    {
+        job.m_generateMap = true;
+        job.m_mapFormat = FromProtoEnum<JOB_EXPORT_PCB_DRILL::MAP_FORMAT>( aCtx.Request.map_format() );
+    }
+
+    job.m_gerberPrecision = aCtx.Request.gerber_precision() == DrillGerberPrecision::DGP_4_5 ? 5 : 6;
+
+    if( aCtx.Request.has_gerber_generate_tenting() )
+        job.m_generateTenting = aCtx.Request.gerber_generate_tenting();
+
+    if( aCtx.Request.report_format() != DrillReportFormat::DRF_UNKNOWN )
+    {
+        job.m_generateReport = true;
+
+        if( aCtx.Request.has_report_filename() )
+            job.m_reportPath = wxString::FromUTF8( aCtx.Request.report_filename() );
+    }
+
     return ExecuteBoardJob( context(), job );
 }
 
@@ -2371,7 +2417,9 @@ HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportPo
     job.m_filename = context()->GetCurrentFileName();
     job.SetConfiguredOutputPath( wxString::FromUTF8( aCtx.Request.job_settings().output_path() ) );
 
-    job.m_useDrillPlaceFileOrigin = aCtx.Request.use_drill_place_file_origin();
+    if( aCtx.Request.has_use_drill_place_file_origin() )
+        job.m_useDrillPlaceFileOrigin = aCtx.Request.use_drill_place_file_origin();
+
     job.m_smdOnly = aCtx.Request.smd_only();
     job.m_excludeFootprintsWithTh = aCtx.Request.exclude_footprints_with_th();
     job.m_excludeDNP = aCtx.Request.exclude_dnp();
@@ -2379,7 +2427,9 @@ HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportPo
     job.m_negateBottomX = aCtx.Request.negate_bottom_x();
     job.m_singleFile = aCtx.Request.single_file();
     job.m_nakedFilename = aCtx.Request.naked_filename();
-    job.m_gerberBoardEdge = aCtx.Request.include_board_edge_for_gerber();
+    if( aCtx.Request.has_include_board_edge_for_gerber() )
+        job.m_gerberBoardEdge = aCtx.Request.include_board_edge_for_gerber();
+
     job.m_variant = wxString::FromUTF8( aCtx.Request.variant() );
 
     job.m_side = FromProtoEnum<JOB_EXPORT_PCB_POS::SIDE>( aCtx.Request.side() );
@@ -2439,7 +2489,9 @@ HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportIp
 
     job.m_drawingSheet = wxString::FromUTF8( aCtx.Request.drawing_sheet() );
     job.m_variant = wxString::FromUTF8( aCtx.Request.variant() );
-    job.m_precision = aCtx.Request.precision();
+    if( aCtx.Request.has_precision() )
+        job.m_precision = aCtx.Request.precision();
+
     job.m_compress = aCtx.Request.compress();
     job.m_colInternalId = wxString::FromUTF8( aCtx.Request.internal_id_column() );
     job.m_colMfgPn = wxString::FromUTF8( aCtx.Request.manufacturer_part_number_column() );
@@ -2497,7 +2549,8 @@ HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportOD
 
     job.m_drawingSheet = wxString::FromUTF8( aCtx.Request.drawing_sheet() );
     job.m_variant = wxString::FromUTF8( aCtx.Request.variant() );
-    job.m_precision = aCtx.Request.precision();
+    if( aCtx.Request.has_precision() )
+        job.m_precision = aCtx.Request.precision();
 
     if( std::optional<ApiResponseStatus> unitError =
             ValidateUnitsInchMm( aCtx.Request.units(), "RunBoardJobExportODB" ) )

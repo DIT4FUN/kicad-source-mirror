@@ -310,12 +310,92 @@ enum DrillFormat
     DF_GERBER = 2;
 }
 
+enum DrillOrigin
+{
+    DO_UNKNOWN = 0;
+    DO_ABSOLUTE = 1;
+    DO_PLOT = 2;
+}
+
+enum DrillZerosFormat
+{
+    DZF_UNKNOWN = 0;
+    DZF_DECIMAL = 1;
+    DZF_SUPPRESS_LEADING = 2;
+    DZF_SUPPRESS_TRAILING = 3;
+    DZF_KEEP_ZEROS = 4;
+}
+
+enum DrillMapFormat
+{
+    DMF_UNKNOWN = 0;
+    DMF_POSTSCRIPT = 1;
+    DMF_GERBER_X2 = 2;
+    DMF_DXF = 3;
+    DMF_SVG = 4;
+    DMF_PDF = 5;
+}
+
+// Gerber drill numeric precision (format is always 4.x for drill outputs).
+enum DrillGerberPrecision
+{
+    DGP_UNKNOWN = 0;
+    DGP_4_5 = 1;
+    DGP_4_6 = 2;
+}
+
+message ExcellonFormatOptions
+{
+    // If true, Y coordinates will be negated in the drill file
+    optional bool mirror_y = 1;
+
+    // If true, comments and other optional info will be omitted from the drill file header
+    optional bool minimal_header = 2;
+
+    // If true, a single drill file will be created with both PTH and NPTH holes
+    optional bool combine_pth_npth = 3;
+
+    // If true, will generate a "route" operation instead of "drill" for oval-shaped holes
+    optional bool route_oval_holes = 4;
+}
+
+// What format to export drill reports in (only one supported so far...)
+enum DrillReportFormat
+{
+    DRF_UNKNOWN = 0;
+
+    // KiCad text drill report
+    DRF_STANDARD = 1;
+}
+
 // Exports NC drill files from a board.  Returns RunJobResponse.
 message RunBoardJobExportDrill
 {
     kiapi.common.types.RunJobSettings job_settings = 1;
 
     DrillFormat format = 2;
+
+    // Inches or millimeters are accepted
+    kiapi.common.types.Units units = 3;
+
+    DrillOrigin origin = 4;
+    DrillZerosFormat zeros_format = 5;
+
+    ExcellonFormatOptions excellon = 6;
+
+    // Set to a valid value to generate a drill map.  Leave unset for no drill map.
+    DrillMapFormat map_format = 11;
+
+    // When generating drill files in Gerber format, the precision to use for coordinates
+    DrillGerberPrecision gerber_precision = 12;
+
+    // When generating drill files in Gerber format, will create additional gerbers specifying
+    // front and back tenting locations for tented pads and vias.
+    optional bool gerber_generate_tenting = 13;
+
+    // Set to a valid value to generate a drill report.  Leave unset for no report.
+    DrillReportFormat report_format = 14;
+    optional string report_filename = 15;
 }
 
 // Which board side(s) to include in position file output.
@@ -344,7 +424,7 @@ message RunBoardJobExportPosition
 {
     kiapi.common.types.RunJobSettings job_settings = 1;
 
-    bool use_drill_place_file_origin = 2;
+    optional bool use_drill_place_file_origin = 2;
     bool smd_only = 3;
     bool exclude_footprints_with_th = 4;
     bool exclude_dnp = 5;
@@ -357,7 +437,7 @@ message RunBoardJobExportPosition
     // Inches or millimeters are accepted
     kiapi.common.types.Units units = 11;
     PositionFormat format = 12;
-    bool include_board_edge_for_gerber = 13;
+    optional bool include_board_edge_for_gerber = 13;
     string variant = 14;
 }
 
@@ -391,7 +471,7 @@ message RunBoardJobExportIpc2581
     // Inches or millimeters are accepted
     kiapi.common.types.Units units = 4;
     Ipc2581Version version = 5;
-    int32 precision = 6;
+    optional int32 precision = 6;
     bool compress = 7;
 
     string internal_id_column = 8;
@@ -430,7 +510,7 @@ message RunBoardJobExportODB
 
     // Inches or millimeters are accepted
     kiapi.common.types.Units units = 4;
-    int32 precision = 5;
+    optional int32 precision = 5;
     OdbCompression compression = 6;
 }
 

@@ -1273,6 +1273,148 @@ JOB_EXPORT_PCB_DRILL::DRILL_FORMAT FromProtoEnum( DrillFormat aValue )
 
 
 template<>
+DrillOrigin ToProtoEnum( JOB_EXPORT_PCB_DRILL::DRILL_ORIGIN aValue )
+{
+    switch( aValue )
+    {
+    case JOB_EXPORT_PCB_DRILL::DRILL_ORIGIN::ABS:  return DrillOrigin::DO_ABSOLUTE;
+    case JOB_EXPORT_PCB_DRILL::DRILL_ORIGIN::PLOT: return DrillOrigin::DO_PLOT;
+    default:
+        wxCHECK_MSG( false, DrillOrigin::DO_UNKNOWN,
+                     "Unhandled case in ToProtoEnum<JOB_EXPORT_PCB_DRILL::DRILL_ORIGIN>" );
+    }
+}
+
+
+template<>
+JOB_EXPORT_PCB_DRILL::DRILL_ORIGIN FromProtoEnum( DrillOrigin aValue )
+{
+    switch( aValue )
+    {
+    case DrillOrigin::DO_ABSOLUTE: return JOB_EXPORT_PCB_DRILL::DRILL_ORIGIN::ABS;
+    case DrillOrigin::DO_PLOT:     return JOB_EXPORT_PCB_DRILL::DRILL_ORIGIN::PLOT;
+    case DrillOrigin::DO_UNKNOWN:
+    default:
+        return JOB_EXPORT_PCB_DRILL::DRILL_ORIGIN::ABS;
+    }
+}
+
+
+template<>
+DrillZerosFormat ToProtoEnum( JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT aValue )
+{
+    switch( aValue )
+    {
+    case JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT::DECIMAL:
+        return DrillZerosFormat::DZF_DECIMAL;
+    case JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT::SUPPRESS_LEADING:
+        return DrillZerosFormat::DZF_SUPPRESS_LEADING;
+    case JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT::SUPPRESS_TRAILING:
+        return DrillZerosFormat::DZF_SUPPRESS_TRAILING;
+    case JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT::KEEP_ZEROS:
+        return DrillZerosFormat::DZF_KEEP_ZEROS;
+    default:
+        wxCHECK_MSG( false, DrillZerosFormat::DZF_UNKNOWN,
+                     "Unhandled case in ToProtoEnum<JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT>" );
+    }
+}
+
+
+template<>
+JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT FromProtoEnum( DrillZerosFormat aValue )
+{
+    switch( aValue )
+    {
+    case DrillZerosFormat::DZF_DECIMAL:
+        return JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT::DECIMAL;
+    case DrillZerosFormat::DZF_SUPPRESS_LEADING:
+        return JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT::SUPPRESS_LEADING;
+    case DrillZerosFormat::DZF_SUPPRESS_TRAILING:
+        return JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT::SUPPRESS_TRAILING;
+    case DrillZerosFormat::DZF_KEEP_ZEROS:
+        return JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT::KEEP_ZEROS;
+    case DrillZerosFormat::DZF_UNKNOWN:
+    default:
+        return JOB_EXPORT_PCB_DRILL::ZEROS_FORMAT::DECIMAL;
+    }
+}
+
+
+template<>
+DrillMapFormat ToProtoEnum( JOB_EXPORT_PCB_DRILL::MAP_FORMAT aValue )
+{
+    switch( aValue )
+    {
+    case JOB_EXPORT_PCB_DRILL::MAP_FORMAT::POSTSCRIPT:
+        return DrillMapFormat::DMF_POSTSCRIPT;
+    case JOB_EXPORT_PCB_DRILL::MAP_FORMAT::GERBER_X2:
+        return DrillMapFormat::DMF_GERBER_X2;
+    case JOB_EXPORT_PCB_DRILL::MAP_FORMAT::DXF:
+        return DrillMapFormat::DMF_DXF;
+    case JOB_EXPORT_PCB_DRILL::MAP_FORMAT::SVG:
+        return DrillMapFormat::DMF_SVG;
+    case JOB_EXPORT_PCB_DRILL::MAP_FORMAT::PDF:
+        return DrillMapFormat::DMF_PDF;
+    default:
+        wxCHECK_MSG( false, DrillMapFormat::DMF_UNKNOWN,
+                     "Unhandled case in ToProtoEnum<JOB_EXPORT_PCB_DRILL::MAP_FORMAT>" );
+    }
+}
+
+
+template<>
+JOB_EXPORT_PCB_DRILL::MAP_FORMAT FromProtoEnum( DrillMapFormat aValue )
+{
+    switch( aValue )
+    {
+    case DrillMapFormat::DMF_POSTSCRIPT:
+        return JOB_EXPORT_PCB_DRILL::MAP_FORMAT::POSTSCRIPT;
+    case DrillMapFormat::DMF_GERBER_X2:
+        return JOB_EXPORT_PCB_DRILL::MAP_FORMAT::GERBER_X2;
+    case DrillMapFormat::DMF_DXF:
+        return JOB_EXPORT_PCB_DRILL::MAP_FORMAT::DXF;
+    case DrillMapFormat::DMF_SVG:
+        return JOB_EXPORT_PCB_DRILL::MAP_FORMAT::SVG;
+    case DrillMapFormat::DMF_PDF:
+        return JOB_EXPORT_PCB_DRILL::MAP_FORMAT::PDF;
+    case DrillMapFormat::DMF_UNKNOWN:
+    default:
+        return JOB_EXPORT_PCB_DRILL::MAP_FORMAT::PDF;
+    }
+}
+
+
+template<>
+kiapi::common::types::Units ToProtoEnum( JOB_EXPORT_PCB_DRILL::DRILL_UNITS aValue )
+{
+    switch( aValue )
+    {
+    case JOB_EXPORT_PCB_DRILL::DRILL_UNITS::INCH: return kiapi::common::types::Units::U_INCH;
+    case JOB_EXPORT_PCB_DRILL::DRILL_UNITS::MM:   return kiapi::common::types::Units::U_MM;
+    default:
+        wxCHECK_MSG( false, kiapi::common::types::Units::U_UNKNOWN,
+                     "Unhandled case in ToProtoEnum<JOB_EXPORT_PCB_DRILL::DRILL_UNITS>" );
+    }
+}
+
+
+template<>
+JOB_EXPORT_PCB_DRILL::DRILL_UNITS FromProtoEnum( kiapi::common::types::Units aValue )
+{
+    switch( aValue )
+    {
+    case kiapi::common::types::Units::U_INCH: return JOB_EXPORT_PCB_DRILL::DRILL_UNITS::INCH;
+    case kiapi::common::types::Units::U_MM:   return JOB_EXPORT_PCB_DRILL::DRILL_UNITS::MM;
+    case kiapi::common::types::Units::U_UNKNOWN:
+    case kiapi::common::types::Units::U_METERS:
+    case kiapi::common::types::Units::U_TENTHS:
+    default:
+        return JOB_EXPORT_PCB_DRILL::DRILL_UNITS::INCH;
+    }
+}
+
+
+template<>
 PositionSide ToProtoEnum( JOB_EXPORT_PCB_POS::SIDE aValue )
 {
     switch( aValue )
