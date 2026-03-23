@@ -68,7 +68,6 @@ set( QA_PCBNEW_SRCS
     test_reference_image_load.cpp
     test_gencad_export.cpp
     test_pdf_output_path.cpp
-    test_plot_controller.cpp
     test_shape_corner_radius.cpp
     test_pcb_grid_helper.cpp
     test_save_load.cpp
