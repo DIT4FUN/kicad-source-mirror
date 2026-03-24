@@ -274,10 +274,33 @@ void BOARD_ITEM::SwapItemData( BOARD_ITEM* aImage )
         return;
 
     EDA_ITEM* parent = GetParent();
+    BOARD*    board = GetBoard();
+
+    // Evict children from the item-by-id cache before the swap moves them to the
+    // image.  The image is typically deleted after the swap (undo/redo, commit revert),
+    // which would leave the cache holding dangling pointers to the destroyed children.
+    if( board )
+    {
+        RunOnChildren(
+                [board]( BOARD_ITEM* child )
+                {
+                    board->UncacheItemById( child->m_Uuid );
+                },
+                RECURSE_MODE::NO_RECURSE );
+    }
 
     swapData( aImage );
-
     SetParent( parent );
+
+    if( board )
+    {
+        RunOnChildren(
+                [board]( BOARD_ITEM* child )
+                {
+                    board->CacheItemById( child );
+                },
+                RECURSE_MODE::NO_RECURSE );
+    }
 }
 
 
