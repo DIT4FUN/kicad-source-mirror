@@ -28,6 +28,7 @@
 #include <api/board_context.h>
 #include <api/api_utils.h>
 #include <board_commit.h>
+#include <board_connected_item.h>
 #include <board_design_settings.h>
 #include <footprint.h>
 #include <kicad_clipboard.h>
@@ -67,6 +68,7 @@
 #include <zone.h>
 
 #include <api/common/types/base_types.pb.h>
+#include <connectivity/connectivity_data.h>
 #include <drc/drc_rule_condition.h>
 #include <drc/drc_rule_parser.h>
 #include <widgets/appearance_controls.h>
@@ -137,6 +139,9 @@ API_HANDLER_PCB::API_HANDLER_PCB( std::shared_ptr<BOARD_CONTEXT> aContext,
 
     registerHandler<InteractiveMoveItems, Empty>( &API_HANDLER_PCB::handleInteractiveMoveItems );
     registerHandler<GetNets, NetsResponse>( &API_HANDLER_PCB::handleGetNets );
+    registerHandler<GetConnectedItems, GetItemsResponse>( &API_HANDLER_PCB::handleGetConnectedItems );
+    registerHandler<GetItemsByNet, GetItemsResponse>( &API_HANDLER_PCB::handleGetItemsByNet );
+    registerHandler<GetItemsByNetClass, GetItemsResponse>( &API_HANDLER_PCB::handleGetItemsByNetClass );
     registerHandler<GetNetClassForNets, NetClassForNetsResponse>(
             &API_HANDLER_PCB::handleGetNetClassForNets );
     registerHandler<RefillZones, Empty>( &API_HANDLER_PCB::handleRefillZones );
@@ -582,7 +587,7 @@ HANDLER_RESULT<ItemRequestStatus> API_HANDLER_PCB::handleCreateUpdateItemsIntern
                 item->RunOnChildren(
                         []( BOARD_ITEM* aChild )
                         {
-                            aChild->ResetUuid();
+                            const_cast<KIID&>( aChild->m_Uuid ) = KIID();
                         },
                         RECURSE );
             }
@@ -657,14 +662,8 @@ HANDLER_RESULT<GetItemsResponse> API_HANDLER_PCB::handleGetItems( const HANDLER_
     std::set<KICAD_T> typesRequested, typesInserted;
     bool handledAnything = false;
 
-    for( int typeRaw : aCtx.Request.types() )
+    for( KICAD_T type : parseRequestedItemTypes( aCtx.Request.types() ) )
     {
-        auto typeMessage = static_cast<common::types::KiCadObjectType>( typeRaw );
-        KICAD_T type = FromProtoEnum<KICAD_T>( typeMessage );
-
-        if( type == TYPE_NOT_INIT )
-            continue;
-
         typesRequested.emplace( type );
 
         if( typesInserted.count( type ) )
@@ -904,16 +903,8 @@ HANDLER_RESULT<SelectionResponse> API_HANDLER_PCB::handleGetSelection(
 
     std::set<KICAD_T> filter;
 
-    for( int typeRaw : aCtx.Request.types() )
-    {
-        auto typeMessage = static_cast<types::KiCadObjectType>( typeRaw );
-        KICAD_T type = FromProtoEnum<KICAD_T>( typeMessage );
-
-        if( type == TYPE_NOT_INIT )
-            continue;
-
+    for( KICAD_T type : parseRequestedItemTypes( aCtx.Request.types() ) )
         filter.insert( type );
-    }
 
     TOOL_MANAGER* mgr = toolManager();
     PCB_SELECTION_TOOL* selectionTool = mgr->GetTool<PCB_SELECTION_TOOL>();
@@ -2026,8 +2017,7 @@ HANDLER_RESULT<types::TitleBlockInfo> API_HANDLER_PCB::handleGetTitleBlockInfo(
     if( !documentValidation )
         return tl::unexpected( documentValidation.error() );
 
-    BOARD* board = this->board();
-    const TITLE_BLOCK& block = board->GetTitleBlock();
+    const TITLE_BLOCK& block = board()->GetTitleBlock();
 
     types::TitleBlockInfo response;
 
@@ -2064,8 +2054,7 @@ HANDLER_RESULT<Empty> API_HANDLER_PCB::handleSetTitleBlockInfo( const HANDLER_CO
         return tl::unexpected( e );
     }
 
-    BOARD* board = this->board();
-    TITLE_BLOCK& block = board->GetTitleBlock();
+    TITLE_BLOCK& block = board()->GetTitleBlock();
 
     const types::TitleBlockInfo& request = aCtx.Request.title_block();
 
@@ -2207,6 +2196,223 @@ HANDLER_RESULT<NetsResponse> API_HANDLER_PCB::handleGetNets( const HANDLER_CONTE
         netProto->mutable_code()->set_value( net->GetNetCode() );
     }
 
+    return response;
+}
+
+
+HANDLER_RESULT<GetItemsResponse> API_HANDLER_PCB::handleGetConnectedItems(
+        const HANDLER_CONTEXT<GetConnectedItems>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    if( !validateItemHeaderDocument( aCtx.Request.header() ) )
+    {
+        ApiResponseStatus e;
+        e.set_status( ApiStatusCode::AS_UNHANDLED );
+        return tl::unexpected( e );
+    }
+
+    std::vector<KICAD_T> types = parseRequestedItemTypes( aCtx.Request.types() );
+    const bool filterByType = aCtx.Request.types_size() > 0;
+
+    if( filterByType && types.empty() )
+    {
+        ApiResponseStatus e;
+        e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+        e.set_error_message( "none of the requested types are valid for a Board object" );
+        return tl::unexpected( e );
+    }
+
+    std::set<KICAD_T> typeFilter( types.begin(), types.end() );
+    std::vector<BOARD_CONNECTED_ITEM*> sourceItems;
+
+    for( const types::KIID& id : aCtx.Request.items() )
+    {
+        if( std::optional<BOARD_ITEM*> item = getItemById( KIID( id.value() ) ) )
+        {
+            if( BOARD_CONNECTED_ITEM* connected = dynamic_cast<BOARD_CONNECTED_ITEM*>( *item ) )
+                sourceItems.emplace_back( connected );
+        }
+    }
+
+    if( sourceItems.empty() )
+    {
+        ApiResponseStatus e;
+        e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+        e.set_error_message( "none of the requested IDs were found or valid connected items" );
+        return tl::unexpected( e );
+    }
+
+    GetItemsResponse response;
+    std::shared_ptr<CONNECTIVITY_DATA> conn = board()->GetConnectivity();
+    std::set<KIID> insertedItems;
+
+    for( BOARD_CONNECTED_ITEM* source : sourceItems )
+    {
+        for( BOARD_CONNECTED_ITEM* connected : conn->GetConnectedItems( source ) )
+        {
+            if( filterByType && !typeFilter.contains( connected->Type() ) )
+                continue;
+
+            if( !insertedItems.insert( connected->m_Uuid ).second )
+                continue;
+
+            connected->Serialize( *response.add_items() );
+        }
+    }
+
+    response.set_status( ItemRequestStatus::IRS_OK );
+    return response;
+}
+
+
+std::vector<KICAD_T> API_HANDLER_PCB::parseRequestedItemTypes( const google::protobuf::RepeatedField<int>& aTypes )
+{
+    std::vector<KICAD_T> types;
+
+    for( int typeRaw : aTypes )
+    {
+        auto typeMessage = static_cast<common::types::KiCadObjectType>( typeRaw );
+        KICAD_T type = FromProtoEnum<KICAD_T>( typeMessage );
+
+        if( type != TYPE_NOT_INIT )
+            types.emplace_back( type );
+    }
+
+    return types;
+}
+
+
+HANDLER_RESULT<GetItemsResponse> API_HANDLER_PCB::handleGetItemsByNet(
+        const HANDLER_CONTEXT<GetItemsByNet>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    if( !validateItemHeaderDocument( aCtx.Request.header() ) )
+    {
+        ApiResponseStatus e;
+        e.set_status( ApiStatusCode::AS_UNHANDLED );
+        return tl::unexpected( e );
+    }
+
+    std::vector<KICAD_T> types = parseRequestedItemTypes( aCtx.Request.types() );
+    const bool filterByType = aCtx.Request.types_size() > 0;
+
+    if( filterByType && types.empty() )
+    {
+        ApiResponseStatus e;
+        e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+        e.set_error_message( "none of the requested types are valid for a Board object" );
+        return tl::unexpected( e );
+    }
+
+    if( !filterByType )
+        types.assign( { PCB_PAD_T, PCB_VIA_T, PCB_TRACE_T, PCB_ARC_T, PCB_SHAPE_T, PCB_ZONE_T } );
+
+    GetItemsResponse response;
+    BOARD* board = this->board();
+    std::shared_ptr<CONNECTIVITY_DATA> conn = board->GetConnectivity();
+    std::set<KIID> insertedItems;
+
+    const NETINFO_LIST& nets = board->GetNetInfo();
+
+    for( const board::types::Net& net : aCtx.Request.nets() )
+    {
+        NETINFO_ITEM* netInfo = nets.GetNetItem( wxString::FromUTF8( net.name() ) );
+
+        if( !netInfo )
+            continue;
+
+        for( BOARD_CONNECTED_ITEM* item : conn->GetNetItems( netInfo->GetNetCode(), types ) )
+        {
+            if( !insertedItems.insert( item->m_Uuid ).second )
+                continue;
+
+            item->Serialize( *response.add_items() );
+        }
+    }
+
+    response.set_status( ItemRequestStatus::IRS_OK );
+    return response;
+}
+
+
+HANDLER_RESULT<GetItemsResponse> API_HANDLER_PCB::handleGetItemsByNetClass(
+        const HANDLER_CONTEXT<GetItemsByNetClass>& aCtx )
+{
+    if( std::optional<ApiResponseStatus> busy = checkForBusy() )
+        return tl::unexpected( *busy );
+
+    if( !validateItemHeaderDocument( aCtx.Request.header() ) )
+    {
+        ApiResponseStatus e;
+        e.set_status( ApiStatusCode::AS_UNHANDLED );
+        return tl::unexpected( e );
+    }
+
+    std::vector<KICAD_T> types = parseRequestedItemTypes( aCtx.Request.types() );
+    const bool filterByType = aCtx.Request.types_size() > 0;
+
+    if( filterByType && types.empty() )
+    {
+        ApiResponseStatus e;
+        e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+        e.set_error_message( "none of the requested types are valid for a Board object" );
+        return tl::unexpected( e );
+    }
+
+    if( !filterByType )
+        types.assign( { PCB_PAD_T, PCB_VIA_T, PCB_TRACE_T, PCB_ARC_T, PCB_SHAPE_T, PCB_ZONE_T } );
+
+    std::set<wxString> requestedClasses;
+
+    for( const std::string& netClass : aCtx.Request.net_classes() )
+        requestedClasses.insert( wxString( netClass.c_str(), wxConvUTF8 ) );
+
+    GetItemsResponse response;
+    BOARD* board = this->board();
+    std::shared_ptr<CONNECTIVITY_DATA> conn = board->GetConnectivity();
+    std::set<KIID> insertedItems;
+
+    for( NETINFO_ITEM* net : board->GetNetInfo() )
+    {
+        if( !net )
+            continue;
+
+        NETCLASS* nc = net->GetNetClass();
+
+        if( !requestedClasses.empty() )
+        {
+            if( !nc )
+                continue;
+
+            bool inClass = false;
+
+            for( const wxString& filter : requestedClasses )
+            {
+                if( nc->ContainsNetclassWithName( filter ) )
+                {
+                    inClass = true;
+                    break;
+                }
+            }
+
+            if( !inClass )
+                continue;
+        }
+
+        for( BOARD_CONNECTED_ITEM* item : conn->GetNetItems( net->GetNetCode(), types ) )
+        {
+            if( !insertedItems.insert( item->m_Uuid ).second )
+                continue;
+
+            item->Serialize( *response.add_items() );
+        }
+    }
+
+    response.set_status( ItemRequestStatus::IRS_OK );
     return response;
 }
 
