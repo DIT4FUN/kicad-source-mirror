@@ -386,6 +386,8 @@ bool DRC_TEST_PROVIDER_EDGE_CLEARANCE::Run()
         }
     }
 
+    m_edgesTree.Build();
+
     /*
      * Collect all testable (item, layer, shape) tuples, then test against edges in parallel.
      * Flattening to per-layer work units ensures even distribution across threads, since

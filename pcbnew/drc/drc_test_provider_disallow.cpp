@@ -100,6 +100,8 @@ bool DRC_TEST_PROVIDER_DISALLOW::Run()
                 return true;
             } );
 
+    antiTrackKeepouts->Build();
+
     for( ZONE* ruleArea : antiCopperKeepouts )
     {
         for( ZONE* copperZone : copperZones )
@@ -169,7 +171,7 @@ bool DRC_TEST_PROVIDER_DISALLOW::Run()
             };
 
     thread_pool& tp = GetKiCadThreadPool();
-    auto futures = tp.submit_loop( 0, toCache.size(), query_areas );
+    auto futures = tp.submit_loop( 0, toCache.size(), query_areas, toCache.size() );
 
     for( auto& ret : futures )
     {

@@ -34,6 +34,7 @@
 #include <geometry/seg.h>
 #include <geometry/shape_poly_set.h>
 #include <geometry/shape_segment.h>
+#include <geometry/packed_rtree.h>
 
 #include <drc/drc_engine.h>
 #include <drc/drc_rtree.h>
@@ -699,12 +700,17 @@ void DRC_TEST_PROVIDER_COPPER_CLEARANCE::testTrackClearances()
                             },
                             m_board->m_DRCMaxClearance );
 
-                    for( ZONE* zone : m_board->m_DRCCopperZones )
-                    {
-                        testItemAgainstZone( track, zone, layer );
+                    auto zoneIt = m_board->m_DRCCopperZonesByLayer.find( layer );
 
-                        if( m_drcEngine->IsCancelled() )
-                            break;
+                    if( zoneIt != m_board->m_DRCCopperZonesByLayer.end() )
+                    {
+                        for( ZONE* zone : zoneIt->second )
+                        {
+                            testItemAgainstZone( track, zone, layer );
+
+                            if( m_drcEngine->IsCancelled() )
+                                break;
+                        }
                     }
                 }
 
@@ -1012,12 +1018,17 @@ void DRC_TEST_PROVIDER_COPPER_CLEARANCE::testPadClearances( )
                                 },
                                 m_board->m_DRCMaxClearance );
 
-                        for( ZONE* zone : m_board->m_DRCCopperZones )
-                        {
-                            testItemAgainstZone( pad, zone, layer );
+                        auto zoneIt = m_board->m_DRCCopperZonesByLayer.find( layer );
 
-                            if( m_drcEngine->IsCancelled() )
-                                return;
+                        if( zoneIt != m_board->m_DRCCopperZonesByLayer.end() )
+                        {
+                            for( ZONE* zone : zoneIt->second )
+                            {
+                                testItemAgainstZone( pad, zone, layer );
+
+                                if( m_drcEngine->IsCancelled() )
+                                    return;
+                            }
                         }
                     }
                 }
@@ -1068,15 +1079,21 @@ void DRC_TEST_PROVIDER_COPPER_CLEARANCE::testGraphicClearances()
                 // have different nets, then we have a short.
                 NETINFO_ITEM* inheritedNet = nullptr;
 
-                for( ZONE* zone : m_board->m_DRCCopperZones )
-                {
-                    if( isKnockoutText( item ) )
-                        testKnockoutTextAgainstZone( item, &inheritedNet, zone );
-                    else
-                        testItemAgainstZone( item, zone, item->GetLayer() );
+                PCB_LAYER_ID layer = item->GetLayer();
+                auto zoneIt = m_board->m_DRCCopperZonesByLayer.find( layer );
 
-                    if( m_drcEngine->IsCancelled() )
-                        return;
+                if( zoneIt != m_board->m_DRCCopperZonesByLayer.end() )
+                {
+                    for( ZONE* zone : zoneIt->second )
+                    {
+                        if( isKnockoutText( item ) )
+                            testKnockoutTextAgainstZone( item, &inheritedNet, zone );
+                        else
+                            testItemAgainstZone( item, zone, layer );
+
+                        if( m_drcEngine->IsCancelled() )
+                            return;
+                    }
                 }
             };
 
@@ -1203,11 +1220,15 @@ void DRC_TEST_PROVIDER_COPPER_CLEARANCE::testGraphicClearances()
 
 void DRC_TEST_PROVIDER_COPPER_CLEARANCE::testZonesToZones()
 {
+    using SEG_RTREE = KIRTREE::PACKED_RTREE<size_t, int, 2>;
+
     bool testClearance = !m_drcEngine->IsErrorLimitExceeded( DRCE_CLEARANCE );
     bool testIntersects = !m_drcEngine->IsErrorLimitExceeded( DRCE_ZONES_INTERSECT );
 
     std::vector<std::map<PCB_LAYER_ID, std::vector<SEG>>> poly_segments;
+    std::vector<std::map<PCB_LAYER_ID, SEG_RTREE>>        seg_rtrees;
     poly_segments.resize( m_board->m_DRCCopperZones.size() );
+    seg_rtrees.resize( m_board->m_DRCCopperZones.size() );
 
     thread_pool&        tp = GetKiCadThreadPool();
     std::atomic<size_t> done( 0 );
@@ -1240,7 +1261,8 @@ void DRC_TEST_PROVIDER_COPPER_CLEARANCE::testZonesToZones()
             };
 
     auto checkZones =
-            [this, testClearance, testIntersects, reportZoneZoneViolation, &poly_segments, &done]
+            [this, testClearance, testIntersects, reportZoneZoneViolation,
+             &poly_segments, &seg_rtrees, &done]
             ( int zoneA_idx, int zoneB_idx, bool sameNet, PCB_LAYER_ID layer ) -> void
             {
                 ZONE*    zoneA = m_board->m_DRCCopperZones[zoneA_idx];
@@ -1264,31 +1286,50 @@ void DRC_TEST_PROVIDER_COPPER_CLEARANCE::testZonesToZones()
 
                     if( constraint.GetSeverity() != RPT_SEVERITY_IGNORE && clearance > 0 )
                     {
-                        std::map<VECTOR2I, int> conflictPoints;
-
                         std::vector<SEG>& refSegments = poly_segments[zoneA_idx][layer];
                         std::vector<SEG>& testSegments = poly_segments[zoneB_idx][layer];
 
-                        // Iterate through all the segments in zoneA
-                        for( SEG& refSegment : refSegments )
+                        auto testIt = seg_rtrees[zoneB_idx].find( layer );
+
+                        if( testIt != seg_rtrees[zoneB_idx].end() && !testIt->second.empty() )
                         {
-                            // Iterate through all the segments in zoneB
-                            for( SEG& testSegment : testSegments )
+                            const SEG_RTREE& testTree = testIt->second;
+
+                            for( SEG& refSegment : refSegments )
                             {
-                                // We have ensured that the 'A' segment starts before the 'B' segment, so if the
-                                // 'A' segment ends before the 'B' segment starts, we can skip to the next 'A'
-                                if( refSegment.B.x < testSegment.A.x )
-                                    break;
+                                int minX = std::min( refSegment.A.x, refSegment.B.x ) - clearance;
+                                int minY = std::min( refSegment.A.y, refSegment.B.y ) - clearance;
+                                int maxX = std::max( refSegment.A.x, refSegment.B.x ) + clearance;
+                                int maxY = std::max( refSegment.A.y, refSegment.B.y ) + clearance;
+                                int qmin[2] = { minX, minY };
+                                int qmax[2] = { maxX, maxY };
+                                bool found = false;
 
-                                int64_t  dist_sq = 0;
-                                VECTOR2I other_pt;
-                                refSegment.NearestPoints( testSegment, pt, other_pt, dist_sq );
-                                actual = std::floor( std::sqrt( dist_sq ) + 0.5 );
+                                auto visitor = [&]( size_t segIdx ) -> bool
+                                {
+                                    SEG& testSegment = testSegments[segIdx];
+                                    int64_t  dist_sq = 0;
+                                    VECTOR2I other_pt;
 
-                                if( actual < clearance )
+                                    refSegment.NearestPoints( testSegment, pt, other_pt, dist_sq );
+                                    actual = std::floor( std::sqrt( dist_sq ) + 0.5 );
+
+                                    if( actual < clearance )
+                                    {
+                                        found = true;
+                                        return false;
+                                    }
+
+                                    return true;
+                                };
+
+                                testTree.Search( qmin, qmax, visitor );
+
+                                if( found )
                                 {
                                     done.fetch_add( 1 );
-                                    reportZoneZoneViolation( zoneA, zoneB, pt, actual, constraint, layer );
+                                    reportZoneZoneViolation( zoneA, zoneB, pt, actual, constraint,
+                                                            layer );
                                     return;
                                 }
                             }
@@ -1338,24 +1379,18 @@ void DRC_TEST_PROVIDER_COPPER_CLEARANCE::testZonesToZones()
                     zone_layer_poly_segs.push_back( seg );
                 }
 
-                // Sort by x-coordinates for the sweep-line optimization in the inner
-                // loop. SEG::operator< must not be used here because it delegates to
-                // VECTOR2I::operator< which compares by magnitude, violating strict
-                // weak ordering when mixed with VECTOR2I::operator== for tie-breaking.
-                std::sort( zone_layer_poly_segs.begin(), zone_layer_poly_segs.end(),
-                           []( const SEG& a, const SEG& b ) -> bool
-                           {
-                               if( a.A.x != b.A.x )
-                                   return a.A.x < b.A.x;
+                SEG_RTREE::Builder builder;
+                builder.Reserve( zone_layer_poly_segs.size() );
 
-                               if( a.A.y != b.A.y )
-                                   return a.A.y < b.A.y;
+                for( size_t si = 0; si < zone_layer_poly_segs.size(); ++si )
+                {
+                    const SEG& seg = zone_layer_poly_segs[si];
+                    int smin[2] = { std::min( seg.A.x, seg.B.x ), std::min( seg.A.y, seg.B.y ) };
+                    int smax[2] = { std::max( seg.A.x, seg.B.x ), std::max( seg.A.y, seg.B.y ) };
+                    builder.Add( smin, smax, si );
+                }
 
-                               if( a.B.x != b.B.x )
-                                   return a.B.x < b.B.x;
-
-                               return a.B.y < b.B.y;
-                           } );
+                seg_rtrees[ii][layer] = builder.Build();
             }
         }
 
