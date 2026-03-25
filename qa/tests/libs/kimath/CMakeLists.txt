@@ -56,6 +56,8 @@ set( QA_KIMATH_SRCS
     geometry/test_vector_utils.cpp
     geometry/test_shape_rect_corner.cpp
     geometry/test_packed_rtree.cpp
+    geometry/test_dynamic_rtree.cpp
+    geometry/bench_spatial_index.cpp
 
     math/test_box2.cpp
     math/test_matrix3x3.cpp
@@ -86,6 +88,7 @@ add_executable( qa_kimath
 target_link_libraries( qa_kimath
     qa_utils
     kimath
+    rtree
     nlohmann_json
     Boost::headers
     Boost::unit_test_framework

@@ -34,7 +34,7 @@
 #include <utility>
 #include <vector>
 
-#include <geometry/rtree_node.h>
+#include <geometry/rtree/rtree_node.h>
 
 namespace KIRTREE
 {
