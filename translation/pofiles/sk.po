@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kicad\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-20 20:14+0300\n"
-"PO-Revision-Date: 2026-03-25 17:09+0000\n"
+"PO-Revision-Date: 2026-03-26 05:17+0000\n"
 "Last-Translator: EdizonTN <edizontn@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/kicad/master-"
 "source/sk/>\n"
@@ -187,13 +187,13 @@ msgstr "Čas opätovného načítania %.3f s"
 #: pcbnew/pcb_io/kicad_sexpr/pcb_io_kicad_sexpr.cpp:3124
 #, c-format
 msgid "Loading %s..."
-msgstr "Načítavam %s..."
+msgstr "Načítavanie %s..."
 
 #: 3d-viewer/3d_rendering/opengl/render_3d_opengl.cpp:560
 #: 3d-viewer/3d_rendering/raytracing/render_3d_raytrace_gl.cpp:110
 #: 3d-viewer/3d_rendering/raytracing/render_3d_raytrace_ram.cpp:99
 msgid "Loading..."
-msgstr "Načítavam..."
+msgstr "Načítavanie..."
 
 #: 3d-viewer/3d_rendering/raytracing/create_scene.cpp:431
 msgid "Load Raytracing: board"
@@ -2110,7 +2110,7 @@ msgstr ""
 
 #: common/confirm.cpp:48 common/confirm.cpp:54
 msgid "File Open Warning"
-msgstr "Varovanie otvorenia súboru"
+msgstr "Upozornenie pri otvorení súboru"
 
 #: common/confirm.cpp:50 common/confirm.cpp:56
 msgid "Interleaved saves may produce very unexpected results."
@@ -2346,7 +2346,7 @@ msgstr "Kľúčové slová"
 #: common/widgets/design_block_pane.cpp:125
 #, c-format
 msgid "Error loading design block %s from library '%s'."
-msgstr "Chyba pri načítavaní návrhového bloku %s z knižnice '%s'."
+msgstr "Pri načítavaní návrhového bloku %s z knižnice '%s' nastala chyba."
 
 #: common/dialog_about/AboutDialog_main.cpp:112
 #: common/lib_tree_model_adapter.cpp:156 common/lib_tree_model_adapter.cpp:158
@@ -3143,7 +3143,7 @@ msgstr "Rohové razítko"
 #: pcbnew/pcbnew_jobs_handler.cpp:2829
 #, c-format
 msgid "Error loading drawing sheet '%s'."
-msgstr "Chyba pri načítaní listu výkresu '%s'."
+msgstr "Pri načítavaní listu výkresu '%s' nastala chyba."
 
 #: common/dialogs/dialog_page_settings.cpp:647
 #: common/dialogs/dialog_page_settings_base.cpp:54
@@ -3165,7 +3165,7 @@ msgid ""
 "Error loading drawing sheet '%s'.\n"
 "%s"
 msgstr ""
-"Chyba pri načítaní listu výkresu '%s'.\n"
+"Pri načítavaní listu výkresu '%s' nastala chyba.\n"
 "%s"
 
 #: common/dialogs/dialog_page_settings_base.cpp:41
@@ -3572,7 +3572,7 @@ msgstr "Zahrnúť:"
 #: pcbnew/dialogs/dialog_drc_base.cpp:203
 #: pcbnew/dialogs/dialog_footprint_checker_base.cpp:49
 msgid "Warnings"
-msgstr "Varovania"
+msgstr "Upozornenia"
 
 #: common/dialogs/dialog_rc_job_base.cpp:68
 msgid "Report job failure when violations present"
@@ -4083,7 +4083,7 @@ msgstr ""
 "faktor mierky. V takom prípade bude možno potrebné nastaviť túto hodnotu "
 "tak, aby zodpovedala mierke DPI vášho systému. 2.0 je bežná hodnota.\n"
 "\n"
-"Ak to nezodpovedá systémovému škálovaniu DPI, plátno nebude zodpovedať "
+"Ak sa nezhoduje so systémovým škálovaním DPI, plátno nebude zodpovedať "
 "veľkosti okna a pozícii kurzora."
 
 #: common/dialogs/panel_common_settings.cpp:95
@@ -4548,7 +4548,7 @@ msgstr "Vyberte položku %s Knižnica"
 #: eeschema/dialogs/panel_sym_lib_table.cpp:578
 #: pcbnew/dialogs/panel_fp_lib_table.cpp:669
 msgid "Warning: Duplicate Nicknames"
-msgstr "Varovanie: Duplicitné prezývky"
+msgstr "Upozornenie: Duplicitné prezývky"
 
 #: common/dialogs/panel_design_block_lib_table.cpp:744
 #: eeschema/dialogs/panel_sym_lib_table.cpp:579
@@ -5796,7 +5796,7 @@ msgstr "Triedy spojov"
 #: pcbnew/dialogs/panel_setup_layers.cpp:930 pcbnew/drc/drc_item.cpp:229
 #: pcbnew/import_gfx/dialog_import_graphics.cpp:244 pcbnew/pcb_marker.cpp:238
 msgid "Warning"
-msgstr "Varovanie"
+msgstr "Upozornenie"
 
 #: common/dialogs/panel_setup_severities.cpp:44
 #: common/dialogs/panel_setup_severities.cpp:118
@@ -6755,7 +6755,7 @@ msgstr "Oblasť pravidla"
 
 #: common/eda_item.cpp:467 eeschema/tools/sch_edit_tool.cpp:267
 msgid "Net Label"
-msgstr "Označenie siete"
+msgstr "Označenie spoja"
 
 #: common/eda_item.cpp:468 eeschema/sch_label.cpp:1390
 #: eeschema/sch_label.cpp:1924 eeschema/sch_label.h:470
@@ -7384,7 +7384,7 @@ msgstr "Chybný alias (duplicitný názov)"
 #: common/font/fontconfig.cpp:366
 #, c-format
 msgid "Error loading font '%s'."
-msgstr "Pri načítaní písma sa vyskytla chyba '%s'."
+msgstr "Pri načítavaní písma '%s' nastala chyba."
 
 #: common/font/fontconfig.cpp:378
 #, c-format
@@ -7774,8 +7774,8 @@ msgid ""
 "Cannot merge: you have unstaged changes. Please commit or stash them before "
 "pulling."
 msgstr ""
-"Nedá sa zlúčiť: máte nepublikované zmeny. Pred načítaním ich prosím commit-"
-"nite, alebo stash-nite."
+"Nie je možné zlúčiť: máte nepublikované zmeny. Pred načítaním ich prosím "
+"commit-nite, alebo stash-nite."
 
 #: common/git/libgit_backend.cpp:1106
 #, c-format
@@ -7787,8 +7787,8 @@ msgid ""
 "Cannot pull with rebase: you have unstaged changes. Please commit or stash "
 "them before pulling."
 msgstr ""
-"Nedá sa načítať s rebase: máte unstaged zmeny. Pred načítaním ich prosím "
-"commit-nite, alebo stash-nite."
+"Nie je možné načítať s rebase: máte unstaged zmeny. Pred načítaním ich "
+"prosím commit-nite, alebo stash-nite."
 
 #: common/git/libgit_backend.cpp:1135
 #, c-format
@@ -8190,7 +8190,7 @@ msgstr "Nepodarilo sa získať riadok JSON %d v '%s': %s"
 
 #: common/io/io_base.cpp:139
 msgid "Loading file canceled by user."
-msgstr "Otváranie súboru bolo zrušené používateľom."
+msgstr "Načítavanie súboru bolo zrušené používateľom."
 
 #: common/jobs/job.cpp:82
 msgid "Job Settings"
@@ -8497,7 +8497,7 @@ msgstr "schematický súbor '%s' sa nenašiel"
 #: common/json_schema_validator.cpp:53
 #, c-format
 msgid "Error loading schema: %s"
-msgstr "Pri načítaní schémy sa vyskytla chyba:%s"
+msgstr "Pri načítavaní schémy:%s nastala chyba"
 
 #: common/kidialog.cpp:57
 msgid "Do not show again"
@@ -8528,7 +8528,7 @@ msgstr "Nepodarilo sa načítať názov inštancie a verziu z kiface knižnice '
 
 #: common/kiway.cpp:452
 msgid "Error loading editor."
-msgstr "Chyba pri načítaní editora."
+msgstr "Pri načítavaní editora nastala chyba."
 
 #: common/kiway.cpp:556
 #, c-format
@@ -8684,7 +8684,7 @@ msgstr "Značky \"Vylúčené zo simulácie\""
 
 #: common/layer_id.cpp:102
 msgid "ERC warnings"
-msgstr "Varovania ERC"
+msgstr "Upozornenia ERC"
 
 #: common/layer_id.cpp:103
 msgid "ERC errors"
@@ -8836,7 +8836,7 @@ msgstr "Vzdušné prepojenia"
 
 #: common/layer_id.cpp:140
 msgid "DRC warnings"
-msgstr "Varovania DRC"
+msgstr "Upozornenia DRC"
 
 #: common/layer_id.cpp:141
 msgid "DRC errors"
@@ -8889,12 +8889,12 @@ msgstr "V prezývke knižnice sa našiel nepovolený znak"
 #: common/lib_table_grid_tricks.cpp:61
 #, c-format
 msgid "Error loading library table '%s'"
-msgstr "Vyskytla chyba pri načítaní tabuľky knižnice '%s'"
+msgstr "Pri načítavaní tabuľky knižnice '%s' nastala chyba"
 
 #: common/lib_table_grid_tricks.cpp:62
 #, c-format
 msgid "Error loading library '%s'"
-msgstr "Chyba pri načítaní knižnice '%s'"
+msgstr "Pri načítavaní knižnice '%s' nastala chyba"
 
 #: common/lib_table_grid_tricks.cpp:107
 msgid "Edit Settings..."
@@ -9028,12 +9028,12 @@ msgstr "Chýbajúce jednotky pre '%s' (%s)"
 #: common/libeval_compiler/libeval_compiler.cpp:1184
 #, c-format
 msgid "Type mismatch between '%s' and %lf"
-msgstr "Nezhoda typov medzi '%s' a %lf"
+msgstr "Nesúlad typov medzi '%s' a %lf"
 
 #: common/libeval_compiler/libeval_compiler.cpp:1190
 #, c-format
 msgid "Type mismatch between %lf and '%s'"
-msgstr "Nezhoda typu medzi %lf a '%s'"
+msgstr "Nesúlad typu medzi %lf a '%s'"
 
 #: common/libraries/lib_table_grid_data_model.cpp:122
 msgid "Edit settings"
@@ -9248,13 +9248,13 @@ msgstr "Nie je možné spracovať názov vývodu v sekcii s symbolov v netliste.
 #: common/netlist_reader/legacy_netlist_reader.cpp:195
 #: pcbnew/netlist_reader/legacy_netlist_reader.cpp:196
 msgid "Cannot parse net name in symbol net section of netlist."
-msgstr "Nie je možné analyzovať názov siete v netto sekcii so symbolmi."
+msgstr "Nie je možné spracovať názov spoja v sekcii spojov symbolu netlistu."
 
 #: common/netlist_reader/legacy_netlist_reader.cpp:243
 #: pcbnew/netlist_reader/legacy_netlist_reader.cpp:244
 #, c-format
 msgid "Cannot find symbol %s in footprint filter section of netlist."
-msgstr "Nedá sa nájsť symbol %s v sekcii filtra puzdra netlistu."
+msgstr "Nie je možné nájsť symbol %s v sekcii filtra puzdra netlistu."
 
 #: common/netlist_reader/netlist_reader.cpp:189
 #: pcbnew/netlist_reader/netlist_reader.cpp:195
@@ -9527,7 +9527,7 @@ msgstr "Otvoriť súbor"
 
 #: common/rc_item.cpp:433 eeschema/erc/erc_item.cpp:423
 msgid "Excluded warning: "
-msgstr "Vylúčené varovanie: "
+msgstr "Vylúčené upozornenie: "
 
 #: common/rc_item.cpp:435 eeschema/erc/erc_item.cpp:425
 msgid "Excluded error: "
@@ -9536,7 +9536,7 @@ msgstr "Vylúčená chyba: "
 #: common/rc_item.cpp:439 eeschema/erc/erc_item.cpp:429
 #: pcbnew/dialogs/dialog_pad_properties.cpp:1587
 msgid "Warning: "
-msgstr "Varovanie: "
+msgstr "Upozornenie: "
 
 #: common/rc_item.cpp:443 eeschema/erc/erc_item.cpp:433
 #: pcbnew/dialogs/dialog_pad_properties.cpp:1585
@@ -10695,7 +10695,7 @@ msgstr "Vybrať stĺpce..."
 
 #: common/tool/actions.cpp:1148
 msgid "Switch units"
-msgstr "Prepnite jednotky"
+msgstr "Prepnúť jednotky"
 
 #: common/tool/actions.cpp:1149
 msgid "Switch between imperial and metric units"
@@ -11375,7 +11375,7 @@ msgstr "Chyba načítania"
 
 #: common/widgets/panel_design_block_chooser.cpp:408
 msgid "Errors were encountered loading design blocks:"
-msgstr "Pri načítavaní návrhových blokov sa vyskytli chyby:"
+msgstr "Pri načítavaní návrhových blokov nastali chyby:"
 
 #: common/widgets/properties_panel.cpp:82
 #: common/widgets/properties_panel.cpp:209
@@ -11518,7 +11518,7 @@ msgstr "Chyba:"
 #: common/widgets/wx_html_report_panel.cpp:206
 #: common/widgets/wx_html_report_panel.cpp:232
 msgid "Warning:"
-msgstr "Varovanie:"
+msgstr "Upozornenie:"
 
 #: common/widgets/wx_html_report_panel.cpp:315
 #: eeschema/dialogs/dialog_erc.cpp:1121
@@ -11848,7 +11848,7 @@ msgstr ""
 
 #: cvpcb/auto_associate.cpp:300
 msgid "CvPcb Warning"
-msgstr "Varovanie CvPcb"
+msgstr "Upozornenie CvPcb"
 
 #: cvpcb/cvpcb_mainframe.cpp:73 cvpcb/cvpcb_mainframe.cpp:88
 #: cvpcb/menubar.cpp:51
@@ -11938,7 +11938,7 @@ msgid ""
 "Error loading schematic.\n"
 "%s"
 msgstr ""
-"Pri načítaní schémy sa vyskytla chyba.\n"
+"Pri načítavaní schémy nastala chyba.\n"
 "%s"
 
 #: cvpcb/dialogs/dialog_config_equfiles.cpp:47
@@ -12032,7 +12032,7 @@ msgstr "Puzdro '%s' sa nenašlo."
 #: cvpcb/display_footprints_frame.cpp:312
 #, c-format
 msgid "Error loading footprint: %s"
-msgstr "Vyskytla sa chyba pri načítaní puzdra: %s"
+msgstr "Pri načítavaní puzdra: %s nastala chyba"
 
 #: cvpcb/display_footprints_frame.cpp:378 pcbnew/footprint.cpp:2176
 #, c-format
@@ -13052,7 +13052,7 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"Chyba pri načítaní symbolu %s z knižnice %s.\n"
+"Pri načítavaní symbolu %s z knižnice %s nastala chyba.\n"
 "\n"
 "%s"
 
@@ -13142,11 +13142,11 @@ msgstr "Zmazať všetky"
 
 #: eeschema/dialogs/dialog_erc.cpp:417 pcbnew/dialogs/dialog_drc.cpp:1302
 msgid "Errors and Warnings Only"
-msgstr "Iba chyby a varovania"
+msgstr "Iba chyby a upozornenia"
 
 #: eeschema/dialogs/dialog_erc.cpp:418 pcbnew/dialogs/dialog_drc.cpp:1303
 msgid "Errors, Warnings and Exclusions"
-msgstr "Chyby, varovania a vylúčenia"
+msgstr "Chyby, upozornenia a vylúčenia"
 
 #: eeschema/dialogs/dialog_erc.cpp:534
 #, c-format
@@ -13167,7 +13167,7 @@ msgstr "chyby"
 
 #: eeschema/dialogs/dialog_erc.cpp:708 pcbnew/dialogs/dialog_drc.cpp:711
 msgid "warnings"
-msgstr "varovania"
+msgstr "upozornenia"
 
 #: eeschema/dialogs/dialog_erc.cpp:709 pcbnew/dialogs/dialog_drc.cpp:712
 msgid "appropriate"
@@ -13216,7 +13216,7 @@ msgstr ""
 #: eeschema/dialogs/dialog_erc.cpp:781 pcbnew/dialogs/dialog_drc.cpp:793
 #, c-format
 msgid "Change severity to Warning for all '%s' violations"
-msgstr "Zmeňte závažnosť na Varovanie pred všetkými porušeniami '%s'"
+msgstr "Zmeniť závažnosť všetkých '%s' porušení na Upozornenie"
 
 #: eeschema/dialogs/dialog_erc.cpp:788 pcbnew/dialogs/dialog_drc.cpp:799
 #, c-format
@@ -13259,7 +13259,7 @@ msgstr "Pripnúť mapu konfliktov"
 #: pcbnew/dialogs/dialog_board_setup.cpp:246 pcbnew/dialogs/dialog_drc.cpp:1017
 #: pcbnew/dialogs/dialog_drc.cpp:1059
 msgid "Violation Severity"
-msgstr "Závažnosť porušenia"
+msgstr "Závažnosť porušení"
 
 #: eeschema/dialogs/dialog_erc.cpp:956
 #: eeschema/dialogs/dialog_label_properties_base.cpp:207
@@ -14314,8 +14314,8 @@ msgid ""
 "The value '%s' can't be converted to boolean correctly, it has been "
 "interpreted as 'False'"
 msgstr ""
-"Hodnota '%s‘ sa nedá správne previesť na boolean, bola interpretovaná ako "
-"'False‘"
+"Hodnotu '%s‘ nie je možné správne previesť na boolean, bola interpretovaná "
+"ako 'False‘"
 
 #: eeschema/dialogs/dialog_lib_edit_pin_table.cpp:1016
 #: eeschema/dialogs/dialog_lib_edit_pin_table.cpp:1574
@@ -14529,7 +14529,7 @@ msgstr "Symbol nebol nájdený v knižnici '%s'."
 #: eeschema/dialogs/dialog_lib_fields_table.cpp:582
 #, c-format
 msgid "Error loading symbol '%s': %s"
-msgstr "Chyba načítania symbolu '%s': %s"
+msgstr "Pri načítavaní symbolu '%s': %s nastala chyba"
 
 #: eeschema/dialogs/dialog_lib_fields_table.cpp:590
 msgid "No related symbols could be loaded from the library."
@@ -17173,7 +17173,7 @@ msgid ""
 "to skip this step, you will be responsible for manually remapping the "
 "symbols."
 msgstr ""
-"Táto schéma v súčasnosti používa na načítanie symbolov knižnice metódu "
+"Táto schéma v súčasnosti používa na načítavanie symbolov knižnice metódu "
 "vyhľadávania v projektovom zozname knižníc symbolov. KiCad sa pokúsi "
 "priradiť existujúce symboly tak, aby používali novú tabuľku knižnice "
 "symbolov. Opätovné priradenie zmení niektoré súbory projektu a schémy "
@@ -17656,7 +17656,7 @@ msgstr "Zvýrazniť krížovo zvýraznené spoje"
 
 #: eeschema/dialogs/panel_eeschema_display_options_base.cpp:61
 msgid "Highlight nets when they are highlighted in the PCB editor"
-msgstr "Zvýraznite siete, keď sú zvýraznené v editore DPS"
+msgstr "Zvýrazniť spoje, keď sú zvýraznené v editore DPS"
 
 #: eeschema/dialogs/panel_eeschema_display_options_base.cpp:65
 #: pcbnew/dialogs/panel_display_options_base.cpp:190
@@ -17692,7 +17692,7 @@ msgstr "Zobraziť ERC chyby"
 
 #: eeschema/dialogs/panel_eeschema_display_options_base.cpp:124
 msgid "Show ERC warnings"
-msgstr "Zobraziť ERC varovania"
+msgstr "Zobraziť ERC upozornenia"
 
 #: eeschema/dialogs/panel_eeschema_display_options_base.cpp:128
 msgid "Show ERC exclusions"
@@ -18270,7 +18270,7 @@ msgstr "PA"
 
 #: eeschema/dialogs/panel_setup_pinmap.cpp:228
 msgid "No error or warning"
-msgstr "Žiadna chyba ani varovanie"
+msgstr "Žiadna chyba ani upozornenie"
 
 #: eeschema/dialogs/panel_setup_pinmap.cpp:233
 msgid "Generate warning"
@@ -18414,8 +18414,8 @@ msgid ""
 "This action will reset your global library table on disk and cannot be "
 "undone."
 msgstr ""
-"Táto akcia resetuje Vašu globálnu tabuľku knižníc na disku a nedá sa vrátiť "
-"späť."
+"Táto akcia resetuje Vašu globálnu tabuľku knižníc na disku a nie je možné "
+"vrátiť ju späť."
 
 #: eeschema/dialogs/panel_sym_lib_table.cpp:779
 #, c-format
@@ -18504,7 +18504,7 @@ msgstr "URL"
 #: eeschema/libraries/legacy_symbol_library.cpp:523
 #: eeschema/symbol_editor/symbol_edit_frame.cpp:1349
 msgid "Loading Symbol Libraries"
-msgstr "Načítavajú sa knižnice symbolov"
+msgstr "Načítavanie knižnice symbolov"
 
 #: eeschema/eeschema.cpp:650
 #, c-format
@@ -18552,8 +18552,8 @@ msgid ""
 "Warning: schematic has annotation errors, please use the schematic editor to "
 "fix them\n"
 msgstr ""
-"VAROVANIE: Schéma má chyby v číslovaní, použite editor schémat na ich "
-"opravu\n"
+"Varovanie: schéma má chyby v číslovaní, je potrebné opraviť ich v editore "
+"schém\n"
 
 #: eeschema/eeschema_jobs_handler.cpp:454
 #: eeschema/eeschema_jobs_handler.cpp:586
@@ -19214,12 +19214,12 @@ msgstr ""
 #: eeschema/files-io.cpp:1554 eeschema/sheet.cpp:472
 #, c-format
 msgid "Error loading schematic '%s'."
-msgstr "Pri načítaní schémy sa vyskytla chyba %s."
+msgstr "Pri načítavaní schémy '%s' nastala chyba."
 
 #: eeschema/files-io.cpp:401
 #, c-format
 msgid "Memory exhausted loading schematic '%s'."
-msgstr "Nedostatok pamäte pri načítaní schémy '%s'."
+msgstr "Pri načítavaní schémy '%s' došlo k vyčerpaniu pamäte."
 
 #: eeschema/files-io.cpp:426 eeschema/files-io.cpp:1557
 #: eeschema/files-io.cpp:1569 eeschema/sheet.cpp:475
@@ -19233,9 +19233,9 @@ msgid ""
 "fixed.  Please save the schematic to repair the broken file or it may not be "
 "usable with other versions of KiCad."
 msgstr ""
-"Pri načítaní schémy, ktorá bola opravená automaticky, sa našla chyba. Uložte "
-"schému, aby ste opravili poškodený súbor, inak nemusí byť použiteľný v iných "
-"verziách KiCadu."
+"Pri načítavaní schémy, ktorá bola opravená automaticky, nastala chyba. Je "
+"potrebné uložiť schému, aby sa opravil poškodený súbor, inak nemusí byť "
+"použiteľný v iných verziách KiCadu."
 
 #: eeschema/files-io.cpp:510
 msgid "Illegal entry found in project file symbol library list."
@@ -19243,7 +19243,7 @@ msgstr "V zozname knižníc symbolov súborov projektu sa našiel neplatný záz
 
 #: eeschema/files-io.cpp:511
 msgid "Project Load Warning"
-msgstr "Varovanie o načítaní projektu"
+msgstr "Upozornenie pri načítaní projektu"
 
 #: eeschema/files-io.cpp:514
 msgid ""
@@ -19372,7 +19372,7 @@ msgstr "Nepodarilo sa uložiť %s."
 
 #: eeschema/files-io.cpp:1300
 msgid "Locked File Warning"
-msgstr "Varovanie na uzamknutý súbor"
+msgstr "Upozornenie na uzamknutý súbor"
 
 #: eeschema/files-io.cpp:1302
 msgid ""
@@ -19388,7 +19388,7 @@ msgstr "Uloženie prepíše existujúce súbory."
 
 #: eeschema/files-io.cpp:1319
 msgid "Save Warning"
-msgstr "Varovanie pri ukladaní"
+msgstr "Upozornenie pri ukladaní"
 
 #: eeschema/files-io.cpp:1322
 msgid ""
@@ -19409,7 +19409,7 @@ msgstr "Zrušiť uloženie projektu"
 #: eeschema/files-io.cpp:1565
 #, c-format
 msgid "Unhandled exception occurred loading schematic '%s'."
-msgstr "Pri načítaní schémy '%s' nastala neošetrená výnimka."
+msgstr "Pri načítavaní schémy '%s' nastala neošetrená výnimka."
 
 #: eeschema/files-io.cpp:1631
 msgid "The current schematic has been modified.  Save changes?"
@@ -19428,7 +19428,7 @@ msgstr "Odvodené od"
 #: eeschema/widgets/symbol_preview_widget.cpp:202
 #, c-format
 msgid "Error loading symbol %s from library '%s'."
-msgstr "Chyba pri načítaní symbolu %s z knižnice '%s'."
+msgstr "Pri načítaní symbolu %s z knižnice '%s' nastala chyba."
 
 #: eeschema/import_gfx/dialog_import_gfx_sch.cpp:62
 #: pcbnew/import_gfx/dialog_import_graphics.cpp:49
@@ -19699,7 +19699,7 @@ msgstr "Knižnicu symbolov '%s' sa nepodarilo načítať."
 #: eeschema/libraries/legacy_symbol_library.cpp:605
 #, c-format
 msgid "Error loading symbol library '%s'."
-msgstr "Chyba pri načítaní knižnice symbolov '%s'."
+msgstr "Pri načítaní knižnice symbolov '%s' nastala chyba."
 
 #: eeschema/menubar.cpp:104
 msgid "Non-KiCad Schematic..."
@@ -20743,7 +20743,7 @@ msgid ""
 "Please review the import errors and warnings (if any)."
 msgstr ""
 "Návrh CADSTAR sa úspešne importoval.\n"
-"Skontrolujte chyby a varovania (ak existujú) pri importe."
+"Skontrolujte vzniknuté chyby a upozornenia (ak existujú) pri importe."
 
 #: eeschema/sch_io/cadstar/cadstar_sch_archive_loader.cpp:542
 #: pcbnew/pcb_io/cadstar/cadstar_pcb_archive_loader.cpp:76
@@ -20755,8 +20755,9 @@ msgid ""
 "Current Design size: %.2f, %.2f millimeters. \n"
 "Maximum permitted design size: %.2f, %.2f millimeters.\n"
 msgstr ""
-"Dizajn je príliš veľký a nedá sa importovať do KiCadu.\n"
-"Zmenšite maximálnu veľkosť návrhu v aplikácii CADSTAR tak, že prejdete na:\n"
+"Dizajn je príliš veľký a nie je možné ho importovať do KiCadu.\n"
+"Je potrebné znížiť maximálnu veľkosť návrhu v aplikácii CADSTAR tak, že "
+"prejdete na:\n"
 "Karta Návrh -> Vlastnosti -> Možnosti návrhu -> Maximálna veľkosť dizajnu.\n"
 "Aktuálna veľkosť dizajnu: %.2f, %.2f milimetrov.\n"
 "Maximálna povolená veľkosť návrhu: %.2f, %.2f milimetrov.\n"
@@ -21022,7 +21023,7 @@ msgstr "Nepodarilo sa nájsť platný súbor schémy '%s'"
 #: eeschema/sch_io/easyeda/sch_io_easyeda.cpp:501
 #, c-format
 msgid "Error loading symbol '%s' from library '%s': %s"
-msgstr "Chyba pri načítaní symbolu '%s' z knižnice '%s': %s"
+msgstr "Pri načítaní symbolu '%s' z knižnice '%s': %s nastala chyba"
 
 #: eeschema/sch_io/easyeda/sch_io_easyeda.cpp:422
 #: eeschema/sch_io/easyeda/sch_io_easyeda.cpp:427
@@ -21036,7 +21037,7 @@ msgstr "Chyba pri enumerácii knižnice symbolov '%s': %s"
 #: eeschema/sch_io/easyeda/sch_io_easyeda.cpp:608
 #, c-format
 msgid "Error loading schematic '%s': %s"
-msgstr "Chyba pri načítavaní schémy '%s': %s"
+msgstr "Pri načítavaní schémy '%s': %s nastala chyba"
 
 #: eeschema/sch_io/easyeda/sch_io_easyeda.h:50
 #: pcbnew/pcb_io/easyeda/pcb_io_easyeda_plugin.h:38
@@ -21329,7 +21330,7 @@ msgid ""
 "Saving would permanently lose symbols that could not be loaded.\n"
 "Please fix the library file manually before saving."
 msgstr ""
-"Knižnicu '%s' nemožno uložiť, pretože pri načítaní došlo k chybe analýzy.\n"
+"Knižnicu '%s' nemožno uložiť, pretože pri načítavaní nastala chyba analýzy.\n"
 "\n"
 "Uloženie by natrvalo stratilo symboly, ktoré sa nedali načítať.\n"
 "Pred uložením opravte súbor knižnice ručne."
@@ -21403,7 +21404,7 @@ msgstr "Neplatné číslo štýlu tela symbolu %s"
 #: eeschema/sch_io/kicad_sexpr/sch_io_kicad_sexpr_parser.cpp:877
 #, c-format
 msgid "Invalid hyperlink url '%s'"
-msgstr "Neplatná URL hypertextového odkazu '%s'"
+msgstr "Neplatná url adresa hypertextového odkazu '%s'"
 
 #: eeschema/sch_io/kicad_sexpr/sch_io_kicad_sexpr_parser.cpp:907
 #, c-format
@@ -21798,7 +21799,7 @@ msgstr "Kolík %s [%s, %s, %s]"
 #: eeschema/sch_pin.cpp:1698
 #, c-format
 msgid "Pin %s [%s, %s]"
-msgstr "PIN %s [%s, %s]"
+msgstr "Vývod %s [%s, %s]"
 
 #: eeschema/sch_pin.cpp:1708
 #, c-format
@@ -23182,7 +23183,7 @@ msgstr ""
 #: eeschema/sheet.cpp:646
 #, c-format
 msgid "Error loading the symbol library table '%s'."
-msgstr "Chyba pri načítaní tabuľky knižníc symbolov '%s'."
+msgstr "Pri načítavaní tabuľky knižníc symbolov '%s' nastala chyba."
 
 #: eeschema/sheet.cpp:675
 msgid ""
@@ -23713,7 +23714,7 @@ msgstr "Nepodarilo sa načítať názov vývodu matice."
 
 #: eeschema/sim/kibis/ibis_parser.cpp:2236
 msgid "Typ-Min-Max Values requires at least Typ."
-msgstr "Hodnoty Typ-Min-MAX vyžadují alespoň Typ."
+msgstr "Hodnoty Typ-Min-Max vyžadujú aspoň Typ."
 
 #: eeschema/sim/kibis/ibis_parser.cpp:2323
 msgid "Unknown Model_type "
@@ -23902,7 +23903,7 @@ msgstr "Bitová rýchlosť môže byť príliš vysoká pre nábežné / zostupn
 #: eeschema/sim/legacy_workbook.cpp:118
 #, c-format
 msgid "Error loading workbook: line %d: %s."
-msgstr "Chyba pri načítaní súboru zostavy simulácie: riadok %d: %s."
+msgstr "Pri načítavaní súboru zostavy simulácie nastala chyba: riadok %d: %s."
 
 #: eeschema/sim/legacy_workbook.cpp:133
 msgid "expecting version"
@@ -23922,15 +23923,15 @@ msgstr "očakáva sa počet stôp"
 
 #: eeschema/sim/legacy_workbook.cpp:226
 msgid "expecting trace type"
-msgstr "očakáva sa typ stopy"
+msgstr "očakávaný je typ spoja"
 
 #: eeschema/sim/legacy_workbook.cpp:236
 msgid "expecting trace name"
-msgstr "očakáva sa názov stopy"
+msgstr "očakávaný je názov spoja"
 
 #: eeschema/sim/legacy_workbook.cpp:246
 msgid "expecting trace color"
-msgstr "očakáva sa farba stopy"
+msgstr "očakávaná je farba spoja"
 
 #: eeschema/sim/legacy_workbook.cpp:262
 msgid "expecting measurement count"
@@ -23972,7 +23973,7 @@ msgstr "Knižnica simulačných modelov sa nenašla na '%s' alebo '%s'"
 #: eeschema/sim/sim_lib_mgr.cpp:332
 #, c-format
 msgid "Error loading simulation model: no '%s' field"
-msgstr "Chyba načítavania simulačného modelu: nie je '%s' pole"
+msgstr "Pri načítavaní simulačného modelu nastala chyba: nie je '%s' pole"
 
 #: eeschema/sim/sim_lib_mgr.cpp:337 pcbnew/board_statistics_report.cpp:556
 #: pcbnew/board_statistics_report.cpp:557
@@ -23992,8 +23993,8 @@ msgid ""
 "Error loading simulation model: could not find base model '%s' in library "
 "'%s'"
 msgstr ""
-"Chyba pri načítaní simulačného modelu: základný model '%s' sa nenašiel v "
-"knižnici '%s'"
+"Pri načítavaní simulačného modelu nastala chyba: základný model '%s' sa "
+"nenašiel v knižnici '%s'"
 
 #: eeschema/sim/sim_library_ibis.cpp:39 eeschema/sim/sim_model_ibis.cpp:81
 #, c-format
@@ -24185,7 +24186,7 @@ msgstr "Počas exportu netlistu sa vyskytli chyby."
 
 #: eeschema/sim/simulator_frame.cpp:369 eeschema/tools/simulator_control.cpp:90
 msgid "Warnings during netlist generation."
-msgstr "Varovania počas generovania netlistu."
+msgstr "Upozornenia počas generovania netlistu."
 
 #: eeschema/sim/simulator_frame.cpp:379
 msgid "Simulator requires a fully annotated schematic."
@@ -24603,7 +24604,7 @@ msgid ""
 "<b>Warning: reference prefix</b><br>prefix ending by '%s' can create issues "
 "if saved in a symbol library"
 msgstr ""
-"<b>Varovanie: prefix referencie</b><br>prefix končiaci '%s' môže spôsobiť "
+"<b>Upozornenie: prefix referencie</b><br>prefix končiaci '%s' môže spôsobiť "
 "problémy, ak je uložený v knižnici symbolov"
 
 #: eeschema/symbol_checker.cpp:261
@@ -26417,7 +26418,7 @@ msgstr "Importovať súbor 2D kresby"
 
 #: eeschema/tools/sch_actions.cpp:1212
 msgid "Switch to PCB Editor"
-msgstr "Prepnite na editor DPS"
+msgstr "Prepnúť na editor DPS"
 
 #: eeschema/tools/sch_actions.cpp:1213
 msgid "Open PCB in board editor"
@@ -26486,11 +26487,11 @@ msgstr "Zobraziť označenia direktív"
 
 #: eeschema/tools/sch_actions.cpp:1282
 msgid "Show ERC Warnings"
-msgstr "Zobraziť varovania ERC"
+msgstr "Zobraziť upozornenia ERC"
 
 #: eeschema/tools/sch_actions.cpp:1283
 msgid "Show markers for electrical rules checker warnings"
-msgstr "Zobraziť značky pre varovania kontroly elektrických pravidiel"
+msgstr "Zobraziť značky pre upozornenia z kontroly elektrických pravidiel"
 
 #: eeschema/tools/sch_actions.cpp:1289
 msgid "Show ERC Errors"
@@ -26692,11 +26693,11 @@ msgstr "Prejsť na aktuálnej čiare o jeden segment späť."
 
 #: eeschema/tools/sch_actions.cpp:1525
 msgid "Switch Segment Posture"
-msgstr "Prepnúť postoj segmentu"
+msgstr "Prepnúť orientáciu segmentu"
 
 #: eeschema/tools/sch_actions.cpp:1526
 msgid "Switches posture of the current segment."
-msgstr "Prepína postoj aktuálneho segmentu."
+msgstr "Prepína orientáciu aktuálneho segmentu."
 
 #: eeschema/tools/sch_actions.cpp:1537 eeschema/tools/sch_move_tool.cpp:494
 #: eeschema/tools/symbol_editor_move_tool.cpp:110
@@ -27378,7 +27379,7 @@ msgstr "Neboli nájdené žiadne problémy so symbolom."
 
 #: eeschema/tools/sch_inspection_tool.cpp:296
 msgid "Symbol Warnings"
-msgstr "Varovania symbolu"
+msgstr "Upozornenia symbolu"
 
 #: eeschema/tools/sch_inspection_tool.cpp:332
 msgid "Select a symbol to diff against its library equivalent."
@@ -28057,7 +28058,7 @@ msgstr "Vyč. BOM"
 
 #: eeschema/widgets/search_handlers.cpp:168
 msgid "Excl. Board"
-msgstr "Vyč. DPS"
+msgstr "Vylúčiť dosku"
 
 #: eeschema/widgets/search_handlers.cpp:478
 msgid "Hierarchical"
@@ -28650,7 +28651,7 @@ msgstr "Súbory Gerber"
 
 #: gerbview/files.cpp:87
 msgid "Zip files"
-msgstr "Súbory ZIP"
+msgstr "Súbory Zip"
 
 #: gerbview/files.cpp:108
 msgid "Job files"
@@ -28738,7 +28739,7 @@ msgstr "Načítavanie %u/%zu %s..."
 #: gerbview/files.cpp:457
 #, c-format
 msgid "Zip file '%s' cannot be opened."
-msgstr "Súbor zip '%s' sa nedá otvoriť."
+msgstr "Nie je možné otvoriť súbor zip '%s'."
 
 #: gerbview/files.cpp:499
 #, c-format
@@ -28878,7 +28879,7 @@ msgstr "Grafická vrstva %d"
 #: gerbview/gerbview_frame.cpp:77 gerbview/menubar.cpp:134
 #: gerbview/menubar.cpp:140
 msgid "Clear Recent Zip Files"
-msgstr "Vymažte posledné súbory ZIP"
+msgstr "Vymazať zoznam nedávno otvorených Zip súborov"
 
 #: gerbview/gerbview_frame.cpp:79 gerbview/menubar.cpp:92
 #: gerbview/menubar.cpp:98
@@ -28938,7 +28939,7 @@ msgstr "Otvorte súbor posledných úloh"
 
 #: gerbview/menubar.cpp:139
 msgid "Open Recent Zip File"
-msgstr "Otvorte posledný súbor ZIP"
+msgstr "Otvoriť nedávno otvorený Zip súbor"
 
 #: gerbview/menubar.cpp:184
 msgid "&Units"
@@ -28962,7 +28963,7 @@ msgid ""
 "Warning: this file has some missing D-Code definitions\n"
 "Therefore the size of some items is undefined"
 msgstr ""
-"Varovanie: v tomto súbore chýbajú niektoré definície D-kódov\n"
+"Upozornenie: v tomto súbore chýbajú niektoré definície D-kódov\n"
 "Preto veľkosť niektorých položiek nie je definovaná"
 
 #: gerbview/rs274d.cpp:417
@@ -29077,7 +29078,7 @@ msgstr "Otvoriť súbor úloh Gerber a s ním spojené vykreslené súbory Gerbe
 
 #: gerbview/tools/gerbview_actions.cpp:69
 msgid "Open Zip Archive File..."
-msgstr "Otvoriť archívny súbor ZIP..."
+msgstr "Otvoriť archívny súbor Zip..."
 
 #: gerbview/tools/gerbview_actions.cpp:70
 msgid "Open a zipped archive (Gerber and Drill) file"
@@ -29210,7 +29211,7 @@ msgstr "Zobraziť v režime XOR"
 
 #: gerbview/tools/gerbview_actions.cpp:243
 msgid "Show layers in exclusive-or compare mode"
-msgstr "Zobraziť vrstvy v režime porovnávania exkluzívnym OR"
+msgstr "Zobraziť vrstvy v režime porovnania typu exclusive-or."
 
 #: gerbview/tools/gerbview_actions.cpp:250
 msgid "Flip Gerber View"
@@ -29226,7 +29227,7 @@ msgstr "Žiadna z Gerberových vrstiev neobsahuje žiadne údaje"
 
 #: gerbview/tools/gerbview_control.cpp:127
 msgid "Export as KiCad Board File"
-msgstr "Exportovať ako súbor DPS KiCad"
+msgstr "Exportovať ako súbor dosky KiCad"
 
 #: gerbview/tools/gerbview_inspection_tool.cpp:145
 msgid "D Codes"
@@ -29626,7 +29627,7 @@ msgid ""
 "Report all DRC warning level violations, this can be combined with the other "
 "severity arguments"
 msgstr ""
-"Hlásiť všetky porušenia DRC úrovne varovania, toto je možné kombinovať s "
+"Hlásiť všetky porušenia DRC úrovne upozornenia, toto je možné kombinovať s "
 "ostatnými argumentmi závažnosti"
 
 #: kicad/cli/command_pcb_drc.cpp:86
@@ -30010,7 +30011,7 @@ msgstr ""
 #: kicad/cli/command_pcb_export_svg.cpp:186
 #: kicad/cli/command_pcb_upgrade.cpp:47
 msgid "Board file does not exist or is not accessible\n"
-msgstr "Súbor DPS neexistuje alebo nie je prístupný\n"
+msgstr "Súbor dosky neexistuje alebo nie je prístupný\n"
 
 #: kicad/cli/command_pcb_export_dxf.cpp:186
 #: kicad/cli/command_pcb_export_svg.cpp:198
@@ -30337,7 +30338,7 @@ msgstr ""
 
 #: kicad/cli/command_pcb_render.cpp:265
 msgid "Colors defined in board stackup override those in preset"
-msgstr "Farby definované v skladbe vrstiev DPS majú prednosť pred predvoľbou"
+msgstr "Farby definované v skladbe vrstiev dosky majú prednosť pred predvoľbou"
 
 #: kicad/cli/command_pcb_render.cpp:269
 msgid ""
@@ -30436,11 +30437,11 @@ msgstr "Neplatný formát obrázka\n"
 
 #: kicad/cli/command_pcb_upgrade.cpp:31
 msgid "Upgrade the board file's format to the latest one"
-msgstr "Aktualizovať formát súboru DPS na najnovší"
+msgstr "Aktualizovať formát súboru dosky na najnovší"
 
 #: kicad/cli/command_pcb_upgrade.cpp:34
 msgid "Forces the board file to be resaved regardless of versioning"
-msgstr "Vynútiť opätovné uloženie súboru DPS bez ohľadu na verziovanie"
+msgstr "Vynúti opätovné uloženie súboru dosky bez ohľadu na správu verzií."
 
 #: kicad/cli/command_sch.h:31
 msgid "Schematics"
@@ -30473,7 +30474,7 @@ msgid ""
 "Report all ERC warning level violations, this can be combined with the other "
 "severity arguments"
 msgstr ""
-"Hlásiť všetky porušenia ERC úrovne varovania, toto je možné kombinovať s "
+"Hlásiť všetky porušenia ERC úrovne upozornenia, toto je možné kombinovať s "
 "ostatnými argumentmi závažnosti"
 
 #: kicad/cli/command_sch_erc.cpp:73
@@ -31035,7 +31036,7 @@ msgstr ""
 
 #: kicad/dialogs/template_default_html.h:257
 msgid "Board Stackups"
-msgstr "Vrstvy DPS"
+msgstr "Skladby vrstiev dosky"
 
 #: kicad/dialogs/template_default_html.h:258
 msgid "Layer configurations optimized for common manufacturing processes."
@@ -31089,7 +31090,8 @@ msgstr "Skontrolovať nastavenia"
 #: kicad/dialogs/template_default_html.h:425
 msgid "Verify libraries, design rules, and board stackup match your needs."
 msgstr ""
-"Overte, či knižnice, pravidlá návrhu a vrstvy DPS zodpovedajú vašim potrebám."
+"Overiť, či knižnice, návrhové pravidlá a skladba vrstiev dosky zodpovedajú "
+"požiadavkám."
 
 #: kicad/dialogs/template_default_html.h:432
 msgid "Add a description by creating"
@@ -31473,7 +31475,7 @@ msgstr "Pridať predvolené úložisko"
 
 #: kicad/pcm/dialogs/dialog_manage_repositories.cpp:96
 msgid "Fully qualified repository url:"
-msgstr "Plne kvalifikovaná URL úložiska:"
+msgstr "Plne kvalifikovaná url repozitára:"
 
 #: kicad/pcm/dialogs/dialog_manage_repositories.cpp:97
 msgid "Add Repository"
@@ -31690,11 +31692,11 @@ msgstr "Zdroje"
 
 #: kicad/pcm/dialogs/panel_packages_view.cpp:508
 msgid "Package download url is not specified"
-msgstr "URL stahování balíčků nie je zadán"
+msgstr "Nie je zadaná url adresa pre sťahovanie balíčkov"
 
 #: kicad/pcm/dialogs/panel_packages_view.cpp:508
 msgid "Error downloading package"
-msgstr "Chyba pri sťahovaní balíka"
+msgstr "Pri sťahovaní balíčka nastala chyba"
 
 #: kicad/pcm/dialogs/panel_packages_view.cpp:517
 msgid "Save Package"
@@ -31761,7 +31763,7 @@ msgstr "Stiahnuť"
 #: kicad/pcm/pcm.cpp:122
 #, c-format
 msgid "Error loading installed packages list: %s"
-msgstr "Chyba pri načítavaní zoznamu nainštalovaných balíčkov: %s"
+msgstr "Pri načítavaní zoznamu nainštalovaných balíčkov nastala chyba: %s"
 
 #: kicad/pcm/pcm.cpp:222 kicad/update_manager.cpp:123
 #, c-format
@@ -31795,7 +31797,7 @@ msgstr "Načítavam balíky úložiska"
 
 #: kicad/pcm/pcm.cpp:349
 msgid "Unable to load repository packages url."
-msgstr "Nepodarilo sa načítať URL adresu repozitára balíkov."
+msgstr "Nepodarilo sa načítať url adresu repozitára balíčkov."
 
 #: kicad/pcm/pcm.cpp:359
 msgid "Packages hash doesn't match. Repository may be corrupted."
@@ -31874,7 +31876,7 @@ msgstr "Nepodarilo sa vytvoriť adresár pre sťahovanie!"
 #: kicad/pcm/pcm_task_manager.cpp:132
 #, c-format
 msgid "Downloading package url: '%s'"
-msgstr "Sťahovanie URL balíka: '%s'"
+msgstr "Sťahovanie url balíčka: '%s'"
 
 #: kicad/pcm/pcm_task_manager.cpp:146
 #, c-format
@@ -32014,12 +32016,12 @@ msgstr "Prístup zamietnutý"
 #: kicad/project_tree_item.cpp:166
 #, c-format
 msgid "Can not move '%s' to recycle bin."
-msgstr "Nedá sa presunúť '%s' do koša."
+msgstr "Nie je možné presunúť '%s' do koša."
 
 #: kicad/project_tree_item.cpp:169
 #, c-format
 msgid "Can not move '%s' to trash."
-msgstr "Nedá sa presunúť '%s' do koša."
+msgstr "Nie je možné presunúť '%s' do koša."
 
 #: kicad/project_tree_pane.cpp:350
 msgid "Directory name:"
@@ -32456,7 +32458,7 @@ msgstr "Na úpravu schémy vytvorte alebo otvorte projekt."
 
 #: kicad/tools/kicad_manager_control.cpp:768
 msgid "Create (or open) a project to edit a pcb."
-msgstr "Na úpravu DPS vytvorte alebo otvorte projekt."
+msgstr "Vytvoriť (alebo otvoriť) projekt pre úpravu DPS."
 
 #: kicad/tools/kicad_manager_control.cpp:783
 msgid "Application failed to load:\n"
@@ -33838,7 +33840,7 @@ msgstr "Bod tavenia:"
 #: pcbnew/dialogs/dialog_track_via_properties_base.cpp:134
 #: pcbnew/dialogs/dialog_track_via_size_base.cpp:25
 msgid "Track width:"
-msgstr "Šírka rozchodu:"
+msgstr "Šírka spoja:"
 
 #: pcb_calculator/calculator_panels/panel_fusing_current_base.cpp:77
 msgid "Track thickness:"
@@ -35427,7 +35429,7 @@ msgstr "km"
 
 #: pcb_calculator/widgets/unit_selector.cpp:214
 msgid "feet"
-msgstr "stop"
+msgstr "stopa"
 
 #: pcb_calculator/widgets/unit_selector.cpp:279
 msgid "mW"
@@ -35842,11 +35844,11 @@ msgstr "Odstrániť dielektrickú vrstvu..."
 #: pcbnew/board_stackup_manager/panel_board_stackup_base.cpp:79
 #: pcbnew/build_BOM_from_board.cpp:107
 msgid "Id"
-msgstr "ID"
+msgstr "Id"
 
 #: pcbnew/board_stackup_manager/panel_board_stackup_base.cpp:131
 msgid "Board thickness from stackup:"
-msgstr "Hrúbka DPS zo stohu vrstiev:"
+msgstr "Hrúbka dosky zo skladby vrstiev:"
 
 #: pcbnew/board_stackup_manager/panel_board_stackup_base.cpp:141
 msgid "Adjust Dielectric Thickness"
@@ -36063,7 +36065,7 @@ msgstr "Minimálny priemer vrtáku"
 
 #: pcbnew/board_statistics_report.cpp:577
 msgid "Board stackup thickness"
-msgstr "Hrúbka stohu vrstiev DPS"
+msgstr "Hrúbka skladby vrstiev dosky"
 
 #: pcbnew/board_statistics_report.cpp:581
 msgid "Front footprint area"
@@ -36214,7 +36216,7 @@ msgstr "Počet medených vrstiev: "
 
 #: pcbnew/board_tables/board_characteristics_table.cpp:82
 msgid "Board thickness: "
-msgstr "Hrúbka DPS: "
+msgstr "Hrúbka dosky "
 
 #: pcbnew/board_tables/board_characteristics_table.cpp:89
 msgid "Board overall dimensions: "
@@ -36246,7 +36248,7 @@ msgstr "Podložky press-fit: "
 
 #: pcbnew/board_tables/board_characteristics_table.cpp:121
 msgid "Plated board edge: "
-msgstr "Pokovaný okraj DPS: "
+msgstr "Pokovená hrana dosky: "
 
 #: pcbnew/board_tables/board_characteristics_table.cpp:130
 msgid "Yes, Bevelled"
@@ -36313,7 +36315,7 @@ msgstr "Odstrániť nadbytočné prekovy"
 
 #: pcbnew/cleanup_item.cpp:49
 msgid "Remove duplicate track"
-msgstr "Odstrániť duplicitnú stopu"
+msgstr "Odstrániť duplicitný spoj"
 
 #: pcbnew/cleanup_item.cpp:50
 msgid "Merge co-linear tracks"
@@ -36321,7 +36323,7 @@ msgstr "Zlúčenie kolineárnych stôp"
 
 #: pcbnew/cleanup_item.cpp:51
 msgid "Remove track not connected at both ends"
-msgstr "Odstráňte stopu, ktorá nie je pripojená na oboch koncoch"
+msgstr "Odstrániť spoj, ktorý nie je pripojený na oboch koncoch"
 
 #: pcbnew/cleanup_item.cpp:52
 msgid "Remove via connected on less than 2 layers"
@@ -36329,11 +36331,11 @@ msgstr "Odstrániť prekovy spojené na menej ako dvoch vrstvách"
 
 #: pcbnew/cleanup_item.cpp:53
 msgid "Remove zero-length track"
-msgstr "Odstráňte stopu nulovej dĺžky"
+msgstr "Odstrániť spoj nulovej dĺžky"
 
 #: pcbnew/cleanup_item.cpp:54
 msgid "Remove track inside pad"
-msgstr "Odstráňte stopu vo vnútri podložky"
+msgstr "Odstrániť spoj vo vnútri plôšky"
 
 #: pcbnew/cleanup_item.cpp:57
 msgid "Remove zero-size graphic"
@@ -36429,7 +36431,7 @@ msgstr "Súčiastka %s má %d podložiek, ale kandidát %s má %d."
 msgid ""
 "Reference prefix mismatch: %s uses prefix '%s' but candidate %s uses '%s'."
 msgstr ""
-"Nezhoda referenčného prefixu: %s používa prefix '%s', ale kandidát %s "
+"Nesúlad referenčného prefixu: %s používa prefix '%s', ale kandidát %s "
 "používa '%s'."
 
 #: pcbnew/connectivity/topo_match.cpp:1098
@@ -36450,7 +36452,7 @@ msgstr "Plôšky komponentov sa líšia medzi %s a %s."
 
 #: pcbnew/convert_shape_list_to_polygon.cpp:422
 msgid "(multiple board outlines not supported)"
-msgstr "(viacnásobné obrysy DPS nie sú podporované)"
+msgstr "(viacnásobné obrysy dosky nie sú podporované)"
 
 #: pcbnew/convert_shape_list_to_polygon.cpp:550
 #: pcbnew/convert_shape_list_to_polygon.cpp:560
@@ -36953,7 +36955,7 @@ msgid ""
 "Error loading board file:\n"
 "%s"
 msgstr ""
-"Chyba pri načítaní súboru dosky:\n"
+"Pri načítaní súboru dosky nastala chyba:\n"
 "%s"
 
 #: pcbnew/dialogs/dialog_board_statistics.cpp:132
@@ -38065,7 +38067,7 @@ msgstr "Zmeniť zodpovedajúcu hodnotu puzdier:"
 
 #: pcbnew/dialogs/dialog_exchange_footprints.cpp:72
 msgid "Change footprints with library id:"
-msgstr "Zameniť puzdrá s knižničným ID:"
+msgstr "Zameniť puzdrá s knižničným id:"
 
 #: pcbnew/dialogs/dialog_exchange_footprints.cpp:73
 msgid "Update text layers and visibilities"
@@ -38151,11 +38153,11 @@ msgstr "Aktualizovať hodnotu zhody puzdier:"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:45
 msgid "Update footprints with library id:"
-msgstr "Aktualizovať puzdrá s knižničným ID:"
+msgstr "Aktualizovať puzdrá s knižničným id:"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:81
 msgid "New footprint library id:"
-msgstr "Nové knižničné ID puzdra:"
+msgstr "Nové knižničné id puzdra:"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:107
 msgid "Remove text items if not in library footprint"
@@ -38489,7 +38491,7 @@ msgstr ""
 
 #: pcbnew/dialogs/dialog_export_step.cpp:150
 msgid "Model Scale Warning"
-msgstr "Varovanie o mierke modelu"
+msgstr "Upozornenie o mierke modelu"
 
 #: pcbnew/dialogs/dialog_export_step.cpp:288
 msgid "STEP files"
@@ -39513,7 +39515,7 @@ msgstr "Generátory puzdra"
 
 #: pcbnew/dialogs/dialog_footprint_wizard_list_base.h:85
 msgid "Traceback of Python Script Errors"
-msgstr "Stopový záznam chýb skriptu Python"
+msgstr "Trasovať chyby skriptu Python"
 
 #: pcbnew/dialogs/dialog_fp_edit_pad_table.cpp:47
 #: pcbnew/dialogs/dialog_pad_properties_base.cpp:127 pcbnew/pad.cpp:2151
@@ -40446,7 +40448,7 @@ msgstr "Súbor Netlist:"
 
 #: pcbnew/dialogs/dialog_import_netlist_base.cpp:42
 msgid "Link footprints using component tstamps (unique ids)"
-msgstr "Prepojiť puzdrá pomocou tstamps (jedinečné ID) komponentov"
+msgstr "Prepojiť puzdrá pomocou tstamps (jedinečné id) komponentov"
 
 #: pcbnew/dialogs/dialog_import_netlist_base.cpp:42
 msgid "Link footprints using reference designators"
@@ -41068,7 +41070,7 @@ msgstr "Chyba vlastností plôšky"
 
 #: pcbnew/dialogs/dialog_pad_properties.cpp:1595
 msgid "Pad Properties Warnings"
-msgstr "Varovanie vlastností plôšky"
+msgstr "Upozornenie vlastností plôšky"
 
 #: pcbnew/dialogs/dialog_pad_properties.cpp:1775
 msgid "Edit Pad Properties"
@@ -41868,7 +41870,7 @@ msgstr "Nastaviť globálnu mierku Y pre presný výstup PostScript."
 
 #: pcbnew/dialogs/dialog_plot_base.cpp:308
 msgid "Track width correction:"
-msgstr "Korekcia rozchodu:"
+msgstr "Korekcia šírky spoja:"
 
 #: pcbnew/dialogs/dialog_plot_base.cpp:313
 msgid ""
@@ -42100,15 +42102,15 @@ msgstr ""
 
 #: pcbnew/dialogs/dialog_pns_settings_base.cpp:107
 msgid "Use mouse path to set track posture"
-msgstr "Pomocou dráhy myši nastavte držanie tela"
+msgstr "Použiť dráhu myši pre nastavenie orientácie spoja"
 
 #: pcbnew/dialogs/dialog_pns_settings_base.cpp:108
 msgid ""
 "When enabled, the posture of tracks will be guided by how the mouse is moved "
 "from the starting location"
 msgstr ""
-"Ak je táto možnosť povolená, poloha spojov bude závisieť od toho, ako sa myš "
-"pohybuje z východiskovej polohy"
+"Ak je táto možnosť povolená, orientácia spojov bude závisieť od toho, ako sa "
+"myš pohybuje z východiskovej polohy"
 
 #: pcbnew/dialogs/dialog_pns_settings_base.cpp:112
 msgid "Fix all segments on click"
@@ -43330,7 +43332,7 @@ msgstr "Prichytiť ku spojom a prekovom:"
 #: pcbnew/dialogs/panel_edit_options_base.cpp:352
 #: pcbnew/dialogs/panel_edit_options_base.cpp:360
 msgid "Capture cursor when the mouse approaches a track"
-msgstr "Zachyťte kurzor, keď sa myš priblíži k stope"
+msgstr "Zachytiť kurzor, keď sa myš priblíži k spoju"
 
 #: pcbnew/dialogs/panel_edit_options_base.cpp:364
 msgid "Snap to graphics:"
@@ -43644,7 +43646,7 @@ msgstr ""
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:75
 msgid "Minimum track width:"
-msgstr "Minimálna šírka rozchodu:"
+msgstr "Minimálna šírka spoja:"
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:80
 msgid ""
@@ -43686,7 +43688,7 @@ msgstr ""
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:141
 msgid "Copper to hole clearance:"
-msgstr "Odstup mede od otvoru:"
+msgstr "Odstup medi od otvoru:"
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:146
 msgid ""
@@ -43698,7 +43700,7 @@ msgstr ""
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:157
 msgid "Copper to edge clearance:"
-msgstr "Odstup mede od okraja:"
+msgstr "Odstup medi od okraja:"
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:162
 msgid ""
@@ -43778,7 +43780,7 @@ msgstr "Potlač"
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:328
 msgid "Minimum item clearance:"
-msgstr "Minimálne vybavenie:"
+msgstr "Minimálny odstup položiek:"
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:333
 msgid ""
@@ -43829,7 +43831,7 @@ msgstr ""
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:415
 #, c-format
 msgid "Note: zone filling can be slow when < %s."
-msgstr "Poznámka: Vyplňování zón může být pomalé, když je < %s."
+msgstr "Poznámka: vyplňovanie zón môže byť pomalé, ak je < %s."
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:424
 msgid "Zone Fill Strategy"
@@ -43849,7 +43851,7 @@ msgstr "Ladenie dĺžky"
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:472
 msgid "Include stackup height in track length calculations"
-msgstr "Zahrnúť výšku stohu do výpočtov dĺžky spoja"
+msgstr "Zahrnúť výšku skladby vrstiev do výpočtov dĺžky spoja"
 
 #: pcbnew/dialogs/panel_setup_constraints_base.cpp:473
 msgid ""
@@ -44806,12 +44808,12 @@ msgid ""
 "<br>\n"
 "\n"
 msgstr ""
-"### Názvy závažnosti\n"
+"### Názvy závažností\n"
 "\n"
-" * warning\n"
-" * error\n"
-" * exclusion\n"
-" * ignore\n"
+" * upozornenie\n"
+" * chyba\n"
+" * vylúčenie\n"
+" * ignorovanie\n"
 "\n"
 "<br>\n"
 "\n"
@@ -44930,7 +44932,7 @@ msgstr ""
 "\n"
 "### Grafický editor pravidiel\n"
 "\n"
-"Pri načítaní pravidiel do grafického editora sa obmedzenia automaticky\n"
+"Pri načítavaní pravidiel do grafického editora sa obmedzenia automaticky\n"
 "mapujú na príslušné panely úprav. Pravidlá s viacerými obmedzeniami môžu "
 "byť\n"
 "rozdelené medzi panely, pričom každý zobrazuje podmnožinu obmedzení "
@@ -45648,7 +45650,7 @@ msgstr "Povoliť teardropu presahovať segmenty spoja"
 
 #: pcbnew/dialogs/panel_setup_teardrops_base.cpp:359
 msgid "Properties for Track-to-Track Teardrops"
-msgstr "Vlastnosti teardropov spoj-spoj"
+msgstr "Vlastnosti teardropov medzi spojmi"
 
 #: pcbnew/dialogs/panel_setup_teardrops_base.cpp:473
 msgid ""
@@ -46140,7 +46142,7 @@ msgstr "Minimum dosky"
 #: pcbnew/drc/drc_engine.cpp:1951
 #, c-format
 msgid "Board minimum clearance: %s."
-msgstr "Minimálna izolačná medzera dosky: %s."
+msgstr "Minimálny odstup dosky: %s."
 
 #: pcbnew/drc/drc_engine.cpp:1163
 msgid "board minimum hole"
@@ -47448,7 +47450,7 @@ msgstr "Žiadny projekt nie je načítaný, testy parity knižnice sa preskakuj�
 
 #: pcbnew/drc/drc_test_provider_library_parity.cpp:1063
 msgid "Loading footprint library table..."
-msgstr "Načítavam tabuľku knižníc puzdier..."
+msgstr "Načítavanie tabuľky knižníc puzdier..."
 
 #: pcbnew/drc/drc_test_provider_library_parity.cpp:1073
 msgid "Checking board footprints against library..."
@@ -47948,7 +47950,7 @@ msgstr "CHYBA na riadku %d, stĺpci %d: %s"
 
 #: pcbnew/drc/rule_editor/drc_re_custom_rule_panel.cpp:371
 msgid "Syntax check passed with warnings:\n"
-msgstr "Kontrola syntax prešla s varovaniami:\n"
+msgstr "Kontrola syntax prešla s upozorneniami:\n"
 
 #: pcbnew/drc/rule_editor/drc_re_custom_rule_panel.cpp:375
 msgid "Syntax OK"
@@ -48654,7 +48656,7 @@ msgstr "Doska plošných spojov"
 #: pcbnew/files.cpp:337
 #, c-format
 msgid "Current board will be closed, save changes to '%s' before continuing?"
-msgstr "Aktuálna DPS bude zatvorená, uložiť zmeny do '%s' pred pokračovaním?"
+msgstr "Aktuálna doska bude zatvorená, uložiť zmeny do '%s' pred pokračovaním?"
 
 #: pcbnew/files.cpp:351
 msgid "Current Board will be closed. Continue?"
@@ -48667,10 +48669,10 @@ msgid ""
 " This may result in different fills from previous KiCad versions which used "
 "the line thicknesses of the board boundary on the Edge Cuts layer."
 msgstr ""
-"Ak sa zóny na tejto DPS znova vyplnia, použije sa nastavenie Odstup okraja "
-"medi (pozri Nastavenie DPS > Pravidlá návrhu > Obmedzenia).\n"
+"Ak sa zóny na tejto doske znova vyplnia, použije sa nastavenie 'Odstup medi "
+"od okraja' (pozri Nastavenie dosky > Pravidlá návrhu > Obmedzenia).\n"
 " Výsledné výplne sa môžu líšiť od predchádzajúcich verzií KiCad, ktoré "
-"používali hrúbky čiar hranice DPS na vrstve Okraj.Rezy."
+"používali hrúbky čiar hranice dosky na vrstve Edge.Cuts."
 
 #: pcbnew/files.cpp:514
 #, c-format
@@ -48697,12 +48699,12 @@ msgstr "Formát súboru nie je podporovaný"
 #: pcbnew/files.cpp:696 pcbnew/files.cpp:706
 #, c-format
 msgid "Error loading PCB '%s'."
-msgstr "Chyba pri načítaní DPS '%s'."
+msgstr "Pri načítavaní DPS nastala chyba '%s'."
 
 #: pcbnew/files.cpp:715
 #, c-format
 msgid "Memory exhausted loading PCB '%s'"
-msgstr "Nedostatok pamäte pri načítaní DPS '%s'"
+msgstr "Pri načítavaní DPS '%s' došlo k vyčerpaniu pamäte"
 
 #: pcbnew/files.cpp:741
 msgid "Finalizing board"
@@ -49054,7 +49056,8 @@ msgstr "Exportovať puzdra do knižnice:"
 
 #: pcbnew/footprint_libraries_utils.cpp:659
 msgid "Update board footprints to link to exported footprints"
-msgstr "Aktualizovať puzdra DPS na prepojenie s exportovanými puzdrami"
+msgstr ""
+"Aktualizovať puzdra dosky na vytvorenie prepojenia s exportovanými puzdrami"
 
 #: pcbnew/footprint_libraries_utils.cpp:859
 #: pcbnew/footprint_viewer_frame.cpp:742
@@ -50202,7 +50205,7 @@ msgstr "Aktualizovať zoznam sietí"
 #: pcbnew/netlist_reader/board_netlist_updater.cpp:2450
 #, c-format
 msgid "Total warnings: %d, errors: %d."
-msgstr "Celkové varovania: %d, chyby: %d."
+msgstr "Celkovo upozornenia: %d, chyby: %d."
 
 #: pcbnew/netlist_reader/netlist.cpp:68
 #, c-format
@@ -50215,7 +50218,7 @@ msgid ""
 "Error loading netlist.\n"
 "%s"
 msgstr ""
-"Chyba pri načítaní netlistu.\n"
+"Pri načítavaní netlistu nastala chyba.\n"
 "%s"
 
 #: pcbnew/netlist_reader/netlist.cpp:189
@@ -50226,7 +50229,7 @@ msgstr "Pre symbol %s nie je definovaná žiadna puzdra."
 #: pcbnew/netlist_reader/netlist.cpp:231
 #, c-format
 msgid "Footprint of %s changed: board footprint '%s', netlist footprint '%s'."
-msgstr "Puzdro %s zmenená: puzdra DPS '%s', puzdra zoznamu sietí '%s'."
+msgstr "Puzdro %s zmenené: puzdro dosky '%s', puzdro netlistu '%s'."
 
 #: pcbnew/netlist_reader/netlist.cpp:254
 #, c-format
@@ -50951,12 +50954,12 @@ msgstr ""
 "Tento súbor bol vytvorený pomocou %s, ktorý používa binárny formát "
 "predchádzajúci Allegro 16.0 a nie je touto aplikáciou podporovaný.\n"
 "\n"
-"Na import tohto návrhu ho otvorte v Cadence Allegro PCB Editor verzie 16.0 "
-"alebo novšej a znovu uložte, potom importujte výsledný súbor."
+"Na import tohto návrhu je potrebné ho otvoriť v Cadence Allegro PCB Editor "
+"verzie 16.0 alebo novšej a znova uložiť, potom importovať výsledný súbor."
 
 #: pcbnew/pcb_io/allegro/pcb_io_allegro.cpp:181
 msgid "Failed to build board from Allegro data"
-msgstr "Nepodarilo sa zostaviť DPS z dát Allegro"
+msgstr "Nepodarilo sa zostaviť dosku z dát Allegro"
 
 #: pcbnew/pcb_io/allegro/pcb_io_allegro.h:39
 msgid "Allegro PCB files"
@@ -51035,11 +51038,11 @@ msgstr "Záznam neznámeho typu: '%d'."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:966
 msgid "Loading extended primitive information data..."
-msgstr "Načítavanie dát rozšírených primitívnych informácií..."
+msgstr "Načítavanie rozšírených dát základných informácií..."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:988
 msgid "Loading board data..."
-msgstr "Načítavanie dát DPS..."
+msgstr "Načítavanie údajov dosky..."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:1300
 #, c-format
@@ -51117,12 +51120,12 @@ msgstr "Súbor sa nenašiel: '%s'. 3D-model nebol importovaný."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:2329
 msgid "Loading nets..."
-msgstr "Načítavanie sietí..."
+msgstr "Načítavanie spojov..."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:2355
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:2610
 msgid "Loading polygons..."
-msgstr "Načítanie mnohouholníkov..."
+msgstr "Načítavanie mnohouholníkov..."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:2395
 #, c-format
@@ -51135,7 +51138,7 @@ msgstr "Načítavanie pravidiel..."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:2590
 msgid "Loading board regions..."
-msgstr "Načítavanie oblastí DPS..."
+msgstr "Načítavanie oblastí dosky..."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:2727
 #, c-format
@@ -51177,7 +51180,7 @@ msgid ""
 "Error loading library '%s':\n"
 "Footprint %s contains polygon shape of kind %d (not yet supported)."
 msgstr ""
-"Chyba pri načítavaní knižnice '%s':\n"
+"Pri načítavaní knižnice '%s' nastala chyba:\n"
 "Puzdro %s obsahuje mnohouholník typu %d (zatiaľ nie je podporovaný)."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:2916
@@ -51191,7 +51194,7 @@ msgstr "Načítavanie výplne zón..."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:3146
 msgid "Loading arcs..."
-msgstr "Načítanie oblúkov..."
+msgstr "Načítavanie oblúkov..."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:3398
 msgid "Loading pads..."
@@ -51203,7 +51206,7 @@ msgid ""
 "Error loading library '%s':\n"
 "Footprint %s pad %s is not marked as multilayer, but is a TH pad."
 msgstr ""
-"Chyba pri načítavaní knižnice '%s':\n"
+"Pri načítavaní knižnice '%s' nastala chyba:\n"
 "Puzdro %s, plôška %s nie je označená ako viacvrstvová, ale je to plôška TH."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:3576
@@ -51235,7 +51238,7 @@ msgid ""
 "90 degree rotations."
 msgstr ""
 "Načítavanie knižnice '%s':\n"
-"Puzdro %s, plôška %s má otvor otočený o  %d stupňov. KiCad podporuje iba "
+"Puzdro %s, plôška %s má otvor otočený o %d stupňov. KiCad podporuje iba "
 "otočenia o 90 stupňov."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:3668
@@ -51338,7 +51341,7 @@ msgstr ""
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:4247
 msgid "Loading tracks..."
-msgstr "Načítavanie cestičiek..."
+msgstr "Načítavanie spojov..."
 
 #: pcbnew/pcb_io/altium/altium_pcb.cpp:4464
 msgid "Loading unicode strings..."
@@ -51523,7 +51526,7 @@ msgstr "Definice plošky CADSTAR '%s' vrátila chyby importu: %s"
 #: pcbnew/pcb_io/cadstar/cadstar_pcb_archive_loader.cpp:1342
 #, c-format
 msgid "Unable to find pad index '%d' in footprint '%s'."
-msgstr "Nedá sa nájsť index plôšky '%d' v puzdre '%s'."
+msgstr "Nepodarilo sa nájsť index plôšky '%d' v puzdre '%s'."
 
 #: pcbnew/pcb_io/cadstar/cadstar_pcb_archive_loader.cpp:1375
 #, c-format
@@ -51904,7 +51907,7 @@ msgstr "Nepodarilo sa nájsť platnú dosku v '%s'"
 #: pcbnew/pcb_io/easyeda/pcb_io_easyeda_plugin.cpp:273
 #, c-format
 msgid "Error loading board '%s': %s"
-msgstr "Chyba načítavania dosky '%s': %s"
+msgstr "Pri načítavaní dosky '%s': %s nastala chyba"
 
 #: pcbnew/pcb_io/easyeda/pcb_io_easyeda_plugin.cpp:296
 #: pcbnew/pcb_io/easyeda/pcb_io_easyeda_plugin.cpp:397
@@ -52357,7 +52360,7 @@ msgstr "Knižnica puzdier '%s' je iba na čítanie."
 #: pcbnew/pcb_io/kicad_sexpr/pcb_io_kicad_sexpr.cpp:202
 #, c-format
 msgid "Warning in file '%s'"
-msgstr "Varovanie v súbore '%s'"
+msgstr "Upozornenie v súbore '%s'"
 
 #: pcbnew/pcb_io/kicad_sexpr/pcb_io_kicad_sexpr.cpp:1643
 #, c-format
@@ -52439,11 +52442,11 @@ msgstr ""
 "Boli nájdené položky v nedefinovaných vrstvách (%s).\n"
 "Chcete ich zachrániť presunutím do vrstvy %s?\n"
 "\n"
-"Zóny bude potrebné znovu vyplniť."
+"Zóny bude potrebné znova vyplniť."
 
 #: pcbnew/pcb_io/kicad_sexpr/pcb_io_kicad_sexpr_parser.cpp:1415
 msgid "Undefined Layers Warning"
-msgstr "Varovanie o nedefinovaných vrstvách"
+msgstr "Upozornenie o nedefinovaných vrstvách"
 
 #: pcbnew/pcb_io/kicad_sexpr/pcb_io_kicad_sexpr_parser.cpp:1577
 #, c-format
@@ -53479,7 +53482,7 @@ msgstr "Vrstva prekovu musí byť medená vrstva."
 
 #: pcbnew/pcb_track.cpp:1846
 msgid "Via layer is outside the board stack."
-msgstr "Vrstva prekovu je mimo stohu vrstiev DPS."
+msgstr "Vrstva prekovov je mimo skladby dosky."
 
 #: pcbnew/pcb_track.cpp:1864
 msgid "Via start layer and end layer cannot be the same"
@@ -53553,7 +53556,7 @@ msgstr "Trať %s dňa %s, dĺžka %s"
 #: pcbnew/pcb_track.cpp:2897 pcbnew/pcb_track.cpp:2903
 #: pcbnew/pcb_track.cpp:2909
 msgid "From board stackup"
-msgstr "Zo stohu vrstiev DPS"
+msgstr "Zo skladby vrstiev dosky"
 
 #: pcbnew/pcb_track.cpp:2886
 msgid "Tented"
@@ -53811,7 +53814,7 @@ msgstr "Chyba pri zápise súboru '%s'.\n"
 #: pcbnew/pcbnew_jobs_handler.cpp:1585
 #, c-format
 msgid "Wrote board statistics to '%s'.\n"
-msgstr "Štatistiky DPS zapísané do '%s'.\n"
+msgstr "Štatistiky dosky boli zapísané do '%s'.\n"
 
 #: pcbnew/pcbnew_jobs_handler.cpp:1925 pcbnew/pcbnew_jobs_handler.cpp:2003
 #, c-format
@@ -53887,7 +53890,7 @@ msgstr "Uložený súbor protokolu DRC do %s\n"
 
 #: pcbnew/pcbnew_jobs_handler.cpp:2482
 msgid "Saved board\n"
-msgstr "DPS uložená\n"
+msgstr "Doska uložená\n"
 
 #: pcbnew/pcbnew_jobs_handler.cpp:2486
 msgid "Failed to save board.\n"
@@ -53912,11 +53915,11 @@ msgstr "Nepodarilo sa vytvoriť súbor IPC-D-356\n"
 
 #: pcbnew/pcbnew_jobs_handler.cpp:2747
 msgid "Successfully saved board file using the latest format\n"
-msgstr "Súbor DPS úspešne uložený v najnovšom formáte\n"
+msgstr "Súbor dosky bol úspešne uložený v najnovšom formáte\n"
 
 #: pcbnew/pcbnew_jobs_handler.cpp:2751
 msgid "Board file was not updated\n"
-msgstr "Súbor DPS nebol aktualizovaný\n"
+msgstr "Súbor dosky nebol aktualizovaný\n"
 
 #: pcbnew/pcbnew_jobs_handler.cpp:2894
 #, c-format
@@ -53941,7 +53944,7 @@ msgstr "Importujem '%s' vo formáte %s...\n"
 #: pcbnew/pcbnew_jobs_handler.cpp:2951
 #, c-format
 msgid "Successfully saved imported board to '%s'\n"
-msgstr "Importovaná DPS úspešne uložená do '%s'\n"
+msgstr "Importovaná doska bola úspešne uložená do '%s'\n"
 
 #: pcbnew/pcbnew_jobs_handler.cpp:3073
 #, c-format
@@ -54005,7 +54008,7 @@ msgstr "Výnimka v kóde pluginu akcie python"
 #: pcbnew/python/scripting/pcbnew_footprint_wizards.cpp:83
 #, c-format
 msgid "Method '%s' not found, or not callable"
-msgstr "Metóda '%s' sa nenašla, alebo sa nedá zavolať"
+msgstr "Metóda '%s' sa nenašla, alebo ju nie je možné zavolať"
 
 #: pcbnew/python/scripting/pcbnew_action_plugins.cpp:140
 #: pcbnew/python/scripting/pcbnew_footprint_wizards.cpp:84
@@ -54023,7 +54026,7 @@ msgstr "Výnimka v kóde sprievodcu puzdrom pythonu"
 #: pcbnew/python/scripting/pcbnew_scripting_helpers.cpp:216
 #, c-format
 msgid "Error loading drawing sheet '%s': %s"
-msgstr "Chyba pri načítavaní listu výkresu '%s': %s"
+msgstr "Pri načítavaní listu výkresu nastala chyba '%s': %s"
 
 #: pcbnew/router/pns_diff_pair_placer.cpp:526
 msgid ""
@@ -54039,7 +54042,7 @@ msgid ""
 "Can't find a suitable starting point.  If starting from an existing "
 "differential pair make sure you are at the end."
 msgstr ""
-"Nedá sa nájsť vhodný východiskový bod. Ak vychádzate z existujúceho "
+"Nie je možné nájsť vhodný východiskový bod. Ak vychádzate z existujúceho "
 "diferenciálneho páru, uistite sa, že ste na jeho konci."
 
 #: pcbnew/router/pns_diff_pair_placer.cpp:598
@@ -54065,13 +54068,13 @@ msgstr ""
 #: pcbnew/router/pns_kicad_iface.cpp:977 pcbnew/router/pns_kicad_iface.cpp:1093
 #: pcbnew/router/router_tool.cpp:919 pcbnew/router/router_tool.cpp:995
 msgid "board minimum clearance"
-msgstr "minimálny odstup DPS"
+msgstr "minimálny odstup dosky"
 
 #: pcbnew/router/pns_kicad_iface.cpp:1012
 #: pcbnew/router/pns_kicad_iface.cpp:1092 pcbnew/router/router_tool.cpp:945
 #: pcbnew/router/router_tool.cpp:976
 msgid "board minimum track width"
-msgstr "minimálna šírka spoja DPS"
+msgstr "minimálna šírka spoja dosky"
 
 #: pcbnew/router/pns_kicad_iface.cpp:1019 pcbnew/router/router_tool.cpp:947
 msgid "existing track"
@@ -54114,7 +54117,7 @@ msgstr ""
 
 #: pcbnew/router/pns_router.cpp:228
 msgid "Diff pair gap is less than board minimum clearance."
-msgstr "Medzera diferenciálneho páru je menšia ako minimálny odstup DPS."
+msgstr "Medzera diferenciálneho páru je menšia ako minimálny odstup dosky."
 
 #: pcbnew/router/pns_router.cpp:261
 msgid "Cannot start routing from a non-plated hole."
@@ -54148,8 +54151,8 @@ msgid ""
 "spacing. Adjust the differential pair settings or start from a location with "
 "the correct gap."
 msgstr ""
-"Medzera diferenciálneho páru v počiatočnom bode nezodpovedá nastavenej "
-"hodnote. K tomu môže dôjsť v zúžených úsekoch (neckdown), kde majú spoje "
+"Medzera diferenciálneho páru v počiatočnom bode, sa nezhoduje s nastavenou "
+"hodnotou. K tomu môže dôjsť v zúžených úsekoch (neckdown), kde majú spoje "
 "menšiu šírku a rozostup. Upravte nastavenia diferenciálneho páru alebo "
 "začnite z miesta so správnou medzerou."
 
@@ -54223,11 +54226,11 @@ msgstr "Zobraziť dialógové okno pre zmenu šírky spoja a veľkosti prekovu."
 
 #: pcbnew/router/router_tool.cpp:221
 msgid "Switch Track Posture"
-msgstr "Zmeniť orientáciu spoja"
+msgstr "Prepnúť orientáciu spoja"
 
 #: pcbnew/router/router_tool.cpp:222
 msgid "Switches posture of the currently routed track."
-msgstr "Prepne spôsob zalomenia práve routovaného spoja."
+msgstr "Prepína orientáciu práve routovaného spoja."
 
 #: pcbnew/router/router_tool.cpp:230
 msgid "Track Corner Mode Switch"
@@ -54296,7 +54299,7 @@ msgstr "Použiť vlastné hodnoty..."
 
 #: pcbnew/router/router_tool.cpp:315 pcbnew/tools/drawing_tool.cpp:123
 msgid "Specify custom track and via sizes"
-msgstr "Zadajte vlastnú stopu a veľkosti"
+msgstr "Zadať vlastné veľkosti spojov a prekovov"
 
 #: pcbnew/router/router_tool.cpp:326
 msgid "Track netclass width"
@@ -54494,7 +54497,7 @@ msgstr "Súbor relácie bol importovaný a zlúčený."
 #: pcbnew/specctra_import_export/specctra_import.cpp:182
 #, c-format
 msgid "Session file uses invalid layer id '%s'."
-msgstr "Súbor relácie používa neplatné ID vrstvy '%s'."
+msgstr "Súbor relácie používa neplatné id vrstvy '%s'."
 
 #: pcbnew/specctra_import_export/specctra_import.cpp:245
 msgid "Session via padstack has no shapes"
@@ -54514,7 +54517,7 @@ msgstr "Nepodporované prekovu tvaru: %s"
 #: pcbnew/specctra_import_export/specctra_import.cpp:307
 #, c-format
 msgid "Session file uses invalid layer id '%s'"
-msgstr "Súbor relácie používa neplatné ID vrstvy '%s'"
+msgstr "Súbor relácie používa neplatné id vrstvy '%s'"
 
 #: pcbnew/specctra_import_export/specctra_import.cpp:368
 msgid "Session file is missing the \"session\" section"
@@ -54624,7 +54627,7 @@ msgstr "Súbor Specctra DSN"
 
 #: pcbnew/tools/board_editor_control.cpp:490
 msgid "Export Board Netlist"
-msgstr "Exportovať zoznam sietí DPS"
+msgstr "Exportovať zoznam spojov dosky"
 
 #: pcbnew/tools/board_editor_control.cpp:491
 msgid "KiCad board netlist files"
@@ -54661,7 +54664,7 @@ msgid ""
 "order to create or update PCBs from schematics, you must launch the KiCad "
 "project manager and create a project."
 msgstr ""
-"Schéma sa nedá aktualizovať, pretože program Pcbnew je otvorený v "
+"Nie je možné aktualizovať schému, pretože program Pcbnew je otvorený v "
 "samostatnom režime. Ak chcete vytvoriť alebo aktualizovať DPS zo schém, "
 "musíte spustiť projektového manažéra KiCad a vytvoriť projekt."
 
@@ -55199,7 +55202,7 @@ msgstr "Vyberte puzdro pre protokol priradení."
 
 #: pcbnew/tools/board_inspection_tool.cpp:1879
 msgid "Board vs library diff for:"
-msgstr "Rozdiel DPS oproti knižnici pre:"
+msgstr "Rozdiel dosky oproti knižnici pre:"
 
 #: pcbnew/tools/board_inspection_tool.cpp:1893
 #: pcbnew/tools/board_inspection_tool.cpp:1901
@@ -55894,7 +55897,7 @@ msgstr "Pridá čiarový kód"
 
 #: pcbnew/tools/pcb_actions.cpp:177
 msgid "Add Board Characteristics"
-msgstr "Pridať charakteristiky DPS"
+msgstr "Pridať charakteristiky dosky"
 
 #: pcbnew/tools/pcb_actions.cpp:178
 msgid "Add a board characteristics table on a graphic layer"
@@ -55906,7 +55909,7 @@ msgstr "Pridať tabuľku vrstvenia"
 
 #: pcbnew/tools/pcb_actions.cpp:187
 msgid "Add a board stackup table on a graphic layer"
-msgstr "Pridať tabuľku vrstvenia DPS na grafickú vrstvu"
+msgstr "Pridať tabuľku skladby vrstiev dosky na grafickú vrstvu"
 
 #: pcbnew/tools/pcb_actions.cpp:194
 msgid "Place Point"
@@ -56026,7 +56029,7 @@ msgstr "Zmenšiť šírku čiary"
 
 #: pcbnew/tools/pcb_actions.cpp:415
 msgid "Switch Arc Posture"
-msgstr "Prepnite polohu oblúka"
+msgstr "Prepnúť orientáciu oblúka"
 
 #: pcbnew/tools/pcb_actions.cpp:427
 msgid "Snap to Objects on the Active Layer Only"
@@ -56064,7 +56067,7 @@ msgstr "Zobraziť okno kontroly pravidiel návrhu"
 
 #: pcbnew/tools/pcb_actions.cpp:473
 msgid "Add selected design block to current board"
-msgstr "Pridať vybraný návrhový blok do aktuálnej DPS"
+msgstr "Pridať vybraný návrhový blok do aktuálnej dosky"
 
 #: pcbnew/tools/pcb_actions.cpp:490
 msgid "Apply Design Block Layout"
@@ -56076,19 +56079,19 @@ msgstr "Použiť rozloženie prepojeného návrhového bloku na vybranú skupinu
 
 #: pcbnew/tools/pcb_actions.cpp:513
 msgid "Save Board as Design Block..."
-msgstr "Uložiť DPS ako návrhový blok..."
+msgstr "Uložiť dosku ako návrhový blok..."
 
 #: pcbnew/tools/pcb_actions.cpp:514
 msgid "Create a new design block from the current board"
-msgstr "Vytvoriť nový návrhový blok z aktuálnej DPS"
+msgstr "Vytvoriť nový návrhový blok z aktuálnej dosky"
 
 #: pcbnew/tools/pcb_actions.cpp:527
 msgid "Update Design Block from Board"
-msgstr "Aktualizovať návrhový blok z DPS"
+msgstr "Aktualizovať návrhový blok z dosky"
 
 #: pcbnew/tools/pcb_actions.cpp:528
 msgid "Set design block layout to current board"
-msgstr "Nastaviť rozloženie návrhového bloku podľa aktuálnej DPS"
+msgstr "Nastaviť rozloženie návrhového bloku podľa aktuálnej dosky"
 
 #: pcbnew/tools/pcb_actions.cpp:535
 msgid "Set design block layout to current selection"
@@ -56278,7 +56281,7 @@ msgstr "Vytvoriť priesečník vybraných mnohouholníkov"
 
 #: pcbnew/tools/pcb_actions.cpp:829
 msgid "Delete Full Track"
-msgstr "Odstrániť celú stopu"
+msgstr "Odstrániť celý spoj"
 
 #: pcbnew/tools/pcb_actions.cpp:830
 msgid "Deletes selected item(s) and copper connections"
@@ -56457,7 +56460,7 @@ msgstr "Upraviť teardropy..."
 
 #: pcbnew/tools/pcb_actions.cpp:1039
 msgid "Add, remove or edit teardrops globally across board"
-msgstr "Globálne pridať, odstrániť alebo upraviť teardropy na celej DPS"
+msgstr "Pridať, odstrániť alebo upraviť teardropy globálne naprieč celou doskou"
 
 #: pcbnew/tools/pcb_actions.cpp:1045
 msgid "Global Deletions..."
@@ -56602,7 +56605,7 @@ msgstr "Pripojiť dosku..."
 
 #: pcbnew/tools/pcb_actions.cpp:1195
 msgid "Open another board and append its contents to this board"
-msgstr "Otvoriť inú DPS a pripojiť jej obsah k tejto DPS"
+msgstr "Otvoriť inú dosku a pripojiť jej obsah k tejto doske"
 
 #: pcbnew/tools/pcb_actions.cpp:1202
 msgid "Clear board and get last rescue file automatically saved by PCB editor"
@@ -56772,11 +56775,11 @@ msgstr "Zbierať a vložiť 3D modely"
 
 #: pcbnew/tools/pcb_actions.cpp:1349
 msgid "Collect footprint 3D models and embed them into the board"
-msgstr "Zbierať 3D modely puzdier a vložiť ich do DPS"
+msgstr "Zhromaždiť 3D modely puzdier a vložiť ich do súboru dosky"
 
 #: pcbnew/tools/pcb_actions.cpp:1359
 msgid "Switch Track Width to Next"
-msgstr "Prepnite šírku stopy na ďalšiu"
+msgstr "Prepnúť šírku spoja na ďalšiu"
 
 #: pcbnew/tools/pcb_actions.cpp:1360
 msgid "Change track width to next pre-defined size"
@@ -56784,7 +56787,7 @@ msgstr "Změnit šířku spoje na další předdefinovanou velikost"
 
 #: pcbnew/tools/pcb_actions.cpp:1367
 msgid "Switch Track Width to Previous"
-msgstr "Prepnúť šírku stopy na predchádzajúcu"
+msgstr "Prepnúť šírku spoja na predchádzajúcu"
 
 #: pcbnew/tools/pcb_actions.cpp:1368
 msgid "Change track width to previous pre-defined size"
@@ -56892,7 +56895,7 @@ msgstr ""
 
 #: pcbnew/tools/pcb_actions.cpp:1575
 msgid "Switch to Schematic Editor"
-msgstr "Prepnite na editor schém"
+msgstr "Prepnúť na editor schém"
 
 #: pcbnew/tools/pcb_actions.cpp:1576
 msgid "Open schematic in schematic editor"
@@ -56940,7 +56943,7 @@ msgstr "Prevrátiť pohľad na dosku"
 
 #: pcbnew/tools/pcb_actions.cpp:1642
 msgid "View board from the opposite side"
-msgstr "Zobraziť DPS z opačnej strany"
+msgstr "Zobraziť dosku z opačnej strany"
 
 #: pcbnew/tools/pcb_actions.cpp:1655
 msgid "Show Ratsnest"
@@ -56948,7 +56951,7 @@ msgstr "Zobraziť vzdušné spoje"
 
 #: pcbnew/tools/pcb_actions.cpp:1656
 msgid "Show lines/arcs representing missing connections on the board"
-msgstr "Zobraziť čiary/oblúky predstavujúce chýbajúce prepojenia na DPS"
+msgstr "Zobraziť čiary/oblúky predstavujúce chýbajúce prepojenia na doske"
 
 #: pcbnew/tools/pcb_actions.cpp:1663
 msgid "Curved Ratsnest Lines"
@@ -57063,7 +57066,7 @@ msgstr "Automatické priblíženie pri zmene puzdra"
 
 #: pcbnew/tools/pcb_actions.cpp:1832
 msgid "Switch to Component (F.Cu) layer"
-msgstr "Prepnite na komponentnú (F.Cu) vrstvu"
+msgstr "Prepnúť na (F.Cu) vrstvu súčiastok"
 
 #: pcbnew/tools/pcb_actions.cpp:1841
 msgid "Switch to Inner Layer 1"
@@ -57258,7 +57261,7 @@ msgstr "Zobraziť vyhodnotenie návrhových obmedzení pre vybraný objekt"
 
 #: pcbnew/tools/pcb_actions.cpp:2175
 msgid "Show differences between board footprint and its library equivalent"
-msgstr "Zobraziť rozdiely medzi puzdrom na DPS a jej ekvivalentom v knižnici"
+msgstr "Zobraziť rozdiely medzi puzdrom na doske a jeho ekvivalentom v knižnici"
 
 #: pcbnew/tools/pcb_actions.cpp:2181
 msgid "Show Footprint Associations"
@@ -57398,7 +57401,7 @@ msgstr "Unroutuje segment po najbližší segment."
 
 #: pcbnew/tools/pcb_actions.cpp:2379
 msgid "Select All Tracks in Net"
-msgstr "Vyberte možnosť Všetky stopy v sieti"
+msgstr "Vybrať všetky prepojené spoje"
 
 #: pcbnew/tools/pcb_actions.cpp:2380
 msgid "Selects all tracks & vias belonging to the same net."
@@ -57675,7 +57678,7 @@ msgstr "Preskočiť aktuálnu položku a routovať ďalšiu vybranú položku."
 #: pcbnew/tools/pcb_actions.cpp:2684
 msgid ""
 "Splits the track segment into two segments connected at the cursor position."
-msgstr "Rozdelí segment stopy na dva segmenty spojené na pozícii kurzora."
+msgstr "Rozdeliť segment spoja na dva segmenty spojené na pozícii kurzora."
 
 #: pcbnew/tools/pcb_actions.cpp:2692
 msgid "Drag 45 Degree Mode"
@@ -57693,7 +57696,7 @@ msgstr "Ťahanie pod voľným uhlom"
 #: pcbnew/tools/pcb_actions.cpp:2702
 msgid ""
 "Drags the nearest joint in the track without restricting the track angle."
-msgstr "Potiahne najbližší spoj v stope bez obmedzenia uhla stopy."
+msgstr "Potiahnúť najbližší prepoj v spoji bez obmedzenia uhla stopy."
 
 #: pcbnew/tools/pcb_actions.cpp:2712
 msgid "Update All Tuning Patterns"
@@ -57833,7 +57836,7 @@ msgstr "Návrhový blok nemá rozloženie na umiestnenie."
 #: pcbnew/tools/pcb_control.cpp:1498 pcbnew/tools/pcb_control.cpp:1723
 #, c-format
 msgid "Design block %s does not have a board file."
-msgstr "Návrhový blok %s nemá súbor DPS."
+msgstr "Návrhový blok %s nemá súbor pre dosku."
 
 #: pcbnew/tools/pcb_control.cpp:1579
 msgid "Design block placement failed - no footprints were placed."
@@ -57851,7 +57854,7 @@ msgstr "Vybraná skupina neobsahuje žiadne puzdra na umiestnenie."
 
 #: pcbnew/tools/pcb_control.cpp:2003
 msgid "Error loading board."
-msgstr "Chyba pri načítaní DPS."
+msgstr "Pri načítavaní dosky nastala chyba."
 
 #: pcbnew/tools/pcb_control.cpp:2128
 msgid "Append Board"
@@ -58254,11 +58257,11 @@ msgstr "Zobraziť nepripojené spoje ako vzdušné spoje"
 
 #: pcbnew/widgets/appearance_controls.cpp:348
 msgid "DRC Warnings"
-msgstr "Varovania DRC"
+msgstr "Upozornenia DRC"
 
 #: pcbnew/widgets/appearance_controls.cpp:348
 msgid "DRC violations with a Warning severity"
-msgstr "Porušenia DRC s prísnosťou Varovania"
+msgstr "Porušenia DRC so závažnosťou 'Upozornenie'"
 
 #: pcbnew/widgets/appearance_controls.cpp:349
 msgid "DRC Errors"
@@ -58266,7 +58269,7 @@ msgstr "Chyby DRC"
 
 #: pcbnew/widgets/appearance_controls.cpp:349
 msgid "DRC violations with an Error severity"
-msgstr "Porušenia DRC so závažnosťou chyby"
+msgstr "Porušenia DRC so závažnosťou 'Chyba'"
 
 #: pcbnew/widgets/appearance_controls.cpp:350
 msgid "DRC Exclusions"
@@ -59364,7 +59367,7 @@ msgstr "Znova vyplniť zóny"
 
 #: pcbnew/zone_manager/dialog_zone_manager_base.cpp:144
 msgid "Refill zones after changes made on board"
-msgstr "Znova vyplniť zóny po zmenách na DPS"
+msgstr "Znova vyplniť zóny po zmenách na doske"
 
 #: pcbnew/zone_manager/dialog_zone_manager_base.cpp:151
 msgid "Update Displayed Zones"
