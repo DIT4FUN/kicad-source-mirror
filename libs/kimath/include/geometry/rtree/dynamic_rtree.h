@@ -25,6 +25,7 @@
 #define DYNAMIC_RTREE_H
 
 #include <algorithm>
+#include <bit>
 #include <cassert>
 #include <climits>
 #include <cstdint>
@@ -1744,28 +1745,29 @@ private:
     bool searchImpl( NODE* aNode, const ELEMTYPE aMin[NUMDIMS],
                      const ELEMTYPE aMax[NUMDIMS], VISITOR& aVisitor, int& aFound ) const
     {
+        uint32_t mask = aNode->ChildOverlapMask( aMin, aMax );
+
         if( aNode->IsLeaf() )
         {
-            for( int i = 0; i < aNode->count; ++i )
+            while( mask )
             {
-                if( aNode->ChildOverlaps( i, aMin, aMax ) )
-                {
-                    aFound++;
+                int i = std::countr_zero( mask );
+                mask &= mask - 1;
+                aFound++;
 
-                    if( !aVisitor( aNode->data[i] ) )
-                        return false;
-                }
+                if( !aVisitor( aNode->data[i] ) )
+                    return false;
             }
         }
         else
         {
-            for( int i = 0; i < aNode->count; ++i )
+            while( mask )
             {
-                if( aNode->ChildOverlaps( i, aMin, aMax ) )
-                {
-                    if( !searchImpl( aNode->children[i], aMin, aMax, aVisitor, aFound ) )
-                        return false;
-                }
+                int i = std::countr_zero( mask );
+                mask &= mask - 1;
+
+                if( !searchImpl( aNode->children[i], aMin, aMax, aVisitor, aFound ) )
+                    return false;
             }
         }
 

@@ -387,16 +387,17 @@ void VIEW::AddBatch( const std::vector<VIEW_ITEM*>& aItems )
         MarkTargetDirty( l.target );
     }
 
-    // Phase 3: Set visibility
-    // Don't queue INITIAL_ADD here — items will be rendered when RecacheAllItems
-    // sets REPAINT after display options are loaded. This avoids a premature render
-    // pass with default settings that would be immediately discarded.
+    // Phase 3: Set visibility and queue initial invalidation.
+    // INITIAL_ADD is required even though VIEW_ITEM_DATA defaults VISIBLE=true (making
+    // SetVisible a no-op). Without it, items reused after VIEW::Clear() retain stale GAL
+    // cache group IDs that point to freed memory.
     for( VIEW_ITEM* item : aItems )
     {
         if( !item || !item->m_viewPrivData || item->m_viewPrivData->m_view != this )
             continue;
 
         SetVisible( item, true );
+        Update( item, KIGFX::INITIAL_ADD );
     }
 }
 
@@ -1618,7 +1619,14 @@ void VIEW::UpdateItems()
                 layerBulk[layer].emplace_back( item, bbox );
             }
 
-            item->viewPrivData()->m_requiredUpdate &= ~( LAYERS | GEOMETRY );
+            // The bulk rebuild handled R-tree reinsertion, so clear LAYERS|GEOMETRY
+            // to avoid redundant R-tree work in invalidateItem(). Replace with REPAINT
+            // so items still reach updateItemGeometry() for GAL cache rebuilds.
+            if( item->viewPrivData()->m_requiredUpdate & ( LAYERS | GEOMETRY ) )
+            {
+                item->viewPrivData()->m_requiredUpdate &= ~( LAYERS | GEOMETRY );
+                item->viewPrivData()->m_requiredUpdate |= REPAINT;
+            }
         }
 
         // Bulk load each layer's R-tree
