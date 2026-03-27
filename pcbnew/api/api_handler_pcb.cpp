@@ -3103,7 +3103,7 @@ HANDLER_RESULT<types::RunJobResponse> API_HANDLER_PCB::handleRunBoardJobExportPs
     if( std::optional<ApiResponseStatus> err = ApplyBoardPlotSettings( aCtx.Request.plot_settings(), job ) )
         return tl::unexpected( *err );
 
-        if( std::optional<ApiResponseStatus> paginationError =
+    if( std::optional<ApiResponseStatus> paginationError =
             ValidatePaginationModeForSingleOrPerFile( aCtx.Request.page_mode(),
                                                       "RunBoardJobExportPs" ) )
     {
