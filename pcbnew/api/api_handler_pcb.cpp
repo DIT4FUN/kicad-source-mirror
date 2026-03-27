@@ -1483,16 +1483,6 @@ HANDLER_RESULT<BoardDesignRulesResponse> API_HANDLER_PCB::handleSetBoardDesignRu
         {
             PCB_DRC_CODE ruleType =
                     FromProtoEnum<PCB_DRC_CODE, kiapi::board::DrcErrorType>( severitySetting.rule_type() );
-            std::shared_ptr<DRC_ITEM> drcItem = DRC_ITEM::Create( ruleType );
-
-            if( !drcItem )
-            {
-                ApiResponseStatus e;
-                e.set_status( ApiStatusCode::AS_BAD_REQUEST );
-                e.set_error_message( fmt::format( "Unknown DRC rule type '{}'",
-                                                  static_cast<int>( severitySetting.rule_type() ) ) );
-                return tl::unexpected( e );
-            }
 
             const std::unordered_set<SEVERITY> permitted( { RPT_SEVERITY_ERROR, RPT_SEVERITY_WARNING, RPT_SEVERITY_IGNORE } );
             SEVERITY setting = FromProtoEnum<SEVERITY, kiapi::common::types::RuleSeverity>( severitySetting.severity() );
@@ -1505,7 +1495,7 @@ HANDLER_RESULT<BoardDesignRulesResponse> API_HANDLER_PCB::handleSetBoardDesignRu
                 return tl::unexpected( e );
             }
 
-            newSettings.m_DRCSeverities[drcItem->GetErrorCode()] = setting;
+            newSettings.m_DRCSeverities[ruleType] = setting;
         }
     }
 
