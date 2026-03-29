@@ -387,11 +387,15 @@ void DIALOG_PCM::setRepositoryData( const wxString& aRepositoryId )
             {
                 package_data.current_version = m_pcm->GetInstalledPackageVersion( pkg.identifier );
                 package_data.pinned = m_pcm->IsPackagePinned( pkg.identifier );
+                package_data.swig_warning = m_pcm->UsesSWIGRuntime( pkg, package_data.current_version );
+            }
+            else if( !pkg.versions.empty() )
+            {
+                package_data.swig_warning = m_pcm->UsesSWIGRuntime( pkg, pkg.versions[0].version );
             }
 
             if( package_data.state == PPS_UPDATE_AVAILABLE )
                 package_data.update_version = m_pcm->GetPackageUpdateVersion( pkg );
-
 
             for( const PENDING_ACTION& action : m_pendingActions )
             {
@@ -474,6 +478,8 @@ void DIALOG_PCM::setInstalledPackages()
 
         package_data.state = m_pcm->GetPackageState( entry.repository_id,
                                                      entry.package.identifier );
+
+        package_data.swig_warning = m_pcm->UsesSWIGRuntime( entry.package, entry.current_version );
 
         if( package_data.state == PPS_UPDATE_AVAILABLE )
             package_data.update_version = m_pcm->GetPackageUpdateVersion( entry.package );
