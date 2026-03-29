@@ -252,6 +252,12 @@ if( APPLE )
             )
     ]] )
 
+    if( KICAD_USE_SENTRY )
+        install(PROGRAMS $<TARGET_FILE:crashpad_handler>
+                DESTINATION ${OSX_BUNDLE_INSTALL_BIN_DIR}
+                COMPONENT binary)
+    endif()
+
     # move all individual app bundles into main bundle
     install( CODE "
         # helper function to move a bundle into main bundle

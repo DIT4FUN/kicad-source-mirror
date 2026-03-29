@@ -1035,6 +1035,13 @@ if( KICAD_USE_SENTRY )
         set( CRASHPAD_WER_ENABLED ON )
     endif()
     add_subdirectory( thirdparty/sentry-native )
+
+    if( APPLE AND TARGET crashpad_handler )
+        set_target_properties(crashpad_handler PROPERTIES
+                RUNTIME_OUTPUT_DIRECTORY "${OSX_BUNDLE_BUILD_BIN_DIR}"
+        )
+    endif()
+
     add_compile_definitions( KICAD_USE_SENTRY )
 endif()
 
