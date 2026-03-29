@@ -2035,8 +2035,8 @@ void PCB_IO_KICAD_SEXPR_PARSER::parseBoardStackup()
         else if( !( layerId & 1 ) )
             type = BS_ITEM_TYPE_COPPER;
 
-        BOARD_STACKUP_ITEM* item = nullptr;
-        bool                skipItem = false;
+        std::unique_ptr<BOARD_STACKUP_ITEM> itemOwner;
+        BOARD_STACKUP_ITEM*                 item = nullptr;
 
         if( type != BS_ITEM_TYPE_UNDEFINED )
         {
@@ -2046,20 +2046,15 @@ void PCB_IO_KICAD_SEXPR_PARSER::parseBoardStackup()
             // correctly, but don't keep it.
             static constexpr int MAX_STACKUP_ITEMS = 128;
 
-            item = new BOARD_STACKUP_ITEM( type );
+            itemOwner = std::make_unique<BOARD_STACKUP_ITEM>( type );
+            item = itemOwner.get();
             item->SetBrdLayerId( layerId );
 
             if( type == BS_ITEM_TYPE_DIELECTRIC )
                 item->SetDielectricLayerId( dielectric_idx++ );
 
             if( stackup.GetCount() < MAX_STACKUP_ITEMS )
-            {
-                stackup.Add( item );
-            }
-            else
-            {
-                skipItem = true;
-            }
+                stackup.Add( itemOwner.release() );
         }
         else
         {
@@ -2174,8 +2169,6 @@ void PCB_IO_KICAD_SEXPR_PARSER::parseBoardStackup()
             }
         }
 
-        if( skipItem )
-            delete item;
     }
 
     if( token != T_RIGHT )
