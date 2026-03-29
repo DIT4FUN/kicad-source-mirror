@@ -419,7 +419,8 @@ bool PNS_LOG_FILE::SaveLog( const wxFileName& logFileName, REPORTER* aRpt )
         return false;
     }
 
-    fp.Write( logString.GetData(), logString.Length() );
+    wxScopedCharBuffer utf8 = logString.ToUTF8();
+    fp.Write( utf8.data(), utf8.length() );
     fp.Close();
 
     return true;
