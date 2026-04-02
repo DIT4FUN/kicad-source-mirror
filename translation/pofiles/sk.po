@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kicad\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-02 14:39+0300\n"
-"PO-Revision-Date: 2026-04-02 11:36+0000\n"
+"PO-Revision-Date: 2026-04-02 14:17+0000\n"
 "Last-Translator: EdizonTN <edizontn@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/kicad/master-"
 "source/sk/>\n"
@@ -388,14 +388,12 @@ msgid "Render current view using Raytracing"
 msgstr "Vykresliť aktuálne zobrazenie pomocou Raytracingu"
 
 #: 3d-viewer/3d_viewer/tools/eda_3d_actions.cpp:63
-#, fuzzy
 msgid "Show parts without 3D model"
-msgstr "Zobraziť plôšky v režime obrysu"
+msgstr "Zobraziť súčiastky bez 3D modelu"
 
 #: 3d-viewer/3d_viewer/tools/eda_3d_actions.cpp:64
-#, fuzzy
 msgid "Display a placeholder for footprints with missing 3D models"
-msgstr "Zobraziť úplný zoznam puzdier pre aktuálnu súčiastku"
+msgstr "Zobraziť zástupný symbol pre puzdrá s chýbajúcimi 3D modelmi"
 
 #: 3d-viewer/3d_viewer/tools/eda_3d_actions.cpp:70
 msgid "Copy 3D image to clipboard"
@@ -4370,9 +4368,8 @@ msgid "High-contrast mode dimming factor:"
 msgstr "Koeficient zatmenia v režime s vysokým kontrastom:"
 
 #: common/dialogs/panel_common_settings_base.cpp:298
-#, fuzzy
 msgid "App theme:"
-msgstr "Použiť motív:"
+msgstr "Použitá téma:"
 
 #: common/dialogs/panel_common_settings_base.cpp:330
 msgid "Scaling"
@@ -5912,9 +5909,8 @@ msgid "How would you like KiCad to create them?"
 msgstr "Ako by ste chceli, aby ich KiCad vytvoril?"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:41
-#, fuzzy
 msgid "Start with the built-in KiCad libraries"
-msgstr "Začať so vstavanými knižnicami KiCad (odporúčané)"
+msgstr "Začať so vstavanými knižnicami KiCad"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:45
 msgid "Import tables from the previous version"
@@ -5931,15 +5927,16 @@ msgstr ""
 "vytvorené s predvolenými knižnicami KiCad."
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:53
-#, fuzzy
 msgid "Migrate built-in libraries to the latest version (recommended)"
-msgstr "Začať so vstavanými knižnicami KiCad (odporúčané)"
+msgstr "Migrácia vstavaných knižníc na najnovšiu verziu (odporúčané)"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:55
 msgid ""
 "When enabled, KiCad will replace any existing references to built-in "
 "libraries with references to the latest version"
 msgstr ""
+"Keď je táto funkcia povolená, KiCad nahradí všetky existujúce odkazy na "
+"vstavané knižnice odkazmi na najnovšiu verziu"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:62
 msgid "Start with no libraries"
@@ -6084,9 +6081,8 @@ msgid "Insert Group"
 msgstr "Vložiť skupinu"
 
 #: common/dialogs/panel_toolbar_customization.cpp:173
-#, fuzzy
 msgid "Filter actions"
-msgstr "Nastavenia filtra"
+msgstr "Akcie filtra"
 
 #: common/dialogs/panel_toolbar_customization.cpp:449
 #: common/dialogs/panel_toolbar_customization.cpp:774
@@ -8906,9 +8902,8 @@ msgid "DRC marker shadows"
 msgstr "Tiene značiek DRC"
 
 #: common/layer_id.cpp:145
-#, fuzzy
 msgid "DRC highlighted"
-msgstr "Zvýraznenie siete"
+msgstr "Zvýraznenie DRC"
 
 #: common/layer_id.cpp:153
 msgid "Grid axes"
@@ -19095,9 +19090,8 @@ msgid "Local and global labels have same name"
 msgstr "Lokálne a globálne označenia majú rovnaký názov"
 
 #: eeschema/erc/erc_item.cpp:133
-#, fuzzy
 msgid "Local and global power symbols have same name"
-msgstr "Lokálne a globálne označenia majú rovnaký názov"
+msgstr "Lokálne a globálne symboly napájania majú rovnaký názov"
 
 #: eeschema/erc/erc_item.cpp:137
 msgid "Different footprint assigned in another unit of the symbol"
@@ -24041,13 +24035,12 @@ msgstr ""
 "inštaláciu."
 
 #: eeschema/sim/ngspice.cpp:783
-#, fuzzy
 msgid ""
 "Simulation terminated by ngspice. This may be caused by insufficient memory "
 "or an internal error. The simulator will be reset."
 msgstr ""
-"Simulácia zlyhala (%s). Toto je zvyčajne spôsobené chybou v ngspice alebo "
-"neplatným netlistom. Simulátor bude resetovaný."
+"NGSpice ukončil simuláciu. Môže to byť spôsobené nedostatkom pamäte alebo "
+"internou chybou. Simulátor bude resetovaný."
 
 #: eeschema/sim/sim_lib_mgr.cpp:109 eeschema/sim/sim_lib_mgr.cpp:162
 #, c-format
@@ -29634,7 +29627,6 @@ msgstr ""
 "Použite vo formáte '--define-var key=value' alebo '-D key=value'"
 
 #: kicad/cli/command.cpp:235
-#, fuzzy
 msgid ""
 "The variant name(s) to output, can be used multiple times to specify "
 "multiple variants.\n"
@@ -29642,11 +29634,11 @@ msgid ""
 "generate separate files for each variant.\n"
 "When no --variant argument is provided, the default variant is output."
 msgstr ""
-"Názvy variantov pre výstup, možno použiť viackrát na zadanie viacerých "
+"Názvy variantov pre výstup, sa môžu použiť viackrát na určenie viacerých "
 "variantov.\n"
-"Pri zadávaní viacerých variantov použite premennú ${VARIANT} vo výstupnej "
-"ceste, pre generovanie samostatných súborov pre každý variant.\n"
-"Ak nie je zadaný argument --variant, výstupom je predvolený variant."
+"Pri zadávaní viacerých variantov použite vo výstupnej ceste parameter $"
+"{VARIANT} na vygenerovanie samostatných súborov pre každý variant.\n"
+"Ak nie je uvedený argument --variant, vypíše sa predvolený variant."
 
 #: kicad/cli/command.h:32
 msgid "Shows help message and exits"
@@ -29654,22 +29646,22 @@ msgstr "Zobrazí pomocníka a ukončí sa"
 
 #: kicad/cli/command_api_server.cpp:50
 msgid "Run the KiCad IPC API server in headless mode"
-msgstr ""
+msgstr "Spustiť KiCad IPC API server bez grafického rozhrania"
 
 #: kicad/cli/command_api_server.cpp:55
 msgid ""
 "Optional path to a .kicad_pro, .kicad_pcb, or .kicad_sch file to pre-load"
 msgstr ""
+"Voliteľná cesta k súboru .kicad_pro, .kicad_pcb alebo .kicad_sch na "
+"predbežné načítanie"
 
 #: kicad/cli/command_api_server.cpp:60
-#, fuzzy
 msgid "Override API socket path"
-msgstr "Prepísať uzamknutia"
+msgstr "Prepísať cestu k soketu API"
 
 #: kicad/cli/command_api_server.cpp:285
-#, fuzzy
 msgid "Failed to start API server\n"
-msgstr "Nepodarilo sa uložiť dosku.\n"
+msgstr "Nepodarilo sa spustiť API server\n"
 
 #: kicad/cli/command_fp.h:31
 msgid "Footprint and Footprint Libraries"
@@ -31797,6 +31789,8 @@ msgid ""
 "Warning: This plugin only supports the legacy Python API and will not run in "
 "this KiCad version."
 msgstr ""
+"Upozornenie: tento plugin podporuje iba staršie rozhranie Python API a "
+"nebude fungovať v tejto verzii KiCad."
 
 #: kicad/pcm/dialogs/panel_package.cpp:152
 msgid "Install Pending"
@@ -35716,24 +35710,22 @@ msgid "Max Width Ratio"
 msgstr "Max. pomer šírky"
 
 #: pcbnew/board_design_settings.cpp:1342
-#, fuzzy, c-format
+#, c-format
 msgid "Value must be between %s and %s."
-msgstr "Šírka textu musí byť medzi %s a %s."
+msgstr "Hodnota musí byť medzi %s a %s."
 
 #: pcbnew/board_design_settings.cpp:1355
-#, fuzzy, c-format
+#, c-format
 msgid "Value must be between %.3f and %.3f."
-msgstr "Šírka textu musí byť medzi %s a %s."
+msgstr "Hodnota musí byť medzi %.3f a %.3f."
 
 #: pcbnew/board_design_settings.cpp:1396
-#, fuzzy
 msgid "Value must be between 0 and 99."
-msgstr "Šírka textu musí byť medzi %s a %s."
+msgstr "Hodnota musí byť medzi 0 a 99."
 
 #: pcbnew/board_design_settings.cpp:1427 pcbnew/board_design_settings.cpp:1435
-#, fuzzy
 msgid "Value must be greater than or equal to 0."
-msgstr "Tolerancia musí byť väčšia alebo rovná 0"
+msgstr "Hodnota musí byť väčšia alebo rovná 0."
 
 #: pcbnew/board_design_settings.cpp:1456
 msgid "No differential pair gap defined."
@@ -38344,9 +38336,8 @@ msgid "Update/reset text sizes and styles"
 msgstr "Aktualizovať/obnoviť veľkosti a štýly textu"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:118
-#, fuzzy
 msgid "Update/reset text position and rotation"
-msgstr "Aktualizovať/obnoviť pozície textu"
+msgstr "Aktualizovať/obnoviť pozíciu a otočenie textu"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:121
 msgid "Update/reset text content"
@@ -38365,15 +38356,16 @@ msgid "Update/reset 3D models"
 msgstr "Aktualizovať/resetovať 3D modelov"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:145
-#, fuzzy
 msgid "Match pad positions"
-msgstr "Aktualizujte polohy polí"
+msgstr "Zosúladiť pozície plôšok"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:146
 msgid ""
 "Attempt to match pad positions even if the footprint origin or rotation has "
 "changed."
 msgstr ""
+"Pokúsiť sa o zladenie polôh plôšok, aj keď sa zmenil počiatok alebo rotácia "
+"puzdra."
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.h:94
 msgid "Update Footprints from Library"
@@ -39154,72 +39146,62 @@ msgstr "Znova začať hľadanie"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:55
 #: pcbnew/dialogs/dialog_find_by_properties_base.h:71
-#, fuzzy
 msgid "Find by Properties"
-msgstr "Vlastnosti vývodu"
+msgstr "Nájsť podľa vlastností"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:60
-#, fuzzy
 msgid "Property"
-msgstr "Vlastnosti"
+msgstr "Vlastnosť"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:62
-#, fuzzy
 msgid "Match"
-msgstr "Šrafovanie"
+msgstr "Zhoda"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:492
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:24
-#, fuzzy
 msgid "No items selected"
-msgstr "Žiadne spoje nie sú vybrané."
+msgstr "Žiadne položky nie sú vybrané"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:668
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:778
-#, fuzzy
 msgid "Ignored"
-msgstr "Ignorovať"
+msgstr "Ignorované"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:668
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:734
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:780
-#, fuzzy
 msgid "Matching"
-msgstr "Ukladanie do cache"
+msgstr "Zodpovedajúce"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:668
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:677
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:736
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:782
-#, fuzzy
 msgid "Different"
-msgstr "Diferenciálny"
+msgstr "Rozdielne"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:901
-#, fuzzy, c-format
+#, c-format
 msgid "%zu items matched"
-msgstr " (%d položiek načítaných)"
+msgstr "%zu zhodných položiek"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:931
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1110
-#, fuzzy
 msgid "B. expressions are not supported."
-msgstr " podmodely nie sú zatiaľ podporované."
+msgstr "Výrazy B. nie sú podporované."
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:934
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:955
-#, fuzzy
 msgid "Expression Error"
-msgstr "Chyba exportu"
+msgstr "Chyba výrazu"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:954
-#, fuzzy
 msgid "Syntax error in expression"
-msgstr "Chýba výraz tvrdenia."
+msgstr "Syntaktická chyba vo výraze"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1102
 msgid "Expression is empty"
-msgstr ""
+msgstr "Výraz nie je zadaný"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1128
 #: pcbnew/drc/rule_editor/drc_re_custom_rule_panel.cpp:375
@@ -39227,19 +39209,16 @@ msgid "Syntax OK"
 msgstr "Syntax OK"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1130
-#, fuzzy
 msgid "Syntax error: "
-msgstr "Vnútorná chyba"
+msgstr "Syntaktická chyba "
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:58
-#, fuzzy
 msgid "From Selection"
-msgstr "Transformovať výber"
+msgstr "Z výberu"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:70
-#, fuzzy
 msgid "Expression"
-msgstr "Regulárny výraz"
+msgstr "Výraz"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:121
 #: pcbnew/drc/rule_editor/drc_re_custom_rule_panel.cpp:51
@@ -39247,28 +39226,24 @@ msgid "Check Syntax"
 msgstr "Skontrolovať syntax"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:124
-#, fuzzy
 msgid "Create from Selection Tab"
-msgstr "Vytvoriť z výberu"
+msgstr "Vytvoriť z karty výberu"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:136
 msgid "Query"
-msgstr ""
+msgstr "Dopyt"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:143
-#, fuzzy
 msgid "Deselect non-matching items"
-msgstr "Kresliť vybrané podradené položky"
+msgstr "Zrušiť výber nezhodujúcich sa položiek"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:147
-#, fuzzy
 msgid "Zoom to fit selected items"
-msgstr "Priblížiť na krížovo zvýraznené položky"
+msgstr "Priblížiť a prispôsobiť na vybrané položky"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:162
-#, fuzzy
 msgid "Select Matching"
-msgstr "Zvoľte cestu"
+msgstr "Vybrať zodpovedajúce"
 
 #: pcbnew/dialogs/dialog_footprint_associations.cpp:49
 msgid "Footprint: "
@@ -42699,37 +42674,32 @@ msgid "Render PCB Job Options"
 msgstr "Možnosti úlohy tvorby obrázka DPS"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:25
-#, fuzzy
 msgid "Test cases directory:"
-msgstr "Cieľový adresár:"
+msgstr "Adresár testovacích prípadov:"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:32
-#, fuzzy
 msgid "Test case name:"
-msgstr "Meno siete:"
+msgstr "Názov testovacieho prípadu:"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
 msgid "Testcase (strict geometry)"
-msgstr ""
+msgstr "Testovací prípad (prísna geometria)"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
-#, fuzzy
 msgid "Testcase (connectivity only)"
-msgstr "Testovať pripojenie"
+msgstr "Testovací prípad (iba pripojenie)"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
-#, fuzzy
 msgid "Testcase (expected fail)"
-msgstr "Premenovať vybrané pole"
+msgstr "Testovací prípad (očakávané zlyhanie)"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
 msgid "Known bug"
-msgstr ""
+msgstr "Známa chyba"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.h:47
-#, fuzzy
 msgid "Save Router Testcase"
-msgstr "Uložiť súbor denníka routera"
+msgstr "Uložiť testovacie prípady routra"
 
 #: pcbnew/dialogs/dialog_rule_area_properties.cpp:130
 #: pcbnew/tools/board_inspection_tool.cpp:1759
@@ -47308,9 +47278,8 @@ msgid "Checking copper zone clearances..."
 msgstr "Kontrolujú sa min. vzdialenosti zóny na medi..."
 
 #: pcbnew/drc/drc_test_provider_copper_clearance.cpp:178
-#, fuzzy
 msgid "Checking teardrop clearances..."
-msgstr "Kontrolujú sa min. vzdialenosti plôšky..."
+msgstr "Kontrolujú sa min. vzdialenosti teardropov..."
 
 #: pcbnew/drc/drc_test_provider_copper_clearance.cpp:293
 #: pcbnew/drc/drc_test_provider_copper_clearance.cpp:584
@@ -49478,33 +49447,30 @@ msgstr ""
 "Výraz, ktorý je číslom, sa bude zhodovať aj s počtom plôšok."
 
 #: pcbnew/footprint_wizard.cpp:128 pcbnew/footprint_wizard.cpp:148
-#, fuzzy
 msgid "Unexpected error with footprint wizard"
-msgstr "Výnimka v kóde sprievodcu puzdrom pythonu"
+msgstr "Neočakávaná chyba so sprievodcom puzdier"
 
 #: pcbnew/footprint_wizard.cpp:156
-#, fuzzy, c-format
+#, c-format
 msgid "Could not launch footprint wizard '%s'"
-msgstr "Sprievodcu puzdrom sa nepodarilo načítať"
+msgstr "Nebolo možné spustiť sprievodcu puzdrom '%s'"
 
 #: pcbnew/footprint_wizard.cpp:166 pcbnew/footprint_wizard.cpp:175
-#, fuzzy
 msgid "Unexpected response from footprint wizard"
-msgstr "Sprievodcu puzdrom sa nepodarilo načítať"
+msgstr "Neočakávaná odpoveď od sprievodcu puzdrom"
 
 #: pcbnew/footprint_wizard.cpp:170
-#, fuzzy, c-format
+#, c-format
 msgid "Footprint wizard error: %s"
-msgstr "Sprievodca púzdrom"
+msgstr "Chyba sprievodcu puzdrom: %s"
 
 #: pcbnew/footprint_wizard.cpp:179
 msgid "The KiCad API is disabled"
-msgstr ""
+msgstr "KiCad API je zakázané"
 
 #: pcbnew/footprint_wizard.cpp:205
-#, fuzzy
 msgid "3D Model"
-msgstr "3D modely"
+msgstr "3D model"
 
 #: pcbnew/footprint_wizard_frame.cpp:87
 #: pcbnew/footprint_wizard_frame_functions.cpp:42
@@ -49517,9 +49483,9 @@ msgid "no wizard selected"
 msgstr "nie je vybraný žiadny sprievodca"
 
 #: pcbnew/footprint_wizard_frame.cpp:391
-#, fuzzy, c-format
+#, c-format
 msgid "3D Viewer [%s]"
-msgstr "Zobrazovač 3D"
+msgstr "3D prehliadač [%s]"
 
 #: pcbnew/generate_footprint_info.cpp:45
 msgid "Documentation"
@@ -52231,9 +52197,9 @@ msgstr ""
 "Ignorovaný mnohouholník, pretože Eagle vrstva '%s' (%d) nebola priradená"
 
 #: pcbnew/pcb_io/eagle/pcb_io_eagle.cpp:1572
-#, fuzzy, c-format
+#, c-format
 msgid "Skipping a polygon on layer '%s' (%d): less than 3 vertices"
-msgstr "Ignorovaný mnohouholník na vrstve '%s' (%d): počet obrysov nie je 1"
+msgstr "Preskočenie mnohouholníka na vrstve '%s' (%d): menej ako 3 vrcholy"
 
 #: pcbnew/pcb_io/eagle/pcb_io_eagle.cpp:1618
 #, c-format
@@ -53120,19 +53086,18 @@ msgid ""
 msgstr "Zadajte pythonový modul, ktorý implementuje funkcie PCB_IO::Puzdro*()."
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.cpp:90
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to parse Sprint Layout file '%s'"
-msgstr "Nepodarilo sa uložiť súbor knižnice puzdier '%s'."
+msgstr "Nepodarilo sa spracovať Sprint Layout súbor '%s'"
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.cpp:132
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to create board from Sprint Layout file '%s'"
-msgstr "Nepodarilo sa vytvoriť súbor knižnice symbolov '%s'."
+msgstr "Nepodarilo sa vytvoriť dosku zo Sprint Layout súboru '%s'"
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.h:49
-#, fuzzy
 msgid "Sprint Layout board file"
-msgstr "KiCad súbory dosiek plošných spojov"
+msgstr "Sprint Layout súbor dosky"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:73
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:82
@@ -53141,61 +53106,55 @@ msgstr "KiCad súbory dosiek plošných spojov"
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:147
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:163
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:174
-#, fuzzy
 msgid "Unexpected end of Sprint Layout file"
-msgstr "Neočakávaný koniec súboru"
+msgstr "Neočakávaný koniec Sprint Layout súboru"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:160
-#, fuzzy
 msgid "Invalid string length in Sprint Layout file"
-msgstr "Alternatívny názov PIN"
+msgstr "Neplatná dĺžka reťazca v Sprint Layout súbore"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:194
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' is too small to be a Sprint Layout file"
-msgstr ""
-"Súbor '%s'\n"
-"nevyzerá ako súbor projektu KiCad."
+msgstr "Súbor '%s' je príliš malý na to, aby to bol Sprint Layout súbor"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:200
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to read file '%s'"
-msgstr "Nepodarilo sa načítať súbor '%s'."
+msgstr "Nepodarilo sa načítať súbor '%s'"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:213
-#, fuzzy
 msgid "Invalid Sprint Layout file header"
-msgstr "Neplatný názov nadradeného symbolu"
+msgstr "Neplatná hlavička Sprint Layout súboru"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:218
-#, fuzzy
 msgid "Invalid board count in Sprint Layout file"
-msgstr "Neplatné číslo s pohyblivou desatinnou čiarkou"
+msgstr "Neplatný počet dosiek v Sprint Layout súbore"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:297
 msgid "Too many objects in Sprint Layout board"
-msgstr ""
+msgstr "Príliš veľa objektov v Sprint Layout doske"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:325
 #, c-format
 msgid "Unknown object type %d in Sprint Layout file"
-msgstr ""
+msgstr "Neznámy typ objektu %d v Sprint Layout súbore"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:362
 msgid "Too many groups in Sprint Layout object"
-msgstr ""
+msgstr "Príliš veľa skupín v Sprint Layout objekte"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:381
 msgid "Too many text children in Sprint Layout object"
-msgstr ""
+msgstr "Príliš veľa podradených textových prvkov v Sprint Layout objekte"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:412
 msgid "Too many points in Sprint Layout object"
-msgstr ""
+msgstr "Príliš veľa bodov v Sprint Layout objekte"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:461
 msgid "Coordinate value out of range in Sprint Layout file"
-msgstr ""
+msgstr "Hodnota súradníc je mimo rozsah v Sprint Layout súbore"
 
 #: pcbnew/pcb_layer_box_selector.cpp:74
 msgid "(not activated)"
@@ -54757,9 +54716,9 @@ msgid "Track Corner Mode"
 msgstr "Režim rohov spoja"
 
 #: pcbnew/router/router_tool.cpp:722
-#, fuzzy, c-format
+#, c-format
 msgid "Test case in directory %s already exists. Overwrite?"
-msgstr "Súčiastka „%s” už existuje. Zmeniť ju?"
+msgstr "Testovací prípad v adresári %s už existuje. Prepísať?"
 
 #: pcbnew/router/router_tool.cpp:750
 msgid "Save router log"
@@ -55011,9 +54970,8 @@ msgid "Align/Distribute"
 msgstr "Zarovnať/Umiestniť"
 
 #: pcbnew/tools/board_editor_control.cpp:213
-#, fuzzy
 msgid "Zone Priority"
-msgstr "Priorita"
+msgstr "Priorita zóny"
 
 #: pcbnew/tools/board_editor_control.cpp:623
 msgid "Specctra Session File"
@@ -55121,24 +55079,20 @@ msgid "Duplicate Zone"
 msgstr "Duplikovať zónu"
 
 #: pcbnew/tools/board_editor_control.cpp:1867
-#, fuzzy
 msgid "Move Zone to Top Priority"
-msgstr "Presunúť roh na polohu"
+msgstr "Presunúť zónu na vrch priorít"
 
 #: pcbnew/tools/board_editor_control.cpp:1921
-#, fuzzy
 msgid "Raise Zone Priority"
-msgstr "Úroveň priority zóny:"
+msgstr "Zvýšiť úroveň priority zóny"
 
 #: pcbnew/tools/board_editor_control.cpp:1975
-#, fuzzy
 msgid "Lower Zone Priority"
-msgstr "Vlastnosti medených oblastí"
+msgstr "Znížiť úroveň priority zóny"
 
 #: pcbnew/tools/board_editor_control.cpp:2056
-#, fuzzy
 msgid "Move Zone to Bottom Priority"
-msgstr "Presunúť roh na polohu"
+msgstr "Presunúť zónu na koniec priorít"
 
 #: pcbnew/tools/board_editor_control.cpp:2129
 msgid "Selection contains no items with labeled nets."
@@ -56519,13 +56473,12 @@ msgid "Open in Footprint Editor"
 msgstr "Otvorte v aplikácii Footprint Editor"
 
 #: pcbnew/tools/pcb_actions.cpp:572
-#, fuzzy
 msgid "Find by Properties..."
-msgstr "Vlastnosti mriežky ..."
+msgstr "Nájsť podľa vlastností..."
 
 #: pcbnew/tools/pcb_actions.cpp:573
 msgid "Find board items matching property criteria or expressions"
-msgstr ""
+msgstr "Nájsť položky dosky zodpovedajúce kritériám vlastností alebo výrazom"
 
 #: pcbnew/tools/pcb_actions.cpp:582
 msgid ""
@@ -57251,23 +57204,20 @@ msgid "Duplicate Zone onto Layer..."
 msgstr "Duplikovať zónu na vrstvu..."
 
 #: pcbnew/tools/pcb_actions.cpp:1428
-#, fuzzy
 msgid "Move to Top"
-msgstr "Presunúť do koša"
+msgstr "Presunúť na vrch"
 
 #: pcbnew/tools/pcb_actions.cpp:1434
 msgid "Raise"
-msgstr ""
+msgstr "Zvýšiť"
 
 #: pcbnew/tools/pcb_actions.cpp:1440
-#, fuzzy
 msgid "Lower"
-msgstr "Napájanie"
+msgstr "Znížiť"
 
 #: pcbnew/tools/pcb_actions.cpp:1446
-#, fuzzy
 msgid "Move to Bottom"
-msgstr "Zarovnať nadol"
+msgstr "Presunúť na spodok"
 
 #: pcbnew/tools/pcb_actions.cpp:1454
 msgid "Place Footprints"
@@ -59776,6 +59726,8 @@ msgid ""
 "Automatically assign zone priorities based on connectivity analysis of "
 "overlapping regions."
 msgstr ""
+"Automaticky priradiť priority zón na základe analýzy prepojenia "
+"prekrývajúcich sa oblastí."
 
 #: pcbnew/zone_manager/dialog_zone_manager_base.cpp:151
 msgid "Refill zones"
