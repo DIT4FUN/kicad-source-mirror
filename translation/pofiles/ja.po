@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kicad\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-02 14:39+0300\n"
-"PO-Revision-Date: 2026-03-31 20:09+0000\n"
+"PO-Revision-Date: 2026-04-03 00:12+0000\n"
 "Last-Translator: 2tama3 <2tama3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kicad/master-"
 "source/ja/>\n"
@@ -386,13 +386,12 @@ msgid "Render current view using Raytracing"
 msgstr "レイトレーシングを使って現在のビューをレンダリング"
 
 #: 3d-viewer/3d_viewer/tools/eda_3d_actions.cpp:63
-#, fuzzy
 msgid "Show parts without 3D model"
-msgstr "アウトライン モードでパッドを表示"
+msgstr "3Dモデル無しで部品を表示"
 
 #: 3d-viewer/3d_viewer/tools/eda_3d_actions.cpp:64
 msgid "Display a placeholder for footprints with missing 3D models"
-msgstr ""
+msgstr "3Dモデルが欠落しているフットプリントの大枠を表示する"
 
 #: 3d-viewer/3d_viewer/tools/eda_3d_actions.cpp:70
 msgid "Copy 3D image to clipboard"
@@ -4364,9 +4363,8 @@ msgid "High-contrast mode dimming factor:"
 msgstr "ハイコントラスト モードの調光要素:"
 
 #: common/dialogs/panel_common_settings_base.cpp:298
-#, fuzzy
 msgid "App theme:"
-msgstr "テーマを使用:"
+msgstr "アプリのテーマ:"
 
 #: common/dialogs/panel_common_settings_base.cpp:330
 msgid "Scaling"
@@ -5905,9 +5903,8 @@ msgid "How would you like KiCad to create them?"
 msgstr "KiCad をどのように設定しますか?"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:41
-#, fuzzy
 msgid "Start with the built-in KiCad libraries"
-msgstr "パッケージに組み込まれている KiCad ライブラリから始める（推奨）"
+msgstr "KiCad に組み込まれている ライブラリから始める"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:45
 msgid "Import tables from the previous version"
@@ -5923,15 +5920,16 @@ msgstr ""
 "トできないテーブルは、デフォルトのKiCadライブラリを使用して作成されます。"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:53
-#, fuzzy
 msgid "Migrate built-in libraries to the latest version (recommended)"
-msgstr "パッケージに組み込まれている KiCad ライブラリから始める（推奨）"
+msgstr "組み込みライブラリを最新版数に移行する（推奨）"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:55
 msgid ""
 "When enabled, KiCad will replace any existing references to built-in "
 "libraries with references to the latest version"
 msgstr ""
+"有効にすると、KiCad は組み込みライブラリへの既存の参照を最新版数への参照に置"
+"き換えます"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:62
 msgid "Start with no libraries"
@@ -6078,9 +6076,8 @@ msgid "Insert Group"
 msgstr "グループを挿入"
 
 #: common/dialogs/panel_toolbar_customization.cpp:173
-#, fuzzy
 msgid "Filter actions"
-msgstr "フィルターの設定"
+msgstr "フィルターの動作"
 
 #: common/dialogs/panel_toolbar_customization.cpp:449
 #: common/dialogs/panel_toolbar_customization.cpp:774
@@ -8206,7 +8203,7 @@ msgstr "不正な円弧 (半径 %0.2f 、角度 %0.2f )"
 #: common/io/easyeda/easyeda_parser_base.cpp:38
 #, c-format
 msgid "Failed to parse number from '%s'"
-msgstr "'%s' から数値のパースできませんでした"
+msgstr "'%s' から数値の解析に失敗しました"
 
 #: common/io/easyedapro/easyedapro_import_utils.cpp:181
 #: common/io/easyedapro/easyedapro_import_utils.cpp:236
@@ -8909,9 +8906,8 @@ msgid "DRC marker shadows"
 msgstr "DRC マーカーの影"
 
 #: common/layer_id.cpp:145
-#, fuzzy
 msgid "DRC highlighted"
-msgstr "ネットハイライト"
+msgstr "DRC ハイライト"
 
 #: common/layer_id.cpp:153
 msgid "Grid axes"
@@ -19071,9 +19067,8 @@ msgid "Local and global labels have same name"
 msgstr "ローカルラベルとグローバルラベルが同じ名前です"
 
 #: eeschema/erc/erc_item.cpp:133
-#, fuzzy
 msgid "Local and global power symbols have same name"
-msgstr "ローカルラベルとグローバルラベルが同じ名前です"
+msgstr "ローカルとグローバル の電源シンボルが同じ名前です"
 
 #: eeschema/erc/erc_item.cpp:137
 msgid "Different footprint assigned in another unit of the symbol"
@@ -21110,7 +21105,7 @@ msgstr "EasyEDA (JLCEDA) Std ファイル"
 #: pcbnew/pcb_io/easyedapro/pcb_io_easyedapro_parser.cpp:76
 #, c-format
 msgid "Failed to parse value: '%s'"
-msgstr "値のパースに失敗しました: '%s'"
+msgstr "値の解析に失敗しました: '%s'"
 
 #: eeschema/sch_io/geda/sch_io_geda.cpp:3646
 #, c-format
@@ -24048,13 +24043,12 @@ msgstr ""
 "さい。"
 
 #: eeschema/sim/ngspice.cpp:783
-#, fuzzy
 msgid ""
 "Simulation terminated by ngspice. This may be caused by insufficient memory "
 "or an internal error. The simulator will be reset."
 msgstr ""
-"シミュレーションがクラッシュしました(%s)。これは通常、ngspiceのバグや無効な"
-"ネットリストが原因です。シミュレーターはリセットされます。"
+"シミュレーションがngspiceによって終了しました。これはメモリー不足や内部エラー"
+"に原因がある可能性があります。シミュレーターはリセットされます。"
 
 #: eeschema/sim/sim_lib_mgr.cpp:109 eeschema/sim/sim_lib_mgr.cpp:162
 #, c-format
@@ -29638,7 +29632,6 @@ msgstr ""
 "'--define-var key=value' または '-D key=value' の形式で使用します"
 
 #: kicad/cli/command.cpp:235
-#, fuzzy
 msgid ""
 "The variant name(s) to output, can be used multiple times to specify "
 "multiple variants.\n"
@@ -29657,22 +29650,20 @@ msgstr "ヘルプ メッセージを表示して終了する"
 
 #: kicad/cli/command_api_server.cpp:50
 msgid "Run the KiCad IPC API server in headless mode"
-msgstr ""
+msgstr "KiCad IPC API サーバーをヘッドレス モードで実行する"
 
 #: kicad/cli/command_api_server.cpp:55
 msgid ""
 "Optional path to a .kicad_pro, .kicad_pcb, or .kicad_sch file to pre-load"
-msgstr ""
+msgstr ".kicad_pro, .kicad_pcb, or .kicad_sch ファイルをプリロードするオプション パス"
 
 #: kicad/cli/command_api_server.cpp:60
-#, fuzzy
 msgid "Override API socket path"
-msgstr "ロックを無視"
+msgstr "API ソケット パスを上書きする"
 
 #: kicad/cli/command_api_server.cpp:285
-#, fuzzy
 msgid "Failed to start API server\n"
-msgstr "基板の保存に失敗しました。\n"
+msgstr "AIP サーバーの起動に失敗しました\n"
 
 #: kicad/cli/command_fp.h:31
 msgid "Footprint and Footprint Libraries"
@@ -31786,6 +31777,8 @@ msgid ""
 "Warning: This plugin only supports the legacy Python API and will not run in "
 "this KiCad version."
 msgstr ""
+"警告: このプラグインは旧形式のPython APIのみをサポートしており、現在のKiCad版"
+"数で動作しません。"
 
 #: kicad/pcm/dialogs/panel_package.cpp:152
 msgid "Install Pending"
@@ -35694,24 +35687,22 @@ msgid "Max Width Ratio"
 msgstr "最大幅比"
 
 #: pcbnew/board_design_settings.cpp:1342
-#, fuzzy, c-format
+#, c-format
 msgid "Value must be between %s and %s."
-msgstr "テキストの幅は %s と %s との間でなければなりません。"
+msgstr "値は %s から %s の間である必要があります。"
 
 #: pcbnew/board_design_settings.cpp:1355
-#, fuzzy, c-format
+#, c-format
 msgid "Value must be between %.3f and %.3f."
-msgstr "テキストの幅は %s と %s との間でなければなりません。"
+msgstr "値は %.3f から%.3f の間である必要があります。"
 
 #: pcbnew/board_design_settings.cpp:1396
-#, fuzzy
 msgid "Value must be between 0 and 99."
-msgstr "テキストの幅は %s と %s との間でなければなりません。"
+msgstr "値は0から99の間である必要があります。"
 
 #: pcbnew/board_design_settings.cpp:1427 pcbnew/board_design_settings.cpp:1435
-#, fuzzy
 msgid "Value must be greater than or equal to 0."
-msgstr "許容差は0以上である必要があります"
+msgstr "値は0以上である必要があります。"
 
 #: pcbnew/board_design_settings.cpp:1456
 msgid "No differential pair gap defined."
@@ -38302,9 +38293,8 @@ msgid "Update/reset text sizes and styles"
 msgstr "テキストのサイズとスタイルを更新/リセット"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:118
-#, fuzzy
 msgid "Update/reset text position and rotation"
-msgstr "テキストの位置を更新/リセット"
+msgstr "テキストの位置と回転を更新/リセット"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:121
 msgid "Update/reset text content"
@@ -38323,15 +38313,16 @@ msgid "Update/reset 3D models"
 msgstr "3D モデルを更新/リセット"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:145
-#, fuzzy
 msgid "Match pad positions"
-msgstr "フィールドの位置を更新"
+msgstr "パッドの位置を合わせる"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:146
 msgid ""
 "Attempt to match pad positions even if the footprint origin or rotation has "
 "changed."
 msgstr ""
+"フットプリントの原点や回転方向が変わった場合でも、パッドの位置を一致させるよ"
+"うに試みる。"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.h:94
 msgid "Update Footprints from Library"
@@ -39114,72 +39105,62 @@ msgstr "検索を再開"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:55
 #: pcbnew/dialogs/dialog_find_by_properties_base.h:71
-#, fuzzy
 msgid "Find by Properties"
-msgstr "ピンのプロパティ"
+msgstr "プロパティで検索"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:60
-#, fuzzy
 msgid "Property"
 msgstr "プロパティ"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:62
-#, fuzzy
 msgid "Match"
-msgstr "ハッチ"
+msgstr "一致"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:492
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:24
-#, fuzzy
 msgid "No items selected"
-msgstr "ネットが未選択です。"
+msgstr "アイテムをなにも選択していません"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:668
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:778
-#, fuzzy
 msgid "Ignored"
-msgstr "無視"
+msgstr "無視する"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:668
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:734
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:780
-#, fuzzy
 msgid "Matching"
-msgstr "キャッシュ"
+msgstr "一致させる"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:668
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:677
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:736
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:782
-#, fuzzy
 msgid "Different"
-msgstr "差動"
+msgstr "異なる"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:901
-#, fuzzy, c-format
+#, c-format
 msgid "%zu items matched"
-msgstr " (%d個のアイテムが読み込まれています)"
+msgstr "%zu 個のアイテムに一致"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:931
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1110
-#, fuzzy
 msgid "B. expressions are not supported."
-msgstr " サブモデルは現在サポートされていません。"
+msgstr "B.式はサポートされていません。"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:934
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:955
-#, fuzzy
 msgid "Expression Error"
-msgstr "エクスポート エラー"
+msgstr "式 エラー"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:954
-#, fuzzy
 msgid "Syntax error in expression"
-msgstr "アサーションの式がありません。"
+msgstr "式に構文エラー"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1102
 msgid "Expression is empty"
-msgstr ""
+msgstr "式が空"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1128
 #: pcbnew/drc/rule_editor/drc_re_custom_rule_panel.cpp:375
@@ -39187,19 +39168,16 @@ msgid "Syntax OK"
 msgstr "構文確認成功"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1130
-#, fuzzy
 msgid "Syntax error: "
-msgstr "最大誤差 :"
+msgstr "構文エラー : "
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:58
-#, fuzzy
 msgid "From Selection"
-msgstr "選択対象を変形"
+msgstr "選択から"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:70
-#, fuzzy
 msgid "Expression"
-msgstr "正規表現"
+msgstr "式"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:121
 #: pcbnew/drc/rule_editor/drc_re_custom_rule_panel.cpp:51
@@ -39207,28 +39185,24 @@ msgid "Check Syntax"
 msgstr "ルールの構文を確認"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:124
-#, fuzzy
 msgid "Create from Selection Tab"
-msgstr "選択対象から作成"
+msgstr "選択タブから作成"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:136
 msgid "Query"
-msgstr ""
+msgstr "クエリ"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:143
-#, fuzzy
 msgid "Deselect non-matching items"
-msgstr "選択した子アイテムを描画"
+msgstr "一致しないアイテムの選択を解除"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:147
-#, fuzzy
 msgid "Zoom to fit selected items"
-msgstr "クロスプローブされたアイテムに合わせてズーム"
+msgstr "選択したアイテムに合わせてズーム"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:162
-#, fuzzy
 msgid "Select Matching"
-msgstr "パスを選択"
+msgstr "一致したものを選択"
 
 #: pcbnew/dialogs/dialog_footprint_associations.cpp:49
 msgid "Footprint: "
@@ -39755,7 +39729,6 @@ msgid "Explicit jumper pad groups:"
 msgstr "詳しいジャンパーパッドグループ:"
 
 #: pcbnew/dialogs/dialog_footprint_wizard_list_base.h:47
-#, fuzzy
 msgid "Footprint Wizards"
 msgstr "フットプリント ウィザード"
 
@@ -42644,37 +42617,32 @@ msgid "Render PCB Job Options"
 msgstr "レンダPCB ジョブ オプション"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:25
-#, fuzzy
 msgid "Test cases directory:"
-msgstr "宛先ディレクトリ:"
+msgstr "テスト ケース ディレクトリ:"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:32
-#, fuzzy
 msgid "Test case name:"
-msgstr "ネット名:"
+msgstr "テスト ケース名:"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
 msgid "Testcase (strict geometry)"
-msgstr ""
+msgstr "テスト ケース (厳密な幾何学)"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
-#, fuzzy
 msgid "Testcase (connectivity only)"
-msgstr "接続をテスト"
+msgstr "テスト ケース (接続のみ)"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
-#, fuzzy
 msgid "Testcase (expected fail)"
-msgstr "選択したフィールドの名前を変更"
+msgstr "テスト ケース (失敗が予想される)"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
 msgid "Known bug"
-msgstr ""
+msgstr "既知のバグ"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.h:47
-#, fuzzy
 msgid "Save Router Testcase"
-msgstr "ルーターのログを保存"
+msgstr "ルーターのテストケースを保存"
 
 #: pcbnew/dialogs/dialog_rule_area_properties.cpp:130
 #: pcbnew/tools/board_inspection_tool.cpp:1759
@@ -44608,7 +44576,6 @@ msgstr ""
 "\n"
 
 #: pcbnew/dialogs/panel_setup_rules_help_2constraints.h:2
-#, fuzzy
 msgid ""
 "### Constraints\n"
 "\n"
@@ -44873,207 +44840,253 @@ msgid ""
 msgstr ""
 "### Constraints\n"
 "\n"
-"| Constraint type           | Argument "
-"type                                                                                                         "
-"| "
-"Description                                                                                                                                                                                                                                                                                                                                                                                                                              "
+"| Constraint type           | Argument type"
+"                                                                                                         "
+"| Description"
+"                                                                                                                                                                                                                                                                                                                                                                                                                              "
 "|\n"
-"|---------------------------|-----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n"
-"| `annular_width`           | min/opt/"
-"max                                                                                                           "
-"| ビア上のアニュラーリングの幅をチェックします。"
-"<br>                                                                                                                                                                                                                                                                                                                                                                                       "
+"|---------------------------"
+"|-----------------------------------------------------------------------------------------------------------------------"
+"|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 "|\n"
-"| `assertion`               | \"&lt;"
-"expression>\"                                                                                                     "
-"| 指定された式をチェックしま"
-"す。                                                                                                                                                                                                                                                                                                                                                                                                           "
+"| `annular_width`           | min/max"
+"                                                                                                               "
+"| ビア上のアニュラーリングの幅をチェックします。<br>"
+"                                                                                                                                                                                                                                                                                                                                                                                       "
+"|\n"
+"| `assertion`               | \"&lt;expression>"
+"\"                                                                                                     "
+"| 指定された式をチェックします。"
+"                                                                                                                                                                                                                                                                                                                                                                                                           "
 "|\n"
 "| `bridged_mask`            "
 "|                                                                                                                       "
 "| 導体間のソルダーマスクブリッジをチェックします。この制約は、最小値/最適値/"
 "最大値を取りません。この制約を違反の深刻度と組み合わせることで、様々な条件に"
-"おいて、ソルダーマスクブリッジを許可または禁止できます。"
-"<br>                                                                                                                                                                                                                       "
+"おいて、ソルダーマスクブリッジを許可または禁止できます。<br>"
+"                                                                                                                                                                                                                       "
 "|\n"
-"| `clearance`               | "
-"min                                                                                                                   "
+"| `clearance`               | min"
+"                                                                                                                   "
 "| 異なるネットの導体オブジェクト間の **電気的** クリアランスを指定します。"
-"(ネットに関係なくオブジェクト間のクリアランスを指定する場合は、"
-"`physical_clearance` を参照してください。)<br><br>導体オブジェクトの重なり "
+"(ネットに関係なくオブジェクト間のクリアランスを指定する場合は"
+"、`physical_clearance` を参照してください。)<br><br>導体オブジェクトの重なり "
 "(衝突) を許可するには、`min` 値が 0 未満 (たとえば、`-1`) の `clearance` 制約"
-"を作成します。"
-"<br>                                                                                                                        "
+"を作成します。<br>"
+"                                                                                                                        "
 "|\n"
-"| `courtyard_clearance`     | "
-"min                                                                                                                   "
+"| `connection_width`        | min"
+"                                                                                                                   "
+"| パッドとゾーン間の接続幅をチェックします。 `min`値よりも狭いパッド接続ごと"
+"にエラーが発生します。<br>"
+"                                                                                                                                                                                                                                                                                                                                     "
+"|\n"
+"| `courtyard_clearance`     | min"
+"                                                                                                                   "
 "| フットプリントのコートヤード間のクリアランスをチェックし、2つのコートヤード"
 "が `min`距離よりも近い場合はエラーを生成します。フットプリントにコートヤード"
-"の形状がない場合、この制約によってエラーは生成されません。"
-"<br>                                                                                                                                                                                                                    "
+"の形状がない場合、この制約によってエラーは生成されません。<br>"
+"                                                                                                                                                                                                                    "
 "|\n"
-"| `creepage`                | "
-"min                                                                                                                   "
-"| 異なるネットの導体オブジェクト間の距離を指定します。"
-"<br>                                                                                                                                                                                                                                                                                                                                                                                 "
+"| `creepage`                | min"
+"                                                                                                                   "
+"| 異なるネットの導体オブジェクト間の距離を指定します。<br>"
+"                                                                                                                                                                                                                                                                                                                                                                                 "
 "|\n"
-"| `diff_pair_gap`           | min/opt/"
-"max                                                                                                           "
-"| 差動ペア内の結合された配線間のギャップをチェックします。結合配線とは互いに"
-"平行な配線セグメントのことです。差動ペアのギャップは、差動ペアの非結合部分 "
-"(たとえば、コンポーネントからのファンアウト) ではテストされません。"
-"<br>                                                                                                                                                                                                             "
+"| `diff_pair_gap`           | min/opt/max"
+"                                                                                                           "
+"| 差動ペア内の並列配線間のギャップをチェックします。`opt`設定は、対話型ルータ"
+"が新しい差動ペアを配置する際に使用します。差動ペア内の配線間の間隔が`min`およ"
+"び`max`設定の範囲外の場合、エラーが発生します。差動ペアの非並列部分(たとえば"
+"、コンポーネントからのファンアウト)ではテストされません。<br>"
+"                                                                                                                                        "
 "|\n"
-"| `diff_pair_uncoupled`     | "
-"max                                                                                                                   "
+"| `diff_pair_uncoupled`     | max"
+"                                                                                                                   "
 "| 差動ペア配線がペア内の他の極性配線から分離されて配線される距離をチェックし"
 "ます (たとえば、ペアがコンポーネントからファンアウトする場合や、ビアなどの別"
-"のオブジェクトの周りを通過するために分離される場合など)。"
-"<br>                                                                                                                                                                                                                      "
+"のオブジェクトの周りを通過するために分離される場合など)。<br>"
+"                                                                                                                                                                                                                      "
 "|\n"
-"| `disallow`                | "
-"`track`<br>`via`<br>`through_via`<br>`blind_via`<br>`buried_via`<br>`micro_via`<br>`pad`<br>`zone`<br>`text`<br>`graphic`<br>`hole`<br>`footprint`<br> "
-"| 禁止するオブジェクトタイプを1つ以上、スペースで区切って指定します。たとえ"
-"ば、`(constraint disallow track)` や `(constraint disallow track via pad)`。"
-"このタイプのオブジェクトがルール条件に一致する場合DRCエラーが生成されます。"
-"<br><br>この制約は、基本的にキープアウト ルールエリアと同じですが、より具体的"
-"なキープアウト制限を作成するために使用できます。"
-"<br>                                       |\n"
-"| `edge_clearance`          | min/opt/"
-"max                                                                                                           "
+"| `disallow`                | `track`<br>`via`<br>`through_via`<br>"
+"`blind_via`<br>`buried_via`<br>`micro_via`<br>`pad`<br>`zone`<br>`text`<br>"
+"`graphic`<br>`hole`<br>`footprint`<br> | 禁止するオブジェクトタイプを1つ以上"
+"、スペースで区切って指定します。たとえば、`(constraint disallow track)` や `"
+"(constraint disallow track via pad)`。このタイプのオブジェクトがルール条件に"
+"一致する場合DRCエラーが生成されます。<br><br>この制約は、基本的に"
+"キープアウト ルールエリアと同じですが、より具体的なキープアウト制限を作成する"
+"ために使用できます。<br>                                       |\n"
+"| `edge_clearance`          | min"
+"                                                                                                                   "
 "| オブジェクトと基板外形間のクリアランスをチェックします。<br><br>基板外形に"
 "は、`Edge.Cuts` レイヤー上のすべてのグラフィカル アイテムと、 *楕円形* パッド"
-"の穴が含まれるため、これは「フライス加工公差」と考えることもできます。（ドリ"
-"ル公差については `physical_hole_clearance` を参照してください。）"
-"<br>                                                                                                                                 "
+"の穴が含まれるため、これは「フライス加工公差」と考えることもできます。（"
+"ドリル公差については `physical_hole_clearance` を参照してください。）<br>"
+"                                                                                                                                 "
 "|\n"
-"| `length`                  | min/"
-"max                                                                                                               "
-"| ルール条件に一致するネットの合計配線長をチェックし、制約の `min` 値（指定さ"
-"れている場合）を下回る、または `max` 値（指定されている場合）を上回るネットご"
-"とにエラーを生成します。"
-"<br>                                                                                                                                                                                                                                                     "
+"| `hole_clearance`          | min"
+"                                                                                                                   "
+"| パッドまたはビアのドリル穴と別のネット上の導体オブジェクト間のクリアランス"
+"をチェックします。クリアランスは穴の中心ではなく直径から測定されます。<br>"
+"                                                                                                                                                                                                                                                                                     "
 "|\n"
-"| `hole`                    | min/"
-"max                                                                                                               "
+"| `hole_size`               | min/opt/max"
+"                                                                                                           "
 "| パッドまたはビアのドリル穴のサイズ (直径) をチェックします。楕円形の穴の場"
 "合、小さい方の (マイナー) 直径は `min` 値 (指定されている場合) に対してテスト"
-"され、大きい方の (メジャー) 直径は `max` 値 (指定されている場合) に対してテス"
-"トされます。"
-"<br>                                                                                                                                                                                     "
+"され、大きい方の (メジャー) 直径は `max` 値 (指定されている場合) に対して"
+"テストされます。 `opt` 値は、ルール条件に一致するネットのデフォルトのビア穴"
+"サイズとして対話型ルータで使用されます。<br>"
+"                                                                                  "
 "|\n"
-"| `hole_clearance`          | "
-"min                                                                                                                   "
-"| パッドまたはビアのドリル穴と別のネット上の導体オブジェクト間のクリアランス"
-"をチェックします。クリアランスは穴の中心ではなく直径から測定されます。"
-"<br>                                                                                                                                                                                                                                                                                     "
+"| `hole_to_hole`            | min"
+"                                                                                                                   "
+"| パッドとビアの機械的にドリルされた穴間のクリアランスをチェックします。"
+"クリアランスは穴の中心間ではなく、穴の直径間で測定されます。<br><br>この制約"
+"はドリルビットの保護のみを目的としています。 ** レーザードリル **  "
+"(マイクロビア) とその他の非機械的にドリル加工された穴との間のクリアランスは"
+"チェックされません。また、 ** ミル加工 **  (楕円形) とその他の非機械的に"
+"ドリル加工された穴との間のクリアランスもチェックされません。<br> |\n"
+"| `length`                  | min/opt/max"
+"                                                                                                           "
+"| ルール条件に一致するネットの合計配線長をチェックし、制約の `min` 値（指定さ"
+"れている場合）を下回る、または `max` 値（指定されている場合）を上回るネットご"
+"とにエラーを生成します。 `opt` 値は、ルール条件に一致するネットに対して長さ調"
+"整ツールで使用される目標長を設定します。<br>"
+"                                                                                                                                                        "
 "|\n"
-"| `hole_to_hole`            | "
-"min                                                                                                                   "
-"| パッドとビアの機械的にドリルされた穴間のクリアランスをチェックします。クリ"
-"アランスは穴の中心間ではなく、穴の直径間で測定されます。<br><br>この制約はド"
-"リルビットの保護のみを目的としています。 ** レーザードリル **  (マイクロビ"
-"ア) とその他の非機械的にドリル加工された穴との間のクリアランスはチェックされ"
-"ません。また、 ** ミル加工 **  (楕円形) とその他の非機械的にドリル加工された"
-"穴との間のクリアランスもチェックされません。<br> |\n"
-"| `physical_clearance`      | "
-"min                                                                                                                   "
-"| 特定のレイヤー (導体以外のレイヤーを含む) 上の 2つのオブジェクト間のクリア"
-"ランスをチェックします。<br><br>これは `clearance` よりも汎用的なチェックを実"
-"行できますが、はるかに遅くなります。可能な場合は  `clearance` を使用してくだ"
-"さい。"
-"<br>                                                                                                                                                                                            "
+"| `min_resolved_spokes`     | `0`<br>`1`<br>`2`<br>`3`<br>`4`<br>"
+"                                                                                   "
+"| パッドへの接続 (スポーク) の総数をチェックします。指定されたスポーク数より"
+"少ないパッドごとにエラーが発生します。<br>"
+"                                                                                                                                                                                                                                                                                                                     "
 "|\n"
-"| `physical_hole_clearance` | "
-"min                                                                                                                   "
-"| ネットに関係なく、パッドまたはビアのドリル穴と他のオブジェクト間のクリアラ"
-"ンスをチェックします。クリアランスは穴の中心ではなく直径から測定されます。"
-"<br><br>これは、**丸い** 穴のみを含むため、「ドリル公差」と考えることもできま"
-"す (フライス加工公差については `edge_clearance` を参照してください)。"
-"<br>                                                                                                                               "
+"| `physical_clearance`      | min"
+"                                                                                                                   "
+"| 特定のレイヤー (導体以外のレイヤーを含む) 上の 2つのオブジェクト間の"
+"クリアランスをチェックします。<br><br>これは `clearance` よりも汎用的な"
+"チェックを実行できますが、はるかに遅くなります。可能な場合は  `clearance` を"
+"使用してください。<br>"
+"                                                                                                                                                                                            "
 "|\n"
-"| `silk_clearance`          | min/opt/"
-"max                                                                                                           "
+"| `physical_hole_clearance` | min"
+"                                                                                                                   "
+"| ネットに関係なく、パッドまたはビアのドリル穴と他のオブジェクト間の"
+"クリアランスをチェックします。クリアランスは穴の中心ではなく直径から測定され"
+"ます。<br><br>これは、**丸い** 穴のみを含むため、「ドリル公差」と考えることも"
+"できます (フライス加工公差については `edge_clearance` を参照してください)"
+"。<br>"
+"                                                                                                                               "
+"|\n"
+"| `silk_clearance`          | min"
+"                                                                                                                   "
 "| シルクスクリーンレイヤー上のオブジェクトと他のオブジェクト間のクリアランス"
-"をチェックします。"
-"<br>                                                                                                                                                                                                                                                                                                                                         "
+"をチェックします。<br>"
+"                                                                                                                                                                                                                                                                                                                                         "
 "|\n"
-"| `skew`                    | "
-"max                                                                                                                   "
-"| ルール条件に一致するネットの合計スキュー、つまり、各ネットの長さと、ルール"
-"に一致する各ネットのすべての長さの平均との差をチェックします。その平均値とい"
-"ずれかのネットの長さの差の絶対値が制約の `max`  値を超える場合、エラーが生成"
-"されます。"
-"<br>                                                                                                                                                                                         "
+"| `skew`                    | min/opt/max/within\\_diff\\_pairs"
+"                                                                                       "
+"| ルール条件に一致するネットの合計スキューつまり各ネットの長さとルールに一致"
+"する最長のネットとの差をチェックします。 最長のネットといずれかのネットとの差"
+"が制約 `max` 値を超えると、エラーが生成されます。 <br>この制約は、ルール条件"
+"に一致するすべてのネットに対してスキュー調整ツールで使用される"
+"ターゲットスキューも設定します。 ターゲットスキューは、指定されている場合は "
+"`opt` 値、指定されていない場合は `min` 値です。 `min` も `opt` も指定されてい"
+"ない場合は、ターゲットスキューは `0` です。 <br>オプション "
+"`within_diff_pairs` が指定されている場合ルールに一致するネットの各差分ペアに"
+"対してスキューが個別にテストされ、指定されていない場合スキューは一致するすべ"
+"てのネットに対してテストされます（例：バスのスキュー調整）。<br>|\n"
+"| `solder_mask_expansion`   | opt"
+"                                                                                                                   "
+"| パッド、形状、配線のハンダマスクの拡張を指定します。"
+"                                                                                                                                                                                                                                                                                                                                                                                     "
 "|\n"
-"| `solder_mask_expansion`   | "
-"opt                                                                                                                   "
-"| パッド、形状、配線のハンダマスクの拡張を指定しま"
-"す。                                                                                                                                                                                                                                                                                                                                                                                     "
-"|\n"
-"| `solder_paste_abs_margin` | "
-"opt                                                                                                                   "
+"| `solder_paste_abs_margin` | opt"
+"                                                                                                                   "
 "| パッドの絶対的なハンダペーストのクリアランスを指定します。ペーストを挿入す"
 "るにはマイナスにします。<br><br>最終的なはんだペーストのクリアランスは、絶対"
-"クリアランスと相対クリアランスの合計になりま"
-"す。                                                                                                                                                                                                                                   "
+"クリアランスと相対クリアランスの合計になります。"
+"                                                                                                                                                                                                                                   "
 "|\n"
-"| `solder_paste_rel_margin` | "
-"opt                                                                                                                   "
+"| `solder_paste_rel_margin` | opt"
+"                                                                                                                   "
 "| パッドの相対的なハンダペーストのクリアランスを指定します。ペーストを挿入す"
 "るにはマイナスにします。<br><br>最終的なはんだペーストのクリアランスは、絶対"
-"クリアランスと相対クリアランスの合計になりま"
-"す。                                                                                                                                                                                                                                   "
+"クリアランスと相対クリアランスの合計になります。"
+"                                                                                                                                                                                                                                   "
 "|\n"
-"| `thermal_relief_gap`      | "
-"min                                                                                                                   "
-"| パッドと熱緩和接続のあるゾーン間のギャップの幅を指定します。"
-"<br>                                                                                                                                                                                                                                                                                                                                                                         "
+"| `text_height`             | min/max"
+"                                                                                                               "
+"| テキストボックスを含むテキストの高さをチェックします。 `min` 値（指定されて"
+"いる場合）より低い、または `max` 値（指定されている場合）より高いテキスト項目"
+"ごとにエラーが生成されます。<br>"
+"                                                                                                                                                                                                                                                 "
 "|\n"
-"| `thermal_spoke_width`     | "
-"opt                                                                                                                   "
-"| 熱緩和接続を使用してパッドをゾーンに接続するスポークの幅を指定します。"
-"<br>                                                                                                                                                                                                                                                                                                                                                               "
+"| `text_thickness`          | min/max"
+"                                                                                                               "
+"| テキストボックスを含むテキストの太さをチェックします。 `min` 値（指定されて"
+"いる場合）より低い、または `max` 値（指定されている場合）より高いテキスト項目"
+"ごとにエラーが生成されます。<br>"
+"                                                                                                                                                                                                                                                 "
 "|\n"
-"| `track_width`             | min/opt/"
-"max                                                                                                           "
-"| 配線と円弧セグメントの幅をチェックします。幅が `min` 値 (指定されている場"
-"合) より小さい、または `max` 値 (指定されている場合) より大きいセグメントごと"
-"にエラーが生成されます。"
-"<br>                                                                                                                                                                                                                                                       "
+"| `thermal_relief_gap`      | min"
+"                                                                                                                   "
+"| パッドと熱緩和接続のあるゾーン間のギャップの幅を指定します。<br>"
+"                                                                                                                                                                                                                                                                                                                                                                         "
 "|\n"
-"| `track_angle`             | min/opt/"
-"max                                                                                                           "
+"| `thermal_spoke_width`     | opt"
+"                                                                                                                   "
+"| 熱緩和接続を使用してパッドをゾーンに接続するスポークの幅を指定します。<br>"
+"                                                                                                                                                                                                                                                                                                                                                               "
+"|\n"
+"| `track_angle`             | min/max"
+"                                                                                                               "
 "| 接続された2つの配線セグメント間の角度をチェックします。角度が `min` 値 (指"
 "定されている場合) より下、または `max` 値 (指定されている場合) より大きい接続"
-"ペアごとにエラーが生成されます。"
-"<br>                                                                                                                                                                                                                                              "
+"ペアごとにエラーが生成されます。<br>"
+"                                                                                                                                                                                                                                              "
 "|\n"
-"| `track_segment_length`    | min/"
-"max                                                                                                               "
+"| `track_segment_length`    | min/max"
+"                                                                                                               "
 "| 配線と円弧セグメントの長さをチェックします。長さが `min` 値 (指定されている"
-"場合) 未満、または `max` 値 (指定されている場合) を超えるセグメントごとにエ"
-"ラーが生成されます。"
-"<br>                                                                                                                                                                                                                                                           "
+"場合) 未満、または `max` 値 (指定されている場合) を超えるセグメントごとに"
+"エラーが生成されます。<br>"
+"                                                                                                                                                                                                                                                           "
 "|\n"
-"| `via_count`               | "
-"max                                                                                                                   "
-"| ルール条件に一致するすべてのネット上のビアの数をカウントします。その数が一"
-"致したネット上の制約 `max` 値を超える場合、そのネットに対してエラーが生成され"
-"ます。"
-"<br>                                                                                                                                                                                                                                                                        "
+"| `track_width`             | min/opt/max"
+"                                                                                                           "
+"| 配線と円弧セグメントの幅をチェックします。幅が `min` 値 (指定されている場"
+"合) より小さい、または `max` 値 (指定されている場合) より大きいセグメントごと"
+"にエラーが生成されます。 `opt`の値は、ルール条件に一致するネットのデフォルト"
+"のトラック幅として、対話型ルータによって使用されます。<br>"
+"                                                                                                                                             "
+"|\n"
+"| `via_count`               | min/max"
+"                                                                                                               "
+"| ルール条件に一致するすべてのネット上のビアの数をカウントします。 ビアの数"
+"が`min`値（指定されている場合）より少ない、または`max`値（指定されている場合"
+"）より多いネットごとにエラーが生成されます。<br>"
+"                                                                                                                                                                                                                                    "
 "|\n"
 "| `via_dangling`            "
 "|                                                                                                                       "
-"|接続されていない、または1つのレイヤーでのみ接続されているビア。この制約は "
+"| 接続されていない、または1つのレイヤーでのみ接続されているビア。この制約は "
 "min/opt/max 値を取りません。この制約を違反の深刻度と組み合わせることで、様々"
-"な条件において、ダンリングビアを許可または禁止することができます。"
-"<br>                                                                                                                                                                                                              "
+"な条件において、ダンリングビアを許可または禁止することができます。<br>"
+"                                                                                                                                                                                                             "
 "|\n"
-"| `zone_connection`         | "
-"`solid`<br>`thermal_reliefs`<br>`none`                                                                                "
-"| ゾーンとパッド間の接続を指定します。"
-"<br>                                                                                                                                                                                                                                                                                                                                                                                                 "
+"| `via_diameter`            | min/opt/max"
+"                                                                                                           "
+"| ビアの直径をチェックします。直径が `min` 値（指定されている場合）より小さい"
+"、または `max` 値（指定されている場合）より大きいビアごとにエラーが生成されま"
+"す。`opt` 値は、ルール条件に一致するネットのデフォルトのビア直径として対話型"
+"ルータで使用されます。<br>"
+"                                                                                                                                                                           "
+"|\n"
+"| `zone_connection`         | `solid`<br>`thermal_reliefs`<br>"
+"`none`                                                                                "
+"| ゾーンとパッド間の接続を指定します。<br>"
+"                                                                                                                                                                                                                                                                                                                                                                                                 "
 "|\n"
 "\n"
 "\n"
@@ -47249,9 +47262,8 @@ msgid "Checking copper zone clearances..."
 msgstr "導体ゾーンのクリアランスを確認中..."
 
 #: pcbnew/drc/drc_test_provider_copper_clearance.cpp:178
-#, fuzzy
 msgid "Checking teardrop clearances..."
-msgstr "パッドのクリアランスを確認中..."
+msgstr "ティアドロップのクリアランスを確認中..."
 
 #: pcbnew/drc/drc_test_provider_copper_clearance.cpp:293
 #: pcbnew/drc/drc_test_provider_copper_clearance.cpp:584
@@ -49418,31 +49430,28 @@ msgstr ""
 "数値の検索語はパッドカウントに対しても一致します。"
 
 #: pcbnew/footprint_wizard.cpp:128 pcbnew/footprint_wizard.cpp:148
-#, fuzzy
 msgid "Unexpected error with footprint wizard"
-msgstr "フットプリント ウィザードを使用して新しいフットプリントを作成"
+msgstr "フットプリント ウィザードで想定外のエラー"
 
 #: pcbnew/footprint_wizard.cpp:156
-#, fuzzy, c-format
+#, c-format
 msgid "Could not launch footprint wizard '%s'"
-msgstr "フットプリント ウィザードの再読み込みに失敗しました"
+msgstr "フットプリント ウィザード '%s' の起動が出来ませんでした"
 
 #: pcbnew/footprint_wizard.cpp:166 pcbnew/footprint_wizard.cpp:175
-#, fuzzy
 msgid "Unexpected response from footprint wizard"
-msgstr "フットプリント ウィザードの再読み込みに失敗しました"
+msgstr "フットプリント ウィザードから想定外の応答"
 
 #: pcbnew/footprint_wizard.cpp:170
-#, fuzzy, c-format
+#, c-format
 msgid "Footprint wizard error: %s"
-msgstr "フットプリント ウィザード"
+msgstr "フットプリント ウィザード エラー: %s"
 
 #: pcbnew/footprint_wizard.cpp:179
 msgid "The KiCad API is disabled"
-msgstr ""
+msgstr "KiCad APIは無効になっています"
 
 #: pcbnew/footprint_wizard.cpp:205
-#, fuzzy
 msgid "3D Model"
 msgstr "3D モデル"
 
@@ -49457,9 +49466,9 @@ msgid "no wizard selected"
 msgstr "ウィザードが未選択です"
 
 #: pcbnew/footprint_wizard_frame.cpp:391
-#, fuzzy, c-format
+#, c-format
 msgid "3D Viewer [%s]"
-msgstr "3D ビューアー"
+msgstr "3D ビューアー [%s]"
 
 #: pcbnew/generate_footprint_info.cpp:45
 msgid "Documentation"
@@ -52199,9 +52208,9 @@ msgstr ""
 "Eagle のレイヤー '%s'（%d）がマップされていないため、ポリゴンを無視します"
 
 #: pcbnew/pcb_io/eagle/pcb_io_eagle.cpp:1572
-#, fuzzy, c-format
+#, c-format
 msgid "Skipping a polygon on layer '%s' (%d): less than 3 vertices"
-msgstr "外形線の1つではないため '%s'（%d）のポリゴンを無視します"
+msgstr "レイヤー '%s' (%d) 上のポリゴンを無視します:頂点数が3つ未満のため"
 
 #: pcbnew/pcb_io/eagle/pcb_io_eagle.cpp:1618
 #, c-format
@@ -53112,19 +53121,18 @@ msgstr ""
 "PCB_IO::Footprint*() 関数が定義されている Python モジュールを入力して下さい。"
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.cpp:90
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to parse Sprint Layout file '%s'"
-msgstr "フットプリント ライブラリ ファイル '%s' を保存できませんでした。"
+msgstr "Sprint Layout ファイル '%s' の解析に失敗しました"
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.cpp:132
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to create board from Sprint Layout file '%s'"
-msgstr "シンボル ライブラリ ファイル '%s' を作成できませんでした。"
+msgstr "Sprint Layout ファイル '%s' から基板の作成に失敗しました"
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.h:49
-#, fuzzy
 msgid "Sprint Layout board file"
-msgstr "KiCad プリント基板 ファイル"
+msgstr "Sprint Layout 基板 ファイル"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:73
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:82
@@ -53133,61 +53141,55 @@ msgstr "KiCad プリント基板 ファイル"
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:147
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:163
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:174
-#, fuzzy
 msgid "Unexpected end of Sprint Layout file"
-msgstr "予期しないファイルの終端"
+msgstr "Sprint Layout ファイルの予期しないファイルの終端"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:160
-#, fuzzy
 msgid "Invalid string length in Sprint Layout file"
-msgstr "不正な波長値"
+msgstr "Sprint Layout ファイル内の不正な文字列長"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:194
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' is too small to be a Sprint Layout file"
-msgstr ""
-"ファイル '%s'\n"
-"はKiCadプロジェクト ファイルではないようです。"
+msgstr "ファイル '%s' はSprint Layout ファイルとしては小さすぎます"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:200
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to read file '%s'"
-msgstr "ファイル '%s' の読み込みに失敗しました。"
+msgstr "ファイル '%s' の読み込みに失敗しました"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:213
-#, fuzzy
 msgid "Invalid Sprint Layout file header"
-msgstr "不正な親のシンボル名"
+msgstr "Sprint Layout ファイルの不正なヘッダー"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:218
-#, fuzzy
 msgid "Invalid board count in Sprint Layout file"
-msgstr "不正な浮動小数点数"
+msgstr "Sprint Layout ファイル内の不正な基板カウント"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:297
 msgid "Too many objects in Sprint Layout board"
-msgstr ""
+msgstr "オブジェクトがSprint Layout 基板内に多すぎる"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:325
 #, c-format
 msgid "Unknown object type %d in Sprint Layout file"
-msgstr ""
+msgstr "Sprint Layout ファイル内の不明なオブジェクト種類 %d"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:362
 msgid "Too many groups in Sprint Layout object"
-msgstr ""
+msgstr "グループがSprint Layout オブジェクト内に多すぎる"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:381
 msgid "Too many text children in Sprint Layout object"
-msgstr ""
+msgstr "テキストの子要素がSprint Layout オブジェクト内に多すぎる"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:412
 msgid "Too many points in Sprint Layout object"
-msgstr ""
+msgstr "ポイントがSprint Layout オブジェクト内に多すぎる"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:461
 msgid "Coordinate value out of range in Sprint Layout file"
-msgstr ""
+msgstr "座標値がSprint Layout ファイル内で範囲外"
 
 #: pcbnew/pcb_layer_box_selector.cpp:74
 msgid "(not activated)"
@@ -54747,9 +54749,9 @@ msgid "Track Corner Mode"
 msgstr "配線のコーナー モード"
 
 #: pcbnew/router/router_tool.cpp:722
-#, fuzzy, c-format
+#, c-format
 msgid "Test case in directory %s already exists. Overwrite?"
-msgstr "ファイル %s は既に存在します。上書きしますか？"
+msgstr "ディレクトリ %s にテスト ケースが既に存在します。上書きしますか？"
 
 #: pcbnew/router/router_tool.cpp:750
 msgid "Save router log"
@@ -55001,9 +55003,8 @@ msgid "Align/Distribute"
 msgstr "整列/均等配置"
 
 #: pcbnew/tools/board_editor_control.cpp:213
-#, fuzzy
 msgid "Zone Priority"
-msgstr "優先度"
+msgstr "ゾーン 優先度"
 
 #: pcbnew/tools/board_editor_control.cpp:623
 msgid "Specctra Session File"
@@ -55112,24 +55113,20 @@ msgid "Duplicate Zone"
 msgstr "ゾーンを複製"
 
 #: pcbnew/tools/board_editor_control.cpp:1867
-#, fuzzy
 msgid "Move Zone to Top Priority"
-msgstr "角を指定の位置に移動"
+msgstr "ゾーン優先度を最上位に移動"
 
 #: pcbnew/tools/board_editor_control.cpp:1921
-#, fuzzy
 msgid "Raise Zone Priority"
-msgstr "ゾーン優先度:"
+msgstr "ゾーン優先度を上げる"
 
 #: pcbnew/tools/board_editor_control.cpp:1975
-#, fuzzy
 msgid "Lower Zone Priority"
-msgstr "導体ゾーンのプロパティ"
+msgstr "ゾーン優先度を下げる"
 
 #: pcbnew/tools/board_editor_control.cpp:2056
-#, fuzzy
 msgid "Move Zone to Bottom Priority"
-msgstr "角を指定の位置に移動"
+msgstr "ゾーン優先度を最下位に移動"
 
 #: pcbnew/tools/board_editor_control.cpp:2129
 msgid "Selection contains no items with labeled nets."
@@ -56509,13 +56506,12 @@ msgid "Open in Footprint Editor"
 msgstr "フットプリント エディターで開く"
 
 #: pcbnew/tools/pcb_actions.cpp:572
-#, fuzzy
 msgid "Find by Properties..."
-msgstr "グリッド設定..."
+msgstr "プロパティで検索..."
 
 #: pcbnew/tools/pcb_actions.cpp:573
 msgid "Find board items matching property criteria or expressions"
-msgstr ""
+msgstr "プロパティの条件または式に一致する基板アイテムを検索"
 
 #: pcbnew/tools/pcb_actions.cpp:582
 msgid ""
@@ -57228,23 +57224,20 @@ msgid "Duplicate Zone onto Layer..."
 msgstr "レイヤー上にゾーンを複製..."
 
 #: pcbnew/tools/pcb_actions.cpp:1428
-#, fuzzy
 msgid "Move to Top"
-msgstr "ゴミ箱へ移動"
+msgstr "上へ移動"
 
 #: pcbnew/tools/pcb_actions.cpp:1434
 msgid "Raise"
-msgstr ""
+msgstr "上げる"
 
 #: pcbnew/tools/pcb_actions.cpp:1440
-#, fuzzy
 msgid "Lower"
-msgstr "電源"
+msgstr "下げる"
 
 #: pcbnew/tools/pcb_actions.cpp:1446
-#, fuzzy
 msgid "Move to Bottom"
-msgstr "下寄せ"
+msgstr "下に移動"
 
 #: pcbnew/tools/pcb_actions.cpp:1454
 msgid "Place Footprints"
@@ -59735,6 +59728,8 @@ msgid ""
 "Automatically assign zone priorities based on connectivity analysis of "
 "overlapping regions."
 msgstr ""
+"重なり合う領域の接続性分析に基づいて、ゾーンの優先順位を自動的に割り当てます"
+"。"
 
 #: pcbnew/zone_manager/dialog_zone_manager_base.cpp:151
 msgid "Refill zones"
