@@ -36,7 +36,7 @@ msgstr ""
 "Project-Id-Version: KiCad i18n Deutsch\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-02 14:39+0300\n"
-"PO-Revision-Date: 2026-03-29 16:09+0000\n"
+"PO-Revision-Date: 2026-04-03 00:12+0000\n"
 "Last-Translator: \"Pferd O.\" <frank.0228@ich-war-hier.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kicad/master-"
 "source/de/>\n"
@@ -420,9 +420,8 @@ msgid "Render current view using Raytracing"
 msgstr "Aktuelle Ansicht mit Raytracing rendern"
 
 #: 3d-viewer/3d_viewer/tools/eda_3d_actions.cpp:63
-#, fuzzy
 msgid "Show parts without 3D model"
-msgstr "Pads als Umriss darstellen"
+msgstr "Bauteile ohne 3D-Modelle anzeigen"
 
 #: 3d-viewer/3d_viewer/tools/eda_3d_actions.cpp:64
 msgid "Display a placeholder for footprints with missing 3D models"
@@ -4433,9 +4432,8 @@ msgid "High-contrast mode dimming factor:"
 msgstr "Potenzieller Abblendfaktor für inaktive Lagen:"
 
 #: common/dialogs/panel_common_settings_base.cpp:298
-#, fuzzy
 msgid "App theme:"
-msgstr "Dieses Thema verwenden:"
+msgstr "App-Thema:"
 
 #: common/dialogs/panel_common_settings_base.cpp:330
 msgid "Scaling"
@@ -5999,9 +5997,8 @@ msgid "How would you like KiCad to create them?"
 msgstr "Wie soll KiCad diese erstellen?"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:41
-#, fuzzy
 msgid "Start with the built-in KiCad libraries"
-msgstr "Mit integrierten KiCad-Bibliotheken beginnen (empfohlen)"
+msgstr "Mit integrierten KiCad-Bibliotheken beginnen"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:45
 msgid "Import tables from the previous version"
@@ -6018,9 +6015,9 @@ msgstr ""
 "können, werden mit den Standardbibliotheken von KiCad erstellt."
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:53
-#, fuzzy
 msgid "Migrate built-in libraries to the latest version (recommended)"
-msgstr "Mit integrierten KiCad-Bibliotheken beginnen (empfohlen)"
+msgstr ""
+"Integrierte KiCad-Bibliotheken zur neuesten Version migrieren (empfohlen)"
 
 #: common/dialogs/panel_startwizard_libraries_base.cpp:55
 msgid ""
@@ -6172,9 +6169,8 @@ msgid "Insert Group"
 msgstr "Gruppe einfügen"
 
 #: common/dialogs/panel_toolbar_customization.cpp:173
-#, fuzzy
 msgid "Filter actions"
-msgstr "Filtereinstellungen"
+msgstr "Filteraktionen"
 
 #: common/dialogs/panel_toolbar_customization.cpp:449
 #: common/dialogs/panel_toolbar_customization.cpp:774
@@ -9012,9 +9008,8 @@ msgid "DRC marker shadows"
 msgstr "DRC-Marker-Schatten"
 
 #: common/layer_id.cpp:145
-#, fuzzy
 msgid "DRC highlighted"
-msgstr "Netzhervorhebung"
+msgstr "DRC-Hervorhebung"
 
 #: common/layer_id.cpp:153
 msgid "Grid axes"
@@ -19291,9 +19286,8 @@ msgid "Local and global labels have same name"
 msgstr "Lokale und globale Bezeichner haben denselben Namen"
 
 #: eeschema/erc/erc_item.cpp:133
-#, fuzzy
 msgid "Local and global power symbols have same name"
-msgstr "Lokale und globale Bezeichner haben denselben Namen"
+msgstr "Lokale und globale Spannungssymbole haben denselben Namen"
 
 #: eeschema/erc/erc_item.cpp:137
 msgid "Different footprint assigned in another unit of the symbol"
@@ -24315,13 +24309,13 @@ msgstr ""
 "Installation überprüfen."
 
 #: eeschema/sim/ngspice.cpp:783
-#, fuzzy
 msgid ""
 "Simulation terminated by ngspice. This may be caused by insufficient memory "
 "or an internal error. The simulator will be reset."
 msgstr ""
-"Die Simulation ist abgestürzt (%s). Der Grund dafür ist meistens Fehler in "
-"ngspice oder eine ungültige Netzliste. Der Simulator wird zurückgesetzt."
+"Die Simulation wurde durch ngspice beendet. Der Grund dafür ist meistens "
+"Fehler zu wenig Arbeitsspeicher oder ein interner Fehler. Der Simulator wird "
+"zurückgesetzt."
 
 #: eeschema/sim/sim_lib_mgr.cpp:109 eeschema/sim/sim_lib_mgr.cpp:162
 #, c-format
@@ -30035,14 +30029,12 @@ msgid ""
 msgstr ""
 
 #: kicad/cli/command_api_server.cpp:60
-#, fuzzy
 msgid "Override API socket path"
-msgstr "Sperren ignorieren"
+msgstr "API socket-Pfad überschreiben"
 
 #: kicad/cli/command_api_server.cpp:285
-#, fuzzy
 msgid "Failed to start API server\n"
-msgstr "Speichern der Platine ist fehlgeschlagen.\n"
+msgstr "Starten des API-Servers fehlgeschlagen.\n"
 
 #: kicad/cli/command_fp.h:31
 msgid "Footprint and Footprint Libraries"
@@ -36169,24 +36161,22 @@ msgid "Max Width Ratio"
 msgstr "Max. Breitenverhältnis"
 
 #: pcbnew/board_design_settings.cpp:1342
-#, fuzzy, c-format
+#, c-format
 msgid "Value must be between %s and %s."
-msgstr "Die Textbreite muss zwischen %s und %s liegen."
+msgstr "Der Wert muss zwischen %s und %s liegen."
 
 #: pcbnew/board_design_settings.cpp:1355
-#, fuzzy, c-format
+#, c-format
 msgid "Value must be between %.3f and %.3f."
-msgstr "Die Textbreite muss zwischen %s und %s liegen."
+msgstr "Wert muss zwischen %.3f und %.3f liegen."
 
 #: pcbnew/board_design_settings.cpp:1396
-#, fuzzy
 msgid "Value must be between 0 and 99."
-msgstr "Die Textbreite muss zwischen %s und %s liegen."
+msgstr "Wert muss zwischen 0 und 99 liegen."
 
 #: pcbnew/board_design_settings.cpp:1427 pcbnew/board_design_settings.cpp:1435
-#, fuzzy
 msgid "Value must be greater than or equal to 0."
-msgstr "Die Toleranz muss größer oder gleich 0 sein"
+msgstr "Der Wert muss größer oder gleich 0 sein."
 
 #: pcbnew/board_design_settings.cpp:1456
 msgid "No differential pair gap defined."
@@ -38809,9 +38799,8 @@ msgid "Update/reset text sizes and styles"
 msgstr "Textgrößen und -stile aktualisieren/zurücksetzen"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:118
-#, fuzzy
 msgid "Update/reset text position and rotation"
-msgstr "Textpositionen aktualisieren/zurücksetzen"
+msgstr "Textposition und -rotation aktualisieren/zurücksetzen"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:121
 msgid "Update/reset text content"
@@ -38830,9 +38819,8 @@ msgid "Update/reset 3D models"
 msgstr "3D-Modelle aktualisieren/zurücksetzen"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:145
-#, fuzzy
 msgid "Match pad positions"
-msgstr "Feld-Positionen aktualisieren"
+msgstr "An Padpositionen ausrichten"
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.cpp:146
 msgid ""
@@ -39628,68 +39616,58 @@ msgstr "Suche von vorn beginnen"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:55
 #: pcbnew/dialogs/dialog_find_by_properties_base.h:71
-#, fuzzy
 msgid "Find by Properties"
-msgstr "Pin-Eigenschaften"
+msgstr "Nach Eigenschaften suchen"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:60
-#, fuzzy
 msgid "Property"
-msgstr "Eigenschaften"
+msgstr "Eigenschaft"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:62
-#, fuzzy
 msgid "Match"
-msgstr "Schraffierung"
+msgstr "Übereinstimmung"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:492
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:24
-#, fuzzy
 msgid "No items selected"
-msgstr "Keine Netze ausgewählt."
+msgstr "Keine Elemente ausgewählt"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:668
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:778
-#, fuzzy
 msgid "Ignored"
-msgstr "Ignorieren"
+msgstr "Ignoriert"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:668
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:734
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:780
-#, fuzzy
 msgid "Matching"
-msgstr "Zwischenspeichern"
+msgstr "Übereinstimmend"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:668
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:677
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:736
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:782
-#, fuzzy
 msgid "Different"
-msgstr "Differenziell"
+msgstr "Unterschiedlich"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:901
-#, fuzzy, c-format
+#, c-format
 msgid "%zu items matched"
-msgstr " (%d Elemente geladen)"
+msgstr "%zu Elemente stimmen überein"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:931
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1110
-#, fuzzy
 msgid "B. expressions are not supported."
-msgstr " Untermodelle werden derzeit nicht unterstützt."
+msgstr "B. Audrücke werden nicht unterstützt."
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:934
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:955
-#, fuzzy
 msgid "Expression Error"
-msgstr "Fehler während des Exports"
+msgstr "Fehler in Ausdruck"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:954
-#, fuzzy
 msgid "Syntax error in expression"
-msgstr "Fehlender Zusicherungsausdruck."
+msgstr "Syntaxfehler in Ausdruck"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1102
 msgid "Expression is empty"
@@ -39701,19 +39679,16 @@ msgid "Syntax OK"
 msgstr "Syntax OK"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1130
-#, fuzzy
 msgid "Syntax error: "
-msgstr "Maximaler Fehler:"
+msgstr "Syntaxfehler: "
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:58
-#, fuzzy
 msgid "From Selection"
-msgstr "Auswahl transformieren"
+msgstr "Aus Auswahl"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:70
-#, fuzzy
 msgid "Expression"
-msgstr "Regulärer Ausdruck"
+msgstr "Ausdruck"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:121
 #: pcbnew/drc/rule_editor/drc_re_custom_rule_panel.cpp:51
@@ -39721,9 +39696,8 @@ msgid "Check Syntax"
 msgstr "Syntax überprüfen"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:124
-#, fuzzy
 msgid "Create from Selection Tab"
-msgstr "Aus Auswahl erzeugen"
+msgstr "Aus Auswahltab erzeugen"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:136
 msgid "Query"
@@ -50091,9 +50065,9 @@ msgstr ""
 "Codes"
 
 #: pcbnew/footprint_wizard.cpp:156
-#, fuzzy, c-format
+#, c-format
 msgid "Could not launch footprint wizard '%s'"
-msgstr "Konnte den Footprintwizard nicht aufrufen"
+msgstr "Konnte den Footprintassistent \"%s\" nicht starten"
 
 #: pcbnew/footprint_wizard.cpp:166 pcbnew/footprint_wizard.cpp:175
 #, fuzzy
@@ -50101,9 +50075,9 @@ msgid "Unexpected response from footprint wizard"
 msgstr "Konnte den Footprintwizard nicht aufrufen"
 
 #: pcbnew/footprint_wizard.cpp:170
-#, fuzzy, c-format
+#, c-format
 msgid "Footprint wizard error: %s"
-msgstr "Footprintwizard"
+msgstr "Footprintassistent-Fehler: %s"
 
 #: pcbnew/footprint_wizard.cpp:179
 msgid "The KiCad API is disabled"
@@ -50125,9 +50099,9 @@ msgid "no wizard selected"
 msgstr "Es wurde noch kein Wizard ausgewählt"
 
 #: pcbnew/footprint_wizard_frame.cpp:391
-#, fuzzy, c-format
+#, c-format
 msgid "3D Viewer [%s]"
-msgstr "3D-Betrachter"
+msgstr "3D-Betrachter [%s]"
 
 #: pcbnew/generate_footprint_info.cpp:45
 msgid "Documentation"
@@ -53804,14 +53778,14 @@ msgstr ""
 "implementiert."
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.cpp:90
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to parse Sprint Layout file '%s'"
-msgstr "Fehler beim Speichern der Symbolbibliotheksdatei \"%s\"."
+msgstr "Fehler beim Parsen der Sprint Layout-Datei \"%s\""
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.cpp:132
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to create board from Sprint Layout file '%s'"
-msgstr "Konnte Symbolbibliotheksdatei \"%s\" nicht erstellen."
+msgstr "Konnte aus Sprint Layout-Datei \"%s\" keine Platine erstellen"
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.h:49
 #, fuzzy
@@ -53835,16 +53809,14 @@ msgid "Invalid string length in Sprint Layout file"
 msgstr "Ungültiger alternativer Pin-Name"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:194
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' is too small to be a Sprint Layout file"
-msgstr ""
-"Die Datei ‚%s‘\n"
-"scheint keine KiCad-Projektdatei zu sein."
+msgstr "Die Datei \"%s\" ist zu klein um eine Sprint Layout-Datei zu sein"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:200
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to read file '%s'"
-msgstr "Datei \"%s\" konnte nicht gelesen werden."
+msgstr "Datei \"%s\" konnte nicht gelesen werden"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:213
 #, fuzzy
@@ -55456,9 +55428,9 @@ msgid "Track Corner Mode"
 msgstr "Leiterbahn-Ecken-Modus"
 
 #: pcbnew/router/router_tool.cpp:722
-#, fuzzy, c-format
+#, c-format
 msgid "Test case in directory %s already exists. Overwrite?"
-msgstr "Ausgabeverzeichnis \"%s\" existiert bereits."
+msgstr "Testfall in Verzeichnis \"%s\" existiert bereits. Überschreiben?"
 
 #: pcbnew/router/router_tool.cpp:750
 msgid "Save router log"
@@ -55832,9 +55804,8 @@ msgid "Move Zone to Top Priority"
 msgstr "Ecke zu Position verschieben"
 
 #: pcbnew/tools/board_editor_control.cpp:1921
-#, fuzzy
 msgid "Raise Zone Priority"
-msgstr "Zonen-Prioritätsebene:"
+msgstr "Zonenpriorität erhöhen"
 
 #: pcbnew/tools/board_editor_control.cpp:1975
 #, fuzzy
