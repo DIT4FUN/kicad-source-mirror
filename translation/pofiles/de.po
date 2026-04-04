@@ -36,7 +36,7 @@ msgstr ""
 "Project-Id-Version: KiCad i18n Deutsch\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-02 14:39+0300\n"
-"PO-Revision-Date: 2026-04-04 04:09+0000\n"
+"PO-Revision-Date: 2026-04-05 09:09+0000\n"
 "Last-Translator: \"Pferd O.\" <frank.0228@ich-war-hier.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kicad/master-"
 "source/de/>\n"
@@ -30003,7 +30003,6 @@ msgstr ""
 "Im Format \"--define-var key=value\" oder \"-D key=value\" verwenden"
 
 #: kicad/cli/command.cpp:235
-#, fuzzy
 msgid ""
 "The variant name(s) to output, can be used multiple times to specify "
 "multiple variants.\n"
@@ -30012,9 +30011,9 @@ msgid ""
 "When no --variant argument is provided, the default variant is output."
 msgstr ""
 "Der/die auszugebende(n) Variantenname(n) kann/können mehrfach verwendet "
-"werden, um mehrere Varianten festzulegen.\n"
-"Wenn Sie mehrere Varianten angeben, verwenden Sie im Ausgabepfad ${VARIANT}, "
-"um für jede Variante eigene Dateien zu erzeugen.\n"
+"werden, um mehrere Varianten zu definieren.\n"
+"Wenn Sie mehrere Varianten erstellen, verwenden Sie im Ausgabepfad ${VARIANT}"
+", um für jede Variante eigene Dateien zu erzeugen.\n"
 "Ohne Angabe des Arguments --variant wird die Standardvariante ausgegeben."
 
 #: kicad/cli/command.h:32
@@ -30023,12 +30022,14 @@ msgstr "Hilfetext anzeigen und beenden"
 
 #: kicad/cli/command_api_server.cpp:50
 msgid "Run the KiCad IPC API server in headless mode"
-msgstr ""
+msgstr "KiCad IPC API-Server ohne Oberfläche ausführen"
 
 #: kicad/cli/command_api_server.cpp:55
 msgid ""
 "Optional path to a .kicad_pro, .kicad_pcb, or .kicad_sch file to pre-load"
 msgstr ""
+"Optionaler Pfad zu einer .kicad_pro-, .kicad_pcb- oder .kicad_sch-Datei zum "
+"Vorladen"
 
 #: kicad/cli/command_api_server.cpp:60
 msgid "Override API socket path"
@@ -32205,6 +32206,8 @@ msgid ""
 "Warning: This plugin only supports the legacy Python API and will not run in "
 "this KiCad version."
 msgstr ""
+"Warnung: Dieses Plugin unterstützt nur die veraltete Python-API und "
+"funktioniert mit dieser KiCad-Version nicht."
 
 #: kicad/pcm/dialogs/panel_package.cpp:152
 msgid "Install Pending"
@@ -38829,6 +38832,8 @@ msgid ""
 "Attempt to match pad positions even if the footprint origin or rotation has "
 "changed."
 msgstr ""
+"Versuchen die Padpositionen zur Positionierung zu verwenden, auch wenn sich "
+"der Ursprung oder die Drehung des Footprints geändert hat."
 
 #: pcbnew/dialogs/dialog_exchange_footprints_base.h:94
 msgid "Update Footprints from Library"
@@ -39673,7 +39678,7 @@ msgstr "Syntaxfehler in Ausdruck"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1102
 msgid "Expression is empty"
-msgstr ""
+msgstr "Ausdruck ist leer"
 
 #: pcbnew/dialogs/dialog_find_by_properties.cpp:1128
 #: pcbnew/drc/rule_editor/drc_re_custom_rule_panel.cpp:375
@@ -39703,22 +39708,19 @@ msgstr "Aus Auswahltab erzeugen"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:136
 msgid "Query"
-msgstr ""
+msgstr "Abfrage"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:143
-#, fuzzy
 msgid "Deselect non-matching items"
-msgstr "Ausgewählte untergeordnete Elemente zeichnen"
+msgstr "Nicht übereinstimmende Elemente abwählen"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:147
-#, fuzzy
 msgid "Zoom to fit selected items"
-msgstr "Auf kreuzreferenzierte Elemente zoomen"
+msgstr "Auf ausgewählte Elemente zoomen"
 
 #: pcbnew/dialogs/dialog_find_by_properties_base.cpp:162
-#, fuzzy
 msgid "Select Matching"
-msgstr "Pfad auswählen"
+msgstr "Übereinstimmende auswählen"
 
 #: pcbnew/dialogs/dialog_footprint_associations.cpp:49
 msgid "Footprint: "
@@ -40248,9 +40250,8 @@ msgid "Explicit jumper pad groups:"
 msgstr "Explizite Jumperpadgruppen:"
 
 #: pcbnew/dialogs/dialog_footprint_wizard_list_base.h:47
-#, fuzzy
 msgid "Footprint Wizards"
-msgstr "Footprintwizard"
+msgstr "Footprintassistenten"
 
 #: pcbnew/dialogs/dialog_footprint_wizard_list_base.h:67
 msgid "Traceback of Python Script Errors"
@@ -43182,37 +43183,32 @@ msgid "Render PCB Job Options"
 msgstr "PCB rendern-Auftragseinstellungen"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:25
-#, fuzzy
 msgid "Test cases directory:"
-msgstr "Zielverzeichnis:"
+msgstr "Testfallverzeichnis:"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:32
-#, fuzzy
 msgid "Test case name:"
-msgstr "Netzname:"
+msgstr "Testfallname:"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
 msgid "Testcase (strict geometry)"
-msgstr ""
+msgstr "Testfall (strenge Geometry)"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
-#, fuzzy
 msgid "Testcase (connectivity only)"
-msgstr "Verbindung testen"
+msgstr "Testfall (nur Verbindungen)"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
-#, fuzzy
 msgid "Testcase (expected fail)"
-msgstr "Ausgewähltes Netz umbenennen"
+msgstr "Testfall (Fehlschlagen erwartet)"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.cpp:45
 msgid "Known bug"
-msgstr ""
+msgstr "Bekannter Fehler"
 
 #: pcbnew/dialogs/dialog_router_save_test_case_base.h:47
-#, fuzzy
 msgid "Save Router Testcase"
-msgstr "Router-Protokoll speichern"
+msgstr "Router-Testfall speichern"
 
 #: pcbnew/dialogs/dialog_rule_area_properties.cpp:130
 #: pcbnew/tools/board_inspection_tool.cpp:1759
@@ -47860,9 +47856,8 @@ msgid "Checking copper zone clearances..."
 msgstr "Prüfe Freiräume von Kupferzonen ..."
 
 #: pcbnew/drc/drc_test_provider_copper_clearance.cpp:178
-#, fuzzy
 msgid "Checking teardrop clearances..."
-msgstr "Prüfe Pad-Freiräume ..."
+msgstr "Prüfe Teardrop-Freiräume ..."
 
 #: pcbnew/drc/drc_test_provider_copper_clearance.cpp:293
 #: pcbnew/drc/drc_test_provider_copper_clearance.cpp:584
@@ -50060,11 +50055,8 @@ msgstr ""
 "Ein Suchbegriff, der eine Zahl ist, wird mit der Pad-Anzahl verglichen."
 
 #: pcbnew/footprint_wizard.cpp:128 pcbnew/footprint_wizard.cpp:148
-#, fuzzy
 msgid "Unexpected error with footprint wizard"
-msgstr ""
-"Ausnahmefall (Exception) während der Ausführung des Python Footprint Wizard "
-"Codes"
+msgstr "Unerwarteter Fehler im Footprintassistent"
 
 #: pcbnew/footprint_wizard.cpp:156
 #, c-format
@@ -50072,9 +50064,8 @@ msgid "Could not launch footprint wizard '%s'"
 msgstr "Konnte den Footprintassistent \"%s\" nicht starten"
 
 #: pcbnew/footprint_wizard.cpp:166 pcbnew/footprint_wizard.cpp:175
-#, fuzzy
 msgid "Unexpected response from footprint wizard"
-msgstr "Konnte den Footprintwizard nicht aufrufen"
+msgstr "Unerwartete Antwort vom Footprintassistent"
 
 #: pcbnew/footprint_wizard.cpp:170
 #, c-format
@@ -50083,12 +50074,11 @@ msgstr "Footprintassistent-Fehler: %s"
 
 #: pcbnew/footprint_wizard.cpp:179
 msgid "The KiCad API is disabled"
-msgstr ""
+msgstr "Die KiCad API ist deaktiviert"
 
 #: pcbnew/footprint_wizard.cpp:205
-#, fuzzy
 msgid "3D Model"
-msgstr "3D-Modelle"
+msgstr "3D-Modell"
 
 #: pcbnew/footprint_wizard_frame.cpp:87
 #: pcbnew/footprint_wizard_frame_functions.cpp:42
@@ -52864,10 +52854,10 @@ msgstr ""
 "wurde"
 
 #: pcbnew/pcb_io/eagle/pcb_io_eagle.cpp:1572
-#, fuzzy, c-format
+#, c-format
 msgid "Skipping a polygon on layer '%s' (%d): less than 3 vertices"
 msgstr ""
-"Ein Polygon auf Lage \"%s\" (%d) wird übersprungen: Umrissanzahl ist nicht 1"
+"Ein Polygon auf Lage \"%s\" (%d) wird übersprungen: Weniger als drei Punkte"
 
 #: pcbnew/pcb_io/eagle/pcb_io_eagle.cpp:1618
 #, c-format
@@ -53790,9 +53780,8 @@ msgid "Failed to create board from Sprint Layout file '%s'"
 msgstr "Konnte aus Sprint Layout-Datei \"%s\" keine Platine erstellen"
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.h:49
-#, fuzzy
 msgid "Sprint Layout board file"
-msgstr "KiCad-Leiterplattendateien"
+msgstr "Sprint Layout-Platinendatei"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:73
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:82
@@ -53801,14 +53790,12 @@ msgstr "KiCad-Leiterplattendateien"
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:147
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:163
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:174
-#, fuzzy
 msgid "Unexpected end of Sprint Layout file"
-msgstr "Unerwartetes Dateiende"
+msgstr "Unerwartetes Ende der Sprint Layout-Datei"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:160
-#, fuzzy
 msgid "Invalid string length in Sprint Layout file"
-msgstr "Ungültiger alternativer Pin-Name"
+msgstr "Ungültiger Zeichenkettelänge in Sprint Layout-Datei"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:194
 #, c-format
@@ -53821,39 +53808,37 @@ msgid "Failed to read file '%s'"
 msgstr "Datei \"%s\" konnte nicht gelesen werden"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:213
-#, fuzzy
 msgid "Invalid Sprint Layout file header"
-msgstr "Ungültiger übergeordneter Symbolname"
+msgstr "Ungültiger Sprint Layout-Dateiheader"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:218
-#, fuzzy
 msgid "Invalid board count in Sprint Layout file"
-msgstr "Ungültige Gleitkommazahl"
+msgstr "Ungültige Platinenanzahl in Sprint Layout-Datei"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:297
 msgid "Too many objects in Sprint Layout board"
-msgstr ""
+msgstr "Zu viele Objekte in Sprint Layout-Platine"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:325
 #, c-format
 msgid "Unknown object type %d in Sprint Layout file"
-msgstr ""
+msgstr "Unbekannter Objekttyp %d in Sprint Layout-Datei"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:362
 msgid "Too many groups in Sprint Layout object"
-msgstr ""
+msgstr "Zu viele Gruppen in Sprint Layout-Objekt"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:381
 msgid "Too many text children in Sprint Layout object"
-msgstr ""
+msgstr "Zu viele Untertexte in Sprint Layout-Objekt"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:412
 msgid "Too many points in Sprint Layout object"
-msgstr ""
+msgstr "Zu viele Punkte in Sprint Layout-Objekt"
 
 #: pcbnew/pcb_io/sprint_layout/sprint_layout_parser.cpp:461
 msgid "Coordinate value out of range in Sprint Layout file"
-msgstr ""
+msgstr "Koordinaten außerhalb des gültigen Bereichs in Sprint Layout-Datei"
 
 #: pcbnew/pcb_layer_box_selector.cpp:74
 msgid "(not activated)"
@@ -55685,9 +55670,8 @@ msgid "Align/Distribute"
 msgstr "Ausrichtung/Verteilung"
 
 #: pcbnew/tools/board_editor_control.cpp:213
-#, fuzzy
 msgid "Zone Priority"
-msgstr "Priorität"
+msgstr "Zonenpriorität"
 
 #: pcbnew/tools/board_editor_control.cpp:623
 msgid "Specctra Session File"
@@ -55801,23 +55785,20 @@ msgid "Duplicate Zone"
 msgstr "Zone verdoppeln"
 
 #: pcbnew/tools/board_editor_control.cpp:1867
-#, fuzzy
 msgid "Move Zone to Top Priority"
-msgstr "Ecke zu Position verschieben"
+msgstr "Zone zur höchsten Priorität verschieben"
 
 #: pcbnew/tools/board_editor_control.cpp:1921
 msgid "Raise Zone Priority"
 msgstr "Zonenpriorität erhöhen"
 
 #: pcbnew/tools/board_editor_control.cpp:1975
-#, fuzzy
 msgid "Lower Zone Priority"
-msgstr "Kupferzonen-Eigenschaften"
+msgstr "Zonenpriorität verringern"
 
 #: pcbnew/tools/board_editor_control.cpp:2056
-#, fuzzy
 msgid "Move Zone to Bottom Priority"
-msgstr "Ecke zu Position verschieben"
+msgstr "Zone zur niedrigsten Priorität verschieben"
 
 #: pcbnew/tools/board_editor_control.cpp:2129
 msgid "Selection contains no items with labeled nets."
@@ -57223,13 +57204,13 @@ msgid "Open in Footprint Editor"
 msgstr "Im Footprinteditor öffnen"
 
 #: pcbnew/tools/pcb_actions.cpp:572
-#, fuzzy
 msgid "Find by Properties..."
-msgstr "Raster-Eigenschaften..."
+msgstr "Nach Eigenschaften suchen..."
 
 #: pcbnew/tools/pcb_actions.cpp:573
 msgid "Find board items matching property criteria or expressions"
 msgstr ""
+"Platinenelemente suchen, die den Suchkriterien oder -ausdrücken entsprechen"
 
 #: pcbnew/tools/pcb_actions.cpp:582
 msgid ""
@@ -57973,23 +57954,20 @@ msgid "Duplicate Zone onto Layer..."
 msgstr "Zone auf Lage duplizieren ..."
 
 #: pcbnew/tools/pcb_actions.cpp:1428
-#, fuzzy
 msgid "Move to Top"
-msgstr "In Papierkorb verschieben"
+msgstr "Nach oben verschieben"
 
 #: pcbnew/tools/pcb_actions.cpp:1434
 msgid "Raise"
-msgstr ""
+msgstr "Erhöhen"
 
 #: pcbnew/tools/pcb_actions.cpp:1440
-#, fuzzy
 msgid "Lower"
-msgstr "Leistung"
+msgstr "Verringern"
 
 #: pcbnew/tools/pcb_actions.cpp:1446
-#, fuzzy
 msgid "Move to Bottom"
-msgstr "Unten ausrichten"
+msgstr "Nach unten verschieben"
 
 #: pcbnew/tools/pcb_actions.cpp:1454
 msgid "Place Footprints"
@@ -60517,6 +60495,8 @@ msgid ""
 "Automatically assign zone priorities based on connectivity analysis of "
 "overlapping regions."
 msgstr ""
+"Zonenprioritäten automatisch auf der Grundlage einer Verbindungsanalyse "
+"überlappender Bereiche zuweisen."
 
 #: pcbnew/zone_manager/dialog_zone_manager_base.cpp:151
 msgid "Refill zones"
