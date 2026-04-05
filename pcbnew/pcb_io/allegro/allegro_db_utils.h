@@ -34,7 +34,10 @@
 #include <functional>
 #include <optional>
 #include <type_traits>
+#include <unordered_set>
 #include <variant>
+
+#include <ki_exception.h>
 
 #include <convert/allegro_pcb_structs.h>
 #include <convert/allegro_db.h>
@@ -154,6 +157,8 @@ public:
 
             if( !m_currBlock )
                 m_current = 0;
+            else
+                m_visited.insert( m_current );
         }
 
         const BLOCK_BASE* operator*() const { return m_currBlock; }
@@ -172,6 +177,10 @@ public:
                 {
                     m_current = 0;
                 }
+                else if( !m_visited.insert( m_current ).second )
+                {
+                    THROW_IO_ERROR( wxString::Format( "Cycle detected in linked list at key %#010x", m_current ) );
+                }
                 else
                 {
                     m_currBlock = m_board.GetObjectByKey( m_current );
@@ -189,11 +198,12 @@ public:
         bool operator!=( const iterator& other ) const { return m_current != other.m_current; }
 
     private:
-        uint32_t          m_current;
-        const BLOCK_BASE* m_currBlock;
-        uint32_t          m_tail;
-        const BRD_DB&     m_board;
-        NEXT_FUNC_T       m_NextFunc;
+        uint32_t                     m_current;
+        const BLOCK_BASE*            m_currBlock;
+        uint32_t                     m_tail;
+        const BRD_DB&                m_board;
+        NEXT_FUNC_T                  m_NextFunc;
+        std::unordered_set<uint32_t> m_visited;
     };
 
     LL_WALKER( uint32_t aHead, uint32_t aTail, const BRD_DB& aBoard ) :
