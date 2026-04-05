@@ -81,10 +81,13 @@ constexpr bool BlockTypeMatches( uint8_t aType )
 
 /**
  * Cast a BLOCK_BASE to a typed BLOCK<T> and return the data.
+ *
+ * The caller is responsible for ensuring the block type matches T before calling this.
  */
 template <ALLEGRO_BLOCK_DATA BLK_T>
 const BLK_T& BlockDataAs( const BLOCK_BASE& aBlock )
 {
+    wxASSERT( BlockTypeMatches<BLK_T>( aBlock.GetBlockType() ) );
     return static_cast<const BLOCK<BLK_T>&>( aBlock ).GetData();
 }
 

@@ -1218,7 +1218,7 @@ wxString BOARD_BUILDER::resolveConstraintSetNameFromField( uint32_t aFieldKey ) 
     if( !fieldBlock || fieldBlock->GetBlockType() != 0x03 )
         return wxEmptyString;
 
-    const BLK_0x03_FIELD& field = static_cast<const BLOCK<BLK_0x03_FIELD>&>( *fieldBlock ).GetData();
+    const BLK_0x03_FIELD& field = BlockDataAs<BLK_0x03_FIELD>( *fieldBlock );
     const std::string* str = std::get_if<std::string>( &field.m_Substruct );
 
     if( !str )
@@ -1510,7 +1510,7 @@ wxString BOARD_BUILDER::resolveMatchGroupName( const BLK_0x1B_NET& aNet ) const
     if( block->GetBlockType() == 0x26 )
     {
         // V172+ path: NET -> 0x26 -> m_GroupPtr -> 0x2C TABLE
-        const auto& x26 = static_cast<const BLOCK<BLK_0x26_MATCH_GROUP>&>( *block ).GetData();
+        const auto& x26 = BlockDataAs<BLK_0x26_MATCH_GROUP>( *block );
         tableKey = x26.m_GroupPtr;
 
         // Some boards have chained 0x26 blocks (m_GroupPtr -> another 0x26 -> 0x2C)
@@ -1520,7 +1520,7 @@ wxString BOARD_BUILDER::resolveMatchGroupName( const BLK_0x1B_NET& aNet ) const
 
             if( next && next->GetBlockType() == 0x26 )
             {
-                const auto& x26b = static_cast<const BLOCK<BLK_0x26_MATCH_GROUP>&>( *next ).GetData();
+                const auto& x26b = BlockDataAs<BLK_0x26_MATCH_GROUP>( *next );
                 tableKey = x26b.m_GroupPtr;
             }
         }
@@ -2091,13 +2091,14 @@ std::vector<std::unique_ptr<BOARD_ITEM>> BOARD_BUILDER::buildGraphicItems( const
     {
     case 0x0c:
     {
-        const auto& pinDef = static_cast<const BLOCK<BLK_0x0C_PIN_DEF>&>( aBlock ).GetData();
+        const auto& pinDef = BlockDataAs<BLK_0x0C_PIN_DEF>( aBlock );
         newItems = buildDrillMarker( pinDef, aParent );
         break;
     }
     case 0x0e:
     {
-        const auto&                rect = static_cast<const BLOCK<BLK_0x0E_RECT>&>( aBlock ).GetData();
+        const auto& rect = BlockDataAs<BLK_0x0E_RECT>( aBlock );
+
         std::unique_ptr<PCB_SHAPE> shape = buildRect( rect, aParent );
         if( shape )
             newItems.push_back( std::move( shape ) );
@@ -2105,7 +2106,8 @@ std::vector<std::unique_ptr<BOARD_ITEM>> BOARD_BUILDER::buildGraphicItems( const
     }
     case 0x14:
     {
-        const auto& graphicContainer = static_cast<const BLOCK<BLK_0x14_GRAPHIC>&>( aBlock ).GetData();
+        const auto& graphicContainer = BlockDataAs<BLK_0x14_GRAPHIC>( aBlock );
+
         std::vector<std::unique_ptr<PCB_SHAPE>> shapes = buildShapes( graphicContainer, aParent );
         for( std::unique_ptr<PCB_SHAPE>& shape : shapes )
             newItems.push_back( std::move( shape ) );
@@ -2113,7 +2115,8 @@ std::vector<std::unique_ptr<BOARD_ITEM>> BOARD_BUILDER::buildGraphicItems( const
     }
     case 0x24:
     {
-        const auto&                rect = static_cast<const BLOCK<BLK_0x24_RECT>&>( aBlock ).GetData();
+        const auto& rect = BlockDataAs<BLK_0x24_RECT>( aBlock );
+
         std::unique_ptr<PCB_SHAPE> shape = buildRect( rect, aParent );
         if( shape )
             newItems.push_back( std::move( shape ) );
@@ -2121,7 +2124,7 @@ std::vector<std::unique_ptr<BOARD_ITEM>> BOARD_BUILDER::buildGraphicItems( const
     }
     case 0x28:
     {
-        const auto&                shapeData = static_cast<const BLOCK<BLK_0x28_SHAPE>&>( aBlock ).GetData();
+        const auto&                shapeData = BlockDataAs<BLK_0x28_SHAPE>( aBlock );
         std::unique_ptr<PCB_SHAPE> shape = buildPolygon( shapeData, aParent );
         if( shape )
             newItems.push_back( std::move( shape ) );
@@ -2129,7 +2132,7 @@ std::vector<std::unique_ptr<BOARD_ITEM>> BOARD_BUILDER::buildGraphicItems( const
     }
     case 0x30:
     {
-        const auto& strWrapper = static_cast<const BLOCK<BLK_0x30_STR_WRAPPER>&>( aBlock ).GetData();
+        const auto& strWrapper = BlockDataAs<BLK_0x30_STR_WRAPPER>( aBlock );
 
         std::unique_ptr<BOARD_ITEM> newItem = buildPcbText( strWrapper, aParent );
         if( newItem )
@@ -2178,7 +2181,7 @@ std::vector<std::unique_ptr<PCB_SHAPE>> BOARD_BUILDER::buildShapes( const BLK_0x
         {
         case 0x01:
         {
-            const auto& arc = static_cast<const BLOCK<BLK_0x01_ARC>&>( *segBlock ).GetData();
+            const auto& arc = BlockDataAs<BLK_0x01_ARC>( *segBlock );
             shape = buildArc( arc, aGraphic.m_Layer, layer, aParent );
             break;
         }
@@ -2186,7 +2189,7 @@ std::vector<std::unique_ptr<PCB_SHAPE>> BOARD_BUILDER::buildShapes( const BLK_0x
         case 0x16:
         case 0x17:
         {
-            const auto& seg = static_cast<const BLOCK<BLK_0x15_16_17_SEGMENT>&>( *segBlock ).GetData();
+            const auto& seg = BlockDataAs<BLK_0x15_16_17_SEGMENT>( *segBlock );
             shape = buildLineSegment( seg, aGraphic.m_Layer, layer, aParent );
             break;
         }
@@ -2304,7 +2307,7 @@ std::vector<std::unique_ptr<PCB_SHAPE>> BOARD_BUILDER::buildPolygonShapes( const
         {
         case 0x01:
         {
-            const auto& arc = static_cast<const BLOCK<BLK_0x01_ARC>&>( *segBlock ).GetData();
+            const auto& arc = BlockDataAs<BLK_0x01_ARC>( *segBlock );
 
             VECTOR2I start = scale( { arc.m_StartX, arc.m_StartY } );
             VECTOR2I end = scale( { arc.m_EndX, arc.m_EndY } );
@@ -2348,7 +2351,7 @@ std::vector<std::unique_ptr<PCB_SHAPE>> BOARD_BUILDER::buildPolygonShapes( const
         case 0x16:
         case 0x17:
         {
-            const auto& seg = static_cast<const BLOCK<BLK_0x15_16_17_SEGMENT>&>( *segBlock ).GetData();
+            const auto& seg = BlockDataAs<BLK_0x15_16_17_SEGMENT>( *segBlock );
             VECTOR2I    start = scale( { seg.m_StartX, seg.m_StartY } );
             VECTOR2I    end = scale( { seg.m_EndX, seg.m_EndY } );
 
@@ -3175,8 +3178,7 @@ std::vector<std::unique_ptr<BOARD_ITEM>> BOARD_BUILDER::buildTrack( const BLK_0x
         case 0x16:
         case 0x17:
         {
-            const BLK_0x15_16_17_SEGMENT& segInfo =
-                    static_cast<const BLOCK<BLK_0x15_16_17_SEGMENT>&>( *block ).GetData();
+            const BLK_0x15_16_17_SEGMENT& segInfo = BlockDataAs<BLK_0x15_16_17_SEGMENT>( *block );
 
             VECTOR2I start{ segInfo.m_StartX, segInfo.m_StartY };
             VECTOR2I end{ segInfo.m_EndX, segInfo.m_EndY };
@@ -3196,7 +3198,7 @@ std::vector<std::unique_ptr<BOARD_ITEM>> BOARD_BUILDER::buildTrack( const BLK_0x
         }
         case 0x01:
         {
-            const BLK_0x01_ARC& arcInfo = static_cast<const BLOCK<BLK_0x01_ARC>&>( *block ).GetData();
+            const BLK_0x01_ARC& arcInfo = BlockDataAs<BLK_0x01_ARC>( *block );
 
             VECTOR2I start = scale( { arcInfo.m_StartX, arcInfo.m_StartY } );
             VECTOR2I end = scale( { arcInfo.m_EndX, arcInfo.m_EndY } );
@@ -3349,14 +3351,13 @@ void BOARD_BUILDER::createTracks()
                 // Track
                 case 0x05:
                 {
-                    const BLK_0x05_TRACK& trackData =
-                            static_cast<const BLOCK<BLK_0x05_TRACK>&>( *connItemBlock ).GetData();
+                    const BLK_0x05_TRACK& trackData = BlockDataAs<BLK_0x05_TRACK>( *connItemBlock );
                     newItemList = buildTrack( trackData, netCode );
                     break;
                 }
                 case 0x33:
                 {
-                    const BLK_0x33_VIA& viaData = static_cast<const BLOCK<BLK_0x33_VIA>&>( *connItemBlock ).GetData();
+                    const BLK_0x33_VIA& viaData = BlockDataAs<BLK_0x33_VIA>( *connItemBlock );
                     newItemList.push_back( buildVia( viaData, netCode ) );
                     break;
                 }
@@ -3370,8 +3371,7 @@ void BOARD_BUILDER::createTracks()
                 {
                     // 0x28 shapes on the net chain are computed copper fills.
                     // Collect them for teardrop and polygon import.
-                    const BLK_0x28_SHAPE& fillShape =
-                            static_cast<const BLOCK<BLK_0x28_SHAPE>&>( *connItemBlock ).GetData();
+                    const BLK_0x28_SHAPE& fillShape = BlockDataAs<BLK_0x28_SHAPE>( *connItemBlock );
 
                     PCB_LAYER_ID fillLayer = getLayer( fillShape.m_Layer );
 
@@ -3566,7 +3566,7 @@ const SHAPE_LINE_CHAIN& BOARD_BUILDER::buildSegmentChain( uint32_t aStartKey ) c
         {
         case 0x01:
         {
-            const auto& arc = static_cast<const BLOCK<BLK_0x01_ARC>&>( *block ).GetData();
+            const auto& arc = BlockDataAs<BLK_0x01_ARC>( *block );
             VECTOR2I    start = scale( { arc.m_StartX, arc.m_StartY } );
             VECTOR2I    end = scale( { arc.m_EndX, arc.m_EndY } );
             VECTOR2I    center = scale( KiROUND( VECTOR2D{ arc.m_CenterX, arc.m_CenterY } ) );
@@ -3607,8 +3607,7 @@ const SHAPE_LINE_CHAIN& BOARD_BUILDER::buildSegmentChain( uint32_t aStartKey ) c
         case 0x16:
         case 0x17:
         {
-            const auto& seg =
-                    static_cast<const BLOCK<BLK_0x15_16_17_SEGMENT>&>( *block ).GetData();
+            const auto& seg = BlockDataAs<BLK_0x15_16_17_SEGMENT>( *block );
             VECTOR2I start = scale( { seg.m_StartX, seg.m_StartY } );
 
             if( outline.PointCount() == 0 || outline.CLastPoint() != start )
@@ -3682,7 +3681,7 @@ SHAPE_LINE_CHAIN BOARD_BUILDER::buildOutline( const BLK_0x28_SHAPE& aShape ) con
         {
         case 0x01:
         {
-            const auto& arc = static_cast<const BLOCK<BLK_0x01_ARC>&>( *segBlock ).GetData();
+            const auto& arc = BlockDataAs<BLK_0x01_ARC>( *segBlock );
             VECTOR2I    start = scale( { arc.m_StartX, arc.m_StartY } );
             VECTOR2I    end = scale( { arc.m_EndX, arc.m_EndY } );
             VECTOR2I    center = scale( KiROUND( VECTOR2D{ arc.m_CenterX, arc.m_CenterY } ) );
@@ -3722,7 +3721,7 @@ SHAPE_LINE_CHAIN BOARD_BUILDER::buildOutline( const BLK_0x28_SHAPE& aShape ) con
         case 0x16:
         case 0x17:
         {
-            const auto& seg = static_cast<const BLOCK<BLK_0x15_16_17_SEGMENT>&>( *segBlock ).GetData();
+            const auto& seg = BlockDataAs<BLK_0x15_16_17_SEGMENT>( *segBlock );
             VECTOR2I    start = scale( { seg.m_StartX, seg.m_StartY } );
 
             if( outline.PointCount() == 0 || outline.CLastPoint() != start )
@@ -3767,7 +3766,7 @@ SHAPE_POLY_SET BOARD_BUILDER::shapeToPolySet( const BLK_0x28_SHAPE& aShape ) con
         if( !holeBlock || holeBlock->GetBlockType() != 0x34 )
             break;
 
-        const auto& keepout = static_cast<const BLOCK<BLK_0x34_KEEPOUT>&>( *holeBlock ).GetData();
+        const auto& keepout = BlockDataAs<BLK_0x34_KEEPOUT>( *holeBlock );
 
         SHAPE_LINE_CHAIN holeOutline = buildSegmentChain( keepout.m_FirstSegmentPtr );
 
@@ -3947,7 +3946,7 @@ std::unique_ptr<ZONE> BOARD_BUILDER::buildZone( const BLOCK_BASE&               
         }
         case 0x28:
         {
-            const BLK_0x28_SHAPE& shapeData = static_cast<const BLOCK<BLK_0x28_SHAPE>&>( *block ).GetData();
+            const BLK_0x28_SHAPE& shapeData = BlockDataAs<BLK_0x28_SHAPE>( *block );
 
             SHAPE_POLY_SET fillPolySet = shapeToPolySet( shapeData );
             combinedFill.Append( fillPolySet );
@@ -4090,7 +4089,7 @@ void BOARD_BUILDER::createZones()
         {
         case 0x0e:
         {
-            const BLK_0x0E_RECT& rectData = static_cast<const BLOCK<BLK_0x0E_RECT>&>( *block ).GetData();
+            const BLK_0x0E_RECT& rectData = BlockDataAs<BLK_0x0E_RECT>( *block );
 
             if( !layerIsZone( rectData.m_Layer ) )
                 continue;
@@ -4101,7 +4100,7 @@ void BOARD_BUILDER::createZones()
         }
         case 0x24:
         {
-            const BLK_0x24_RECT& rectData = static_cast<const BLOCK<BLK_0x24_RECT>&>( *block ).GetData();
+            const BLK_0x24_RECT& rectData = BlockDataAs<BLK_0x24_RECT>( *block );
 
             if( !layerIsZone( rectData.m_Layer ) )
                 continue;
@@ -4112,7 +4111,7 @@ void BOARD_BUILDER::createZones()
         }
         case 0x28:
         {
-            const BLK_0x28_SHAPE& shapeData = static_cast<const BLOCK<BLK_0x28_SHAPE>&>( *block ).GetData();
+            const BLK_0x28_SHAPE& shapeData = BlockDataAs<BLK_0x28_SHAPE>( *block );
 
             if( !layerIsZone( shapeData.m_Layer ) )
                 continue;
@@ -4150,7 +4149,7 @@ void BOARD_BUILDER::createZones()
         {
         case 0x24:
         {
-            const BLK_0x24_RECT& rectData = static_cast<const BLOCK<BLK_0x24_RECT>&>( *block ).GetData();
+            const BLK_0x24_RECT& rectData = BlockDataAs<BLK_0x24_RECT>( *block );
 
             if( !layerIsZone( rectData.m_Layer ) )
                 continue;
@@ -4163,7 +4162,7 @@ void BOARD_BUILDER::createZones()
         }
         case 0x28:
         {
-            const BLK_0x28_SHAPE& shapeData = static_cast<const BLOCK<BLK_0x28_SHAPE>&>( *block ).GetData();
+            const BLK_0x28_SHAPE& shapeData = BlockDataAs<BLK_0x28_SHAPE>( *block );
 
             if( !layerIsZone( shapeData.m_Layer ) )
                 continue;
@@ -4250,8 +4249,7 @@ void BOARD_BUILDER::createTables()
             {
             case 0x37:
             {
-                const BLK_0x37_PTR_ARRAY& ptrArray =
-                        static_cast<const BLOCK<BLK_0x37_PTR_ARRAY>&>( *keyTable ).GetData();
+                const BLK_0x37_PTR_ARRAY& ptrArray = BlockDataAs<BLK_0x37_PTR_ARRAY>( *keyTable );
 
                 uint32_t count = std::min( ptrArray.m_Count, static_cast<uint32_t>( ptrArray.m_Ptrs.size() ) );
 
@@ -4282,7 +4280,7 @@ void BOARD_BUILDER::createTables()
             }
             case 0x3c:
             {
-                const BLK_0x3C_KEY_LIST& keyList = static_cast<const BLOCK<BLK_0x3C_KEY_LIST>&>( *keyTable ).GetData();
+                const BLK_0x3C_KEY_LIST& keyList = BlockDataAs<BLK_0x3C_KEY_LIST>( *keyTable );
 
                 wxLogTrace( traceAllegroBuilder, "    Key list with %zu entries",
                             static_cast<size_t>( keyList.m_NumEntries ) );
