@@ -53,20 +53,6 @@ inline const wxChar* const traceAllegroUtils = wxT( "KICAD_ALLEGRO_BUILDER" );
 
 
 /**
- * Satisfied by Allegro block data structs that can be used with BLOCK_REF.
- *
- * Every BLK_0x* struct declares a BLOCK_TYPE_CODE trait, except those with multiple valid
- * codes, which are special-cased.
- */
-template <typename T>
-concept ALLEGRO_BLOCK_DATA = requires
-{
-    { T::BLOCK_TYPE_CODE }->std::convertible_to<uint8_t>;
-}
-|| std::is_same_v<T, BLK_0x15_16_17_SEGMENT>;
-
-
-/**
  * Check whether a runtime block type code matches the expected type for T.
  */
 template <ALLEGRO_BLOCK_DATA BLK_T>
