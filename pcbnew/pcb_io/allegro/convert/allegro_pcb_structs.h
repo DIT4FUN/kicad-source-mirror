@@ -1381,18 +1381,19 @@ struct BLK_0x1C_PADSTACK
 
     uint32_t GetLayerCount() const
     {
+        uint32_t count = 0;
+
         if( std::holds_alternative<HEADER_v16x>( m_Header ) )
-        {
-            return std::get<HEADER_v16x>( m_Header ).m_LayerCount;
-        }
+            count = std::get<HEADER_v16x>( m_Header ).m_LayerCount;
         else if( std::holds_alternative<HEADER_v17x>( m_Header ) )
-        {
-            return std::get<HEADER_v17x>( m_Header ).m_LayerCount;
-        }
+            count = std::get<HEADER_v17x>( m_Header ).m_LayerCount;
         else
-        {
             throw std::runtime_error( "Unknown header variant" );
-        }
+
+        if( count > 256 )
+            throw std::runtime_error( "Layer count exceeds maximum of 256" );
+
+        return count;
     }
 
     bool IsPlated() const
