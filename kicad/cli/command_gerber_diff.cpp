@@ -36,6 +36,7 @@
 #define ARG_EXIT_CODE_ONLY "--exit-code-only"
 #define ARG_TOLERANCE "--tolerance"
 #define ARG_STRICT "--strict"
+#define ARG_NO_ALIGN "--no-align"
 
 
 CLI::GERBER_DIFF_COMMAND::GERBER_DIFF_COMMAND() :
@@ -83,6 +84,10 @@ CLI::GERBER_DIFF_COMMAND::GERBER_DIFF_COMMAND() :
             .metavar( "TOLERANCE" );
 
     m_argParser.add_argument( ARG_STRICT ).help( UTF8STDSTR( _( "Fail on any parse warnings or errors" ) ) ).flag();
+
+    m_argParser.add_argument( ARG_NO_ALIGN )
+            .help( UTF8STDSTR( _( "Skip bounding-box origin alignment; catches absolute-placement regressions" ) ) )
+            .flag();
 }
 
 
@@ -98,6 +103,7 @@ int CLI::GERBER_DIFF_COMMAND::doPerform( KIWAY& aKiway )
     diffJob->m_exitCodeOnly = m_argParser.get<bool>( ARG_EXIT_CODE_ONLY );
     diffJob->m_tolerance = m_argParser.get<int>( ARG_TOLERANCE );
     diffJob->m_strict = m_argParser.get<bool>( ARG_STRICT );
+    diffJob->m_noAlign = m_argParser.get<bool>( ARG_NO_ALIGN );
 
     wxString format = From_UTF8( m_argParser.get<std::string>( ARG_FORMAT ).c_str() );
 
@@ -119,7 +125,8 @@ int CLI::GERBER_DIFF_COMMAND::doPerform( KIWAY& aKiway )
         return EXIT_CODES::ERR_ARGS;
     }
 
-    // Handle output path for PNG format
+    // For PNG, generate a default output path when -o is not given.
+    // For text/JSON, -o is optional — omitting it sends output to stdout.
     if( diffJob->m_outputFormat == JOB_GERBER_DIFF::OUTPUT_FORMAT::PNG )
     {
         if( m_argOutput.IsEmpty() )
@@ -132,6 +139,10 @@ int CLI::GERBER_DIFF_COMMAND::doPerform( KIWAY& aKiway )
         {
             diffJob->SetConfiguredOutputPath( m_argOutput );
         }
+    }
+    else if( !m_argOutput.IsEmpty() )
+    {
+        diffJob->SetConfiguredOutputPath( m_argOutput );
     }
 
     int exitCode = aKiway.ProcessJob( KIWAY::FACE_GERBVIEW, diffJob.get() );

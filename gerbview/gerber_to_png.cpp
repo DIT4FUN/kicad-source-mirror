@@ -20,8 +20,10 @@
 #include "gerber_to_png.h"
 #include "gerber_file_image.h"
 #include "gerber_draw_item.h"
+#include "dcode.h"
 #include "excellon_image.h"
 #include "excellon_defaults.h"
+#include <convert_basic_shapes_to_polygon.h>
 #include <jobs/job_gerber_export_png.h>
 #include <plotters/plotter_png.h>
 #include <geometry/shape_poly_set.h>
@@ -111,12 +113,28 @@ namespace
 void RenderItem( GERBER_DRAW_ITEM* aItem, PNG_PLOTTER& aPlotter, const KIGFX::COLOR4D& aColor )
 {
     SHAPE_POLY_SET itemPoly;
+    bool           needsFlashOffset = false;
 
     if( aItem->m_ShapeAsPolygon.OutlineCount() > 0 )
     {
         itemPoly = aItem->m_ShapeAsPolygon;
     }
-    else if( aItem->m_ShapeType == GBR_SEGMENT || aItem->m_ShapeType == GBR_ARC )
+    else if( aItem->m_ShapeType == GBR_SEGMENT )
+    {
+        D_CODE* dcode = aItem->GetDcodeDescr();
+
+        if( dcode && dcode->m_ApertType != APT_RECT )
+        {
+            int arcError = static_cast<int>( gerbIUScale.IU_PER_MM * ARC_LOW_DEF_MM );
+            TransformOvalToPolygon( itemPoly, aItem->m_Start, aItem->m_End,
+                                    aItem->m_Size.x, arcError, ERROR_INSIDE );
+        }
+        else
+        {
+            aItem->ConvertSegmentToPolygon( &itemPoly );
+        }
+    }
+    else if( aItem->m_ShapeType == GBR_ARC )
     {
         aItem->ConvertSegmentToPolygon( &itemPoly );
     }
@@ -127,14 +145,18 @@ void RenderItem( GERBER_DRAW_ITEM* aItem, PNG_PLOTTER& aPlotter, const KIGFX::CO
         if( dcode )
         {
             dcode->ConvertShapeToPolygon( aItem );
-            itemPoly = aItem->m_ShapeAsPolygon;
+            itemPoly = dcode->m_Polygon;
+            needsFlashOffset = true;
         }
     }
 
     if( itemPoly.OutlineCount() == 0 )
         return;
 
-    // Apply AB transforms and render each outline directly
+    // Flashed shapes from ConvertShapeToPolygon are centered at (0,0).
+    // Offset by the item's position before applying the AB transform.
+    VECTOR2I offset = needsFlashOffset ? VECTOR2I( aItem->m_Start ) : VECTOR2I( 0, 0 );
+
     aPlotter.SetColor( aColor );
 
     for( int i = 0; i < itemPoly.OutlineCount(); i++ )
@@ -144,7 +166,7 @@ void RenderItem( GERBER_DRAW_ITEM* aItem, PNG_PLOTTER& aPlotter, const KIGFX::CO
         pts.reserve( outline.PointCount() );
 
         for( int j = 0; j < outline.PointCount(); j++ )
-            pts.push_back( aItem->GetABPosition( outline.CPoint( j ) ) );
+            pts.push_back( aItem->GetABPosition( outline.CPoint( j ) + offset ) );
 
         if( pts.size() >= 3 )
             aPlotter.PlotPoly( pts, FILL_T::FILLED_SHAPE, 0 );
@@ -213,7 +235,26 @@ bool RenderGerberToPng( const wxString& aInputPath, const wxString& aOutputPath,
         return false;
     }
 
-    BOX2I bbox = CalculateGerberBoundingBox( image.get() );
+    BOX2I bbox;
+
+    if( aOptions.HasViewportOverride() )
+    {
+        // Viewport is specified in Gerber-native coordinates (Y increases upward).
+        // KiCad stores gerber items with Y negated (Y increases downward), so
+        // negate the origin Y and flip the window vertically.
+        double iuPerMm = gerbIUScale.IU_PER_MM;
+        int    ox = static_cast<int>( std::round( aOptions.originXMm * iuPerMm ) );
+        int    oy = static_cast<int>( std::round(
+                -( aOptions.originYMm + aOptions.windowHeightMm ) * iuPerMm ) );
+        int    w = static_cast<int>( std::round( aOptions.windowWidthMm * iuPerMm ) );
+        int    h = static_cast<int>( std::round( aOptions.windowHeightMm * iuPerMm ) );
+
+        bbox = BOX2I( VECTOR2I( ox, oy ), VECTOR2I( w, h ) );
+    }
+    else
+    {
+        bbox = CalculateGerberBoundingBox( image.get() );
+    }
 
     if( bbox.GetWidth() == 0 || bbox.GetHeight() == 0 )
     {
@@ -223,14 +264,25 @@ bool RenderGerberToPng( const wxString& aInputPath, const wxString& aOutputPath,
         return false;
     }
 
-    GERBER_PLOTTER_VIEWPORT vp = CalculatePlotterViewport( bbox, aOptions.dpi, aOptions.width, aOptions.height );
+    // When using a viewport override with DPI, calculate pixel dimensions from the window
+    int reqWidth = aOptions.width;
+    int reqHeight = aOptions.height;
+
+    if( aOptions.HasViewportOverride() && reqWidth == 0 && reqHeight == 0 )
+    {
+        double mmPerInch = 25.4;
+        reqWidth = static_cast<int>( std::ceil( aOptions.windowWidthMm / mmPerInch * aOptions.dpi ) );
+        reqHeight = static_cast<int>( std::ceil( aOptions.windowHeightMm / mmPerInch * aOptions.dpi ) );
+    }
+
+    GERBER_PLOTTER_VIEWPORT vp = CalculatePlotterViewport( bbox, aOptions.dpi, reqWidth, reqHeight );
 
     PNG_PLOTTER plotter;
     plotter.SetPixelSize( vp.width, vp.height );
     plotter.SetResolution( aOptions.dpi );
     plotter.SetAntialias( aOptions.antialias );
     plotter.SetBackgroundColor( aOptions.backgroundColor );
-    plotter.SetViewport( vp.offset, vp.iuPerDecimil, vp.plotScale, true );
+    plotter.SetViewport( vp.offset, vp.iuPerDecimil, vp.plotScale, false );
 
     // Start plotting
     if( !plotter.StartPlot( wxEmptyString ) )
@@ -241,14 +293,24 @@ bool RenderGerberToPng( const wxString& aInputPath, const wxString& aOutputPath,
         return false;
     }
 
-    // Render all items
+    // Render all items with proper polarity handling.
+    // Negative (clear) polarity items erase copper by drawing with the background color.
+    // On transparent exports the background is alpha=0, so source-over is a no-op.
+    // Switch to CAIRO_OPERATOR_CLEAR so those regions become fully transparent.
+    bool transparentBg = ( aOptions.backgroundColor.a == 0 );
+
     for( GERBER_DRAW_ITEM* item : image->GetItems() )
     {
-        // Skip negative items for now (would need proper polarity handling)
         if( item->GetLayerPolarity() )
-            continue;
-
-        RenderItem( item, plotter, aOptions.foregroundColor );
+        {
+            plotter.SetClearCompositing( transparentBg );
+            RenderItem( item, plotter, aOptions.backgroundColor );
+            plotter.SetClearCompositing( false );
+        }
+        else
+        {
+            RenderItem( item, plotter, aOptions.foregroundColor );
+        }
     }
 
     plotter.EndPlot();
@@ -276,6 +338,26 @@ bool RenderGerberToPng( const wxString& aInputPath, const wxString& aOutputPath,
     options.antialias = aJob.m_antialias;
     options.backgroundColor =
             aJob.m_transparentBackground ? KIGFX::COLOR4D( 1.0, 1.0, 1.0, 0.0 ) : KIGFX::COLOR4D::WHITE;
+
+    if( !aJob.m_foregroundColor.IsEmpty() )
+        options.foregroundColor = KIGFX::COLOR4D( aJob.m_foregroundColor );
+
+    if( !aJob.m_backgroundColor.IsEmpty() )
+        options.backgroundColor = KIGFX::COLOR4D( aJob.m_backgroundColor );
+
+    double toMm = 1.0;
+
+    switch( aJob.m_units )
+    {
+    case JOB_GERBER_EXPORT_PNG::UNITS::INCH: toMm = 25.4;   break;
+    case JOB_GERBER_EXPORT_PNG::UNITS::MILS: toMm = 0.0254; break;
+    case JOB_GERBER_EXPORT_PNG::UNITS::MM:   toMm = 1.0;    break;
+    }
+
+    options.originXMm = aJob.m_originX * toMm;
+    options.originYMm = aJob.m_originY * toMm;
+    options.windowWidthMm = aJob.m_windowWidth * toMm;
+    options.windowHeightMm = aJob.m_windowHeight * toMm;
 
     return RenderGerberToPng( aInputPath, aOutputPath, options, aErrorMsg, aMessages );
 }

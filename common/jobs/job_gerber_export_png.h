@@ -36,6 +36,13 @@ public:
     wxString GetDefaultDescription() const override;
     wxString GetSettingsDialogTitle() const override;
 
+    enum class UNITS
+    {
+        MM,
+        INCH,
+        MILS
+    };
+
     wxString m_inputFile;
     int      m_dpi = 300;
     int      m_width = 0;
@@ -44,8 +51,17 @@ public:
     bool     m_transparentBackground = true;
     bool     m_strict = false;
 
-    // When width/height are 0, calculate from DPI and Gerber bounds
-    // When specified, override the automatic calculation
+    // Viewport override. When both window dimensions are > 0, the viewport is
+    // defined by origin + window rather than the gerber bounding box.
+    // Values are in the units specified by m_units.
+    UNITS  m_units = UNITS::MM;
+    double m_originX = 0.0;
+    double m_originY = 0.0;
+    double m_windowWidth = 0.0;
+    double m_windowHeight = 0.0;
+
+    wxString m_foregroundColor;
+    wxString m_backgroundColor;
 };
 
 #endif

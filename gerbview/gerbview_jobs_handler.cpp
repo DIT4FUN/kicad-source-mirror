@@ -30,6 +30,7 @@
 #include <reporter.h>
 #include <base_units.h>
 #include <json_common.h>
+#include <wx/file.h>
 #include <wx/filename.h>
 
 
@@ -143,10 +144,10 @@ int GERBVIEW_JOBS_HANDLER::JobGerberInfo( JOB* aJob )
         break;
     }
 
-    double originX = bbox.GetOrigin().x * iuToMm * lengthScale;
-    double originY = bbox.GetOrigin().y * iuToMm * lengthScale;
-    double width = bbox.GetWidth() * iuToMm * lengthScale;
-    double height = bbox.GetHeight() * iuToMm * lengthScale;
+    double originX = static_cast<double>( bbox.GetOrigin().x ) * iuToMm * lengthScale;
+    double originY = static_cast<double>( bbox.GetOrigin().y ) * iuToMm * lengthScale;
+    double width = static_cast<double>( bbox.GetWidth() ) * iuToMm * lengthScale;
+    double height = static_cast<double>( bbox.GetHeight() ) * iuToMm * lengthScale;
 
     int apertureCount = image->GetDcodesCount();
 
@@ -275,9 +276,14 @@ int GERBVIEW_JOBS_HANDLER::JobGerberDiff( JOB* aJob )
     SHAPE_POLY_SET polyA = ConvertGerberToPolySet( imageA.get(), diffJob->m_tolerance );
     SHAPE_POLY_SET polyB = ConvertGerberToPolySet( imageB.get(), diffJob->m_tolerance );
 
-    // Calculate alignment offset and apply to polyB
-    VECTOR2I alignOffset = CalculateAlignment( polyA, polyB );
-    polyB.Move( alignOffset );
+    // Align bounding-box origins unless the caller explicitly opts out.
+    // Skip alignment when testing for absolute-placement correctness (wrong origin,
+    // unit conversion errors, etc.) that auto-alignment would silently hide.
+    if( !diffJob->m_noAlign )
+    {
+        VECTOR2I alignOffset = CalculateAlignment( polyA, polyB );
+        polyB.Move( alignOffset );
+    }
 
     // Calculate differences
     GERBER_DIFF_RESULT result = CalculateGerberDiff( polyA, polyB );
@@ -296,14 +302,49 @@ int GERBVIEW_JOBS_HANDLER::JobGerberDiff( JOB* aJob )
     wxFileName fnA( diffJob->m_inputFileA );
     wxFileName fnB( diffJob->m_inputFileB );
 
+    auto writeTextToOutput = [&]( const wxString& aText ) -> bool
+    {
+        wxString outputPath = diffJob->GetConfiguredOutputPath();
+
+        if( !outputPath.IsEmpty() )
+        {
+            wxFile file( outputPath, wxFile::write );
+
+            if( !file.IsOpened() )
+            {
+                if( m_reporter )
+                {
+                    m_reporter->Report( wxString::Format( wxS( "Failed to open output file: %s" ), outputPath ),
+                                        RPT_SEVERITY_ERROR );
+                }
+
+                return false;
+            }
+
+            file.Write( aText );
+
+            if( m_reporter )
+            {
+                m_reporter->Report( wxString::Format( wxS( "Output written to: %s" ), outputPath ),
+                                    RPT_SEVERITY_INFO );
+            }
+        }
+        else if( m_reporter )
+        {
+            m_reporter->Report( aText, RPT_SEVERITY_INFO );
+        }
+
+        return true;
+    };
+
     switch( diffJob->m_outputFormat )
     {
     case JOB_GERBER_DIFF::OUTPUT_FORMAT::TEXT:
     {
         wxString text = FormatDiffResultText( result, fnA.GetFullName(), fnB.GetFullName() );
 
-        if( m_reporter )
-            m_reporter->Report( text, RPT_SEVERITY_INFO );
+        if( !writeTextToOutput( text ) )
+            return CLI::EXIT_CODES::ERR_UNKNOWN;
 
         break;
     }
@@ -312,8 +353,8 @@ int GERBVIEW_JOBS_HANDLER::JobGerberDiff( JOB* aJob )
     {
         nlohmann::json j = FormatDiffResultJson( result, fnA.GetFullName(), fnB.GetFullName() );
 
-        if( m_reporter )
-            m_reporter->Report( wxString::FromUTF8( j.dump( 2 ) ), RPT_SEVERITY_INFO );
+        if( !writeTextToOutput( wxString::FromUTF8( j.dump( 2 ) ) ) )
+            return CLI::EXIT_CODES::ERR_UNKNOWN;
 
         break;
     }

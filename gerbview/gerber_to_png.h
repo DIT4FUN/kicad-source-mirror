@@ -63,6 +63,16 @@ struct GERBER_RENDER_OPTIONS
     bool           antialias = true;
     KIGFX::COLOR4D foregroundColor = KIGFX::COLOR4D::BLACK;
     KIGFX::COLOR4D backgroundColor = KIGFX::COLOR4D( 1.0, 1.0, 1.0, 0.0 ); ///< Transparent white
+
+    double originXMm = 0.0;        ///< Viewport origin X in mm
+    double originYMm = 0.0;        ///< Viewport origin Y in mm
+    double windowWidthMm = 0.0;    ///< Viewport width in mm (> 0 enables viewport mode)
+    double windowHeightMm = 0.0;   ///< Viewport height in mm (> 0 enables viewport mode)
+
+    bool HasViewportOverride() const
+    {
+        return windowWidthMm > 0.0 && windowHeightMm > 0.0;
+    }
 };
 
 

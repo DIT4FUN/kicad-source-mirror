@@ -22,6 +22,12 @@
 #include <i18n_utility.h>
 
 
+NLOHMANN_JSON_SERIALIZE_ENUM( JOB_GERBER_EXPORT_PNG::UNITS,
+                              { { JOB_GERBER_EXPORT_PNG::UNITS::MM, "mm" },
+                                { JOB_GERBER_EXPORT_PNG::UNITS::INCH, "in" },
+                                { JOB_GERBER_EXPORT_PNG::UNITS::MILS, "mils" } } )
+
+
 JOB_GERBER_EXPORT_PNG::JOB_GERBER_EXPORT_PNG() :
         JOB( "gerber_export_png", false )
 {
@@ -31,6 +37,13 @@ JOB_GERBER_EXPORT_PNG::JOB_GERBER_EXPORT_PNG() :
     m_params.emplace_back( new JOB_PARAM<bool>( "antialias", &m_antialias, m_antialias ) );
     m_params.emplace_back(
             new JOB_PARAM<bool>( "transparent_background", &m_transparentBackground, m_transparentBackground ) );
+    m_params.emplace_back( new JOB_PARAM<UNITS>( "units", &m_units, m_units ) );
+    m_params.emplace_back( new JOB_PARAM<double>( "origin_x", &m_originX, m_originX ) );
+    m_params.emplace_back( new JOB_PARAM<double>( "origin_y", &m_originY, m_originY ) );
+    m_params.emplace_back( new JOB_PARAM<double>( "window_width", &m_windowWidth, m_windowWidth ) );
+    m_params.emplace_back( new JOB_PARAM<double>( "window_height", &m_windowHeight, m_windowHeight ) );
+    m_params.emplace_back( new JOB_PARAM<wxString>( "foreground_color", &m_foregroundColor, m_foregroundColor ) );
+    m_params.emplace_back( new JOB_PARAM<wxString>( "background_color", &m_backgroundColor, m_backgroundColor ) );
 }
 
 

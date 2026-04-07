@@ -87,6 +87,14 @@ public:
     virtual void SetColor( const COLOR4D& aColor ) override;
     virtual void SetDash( int aLineWidth, LINE_STYLE aLineStyle ) override;
 
+    /**
+     * Switch the Cairo compositing operator between CLEAR and OVER.
+     *
+     * Use aClear=true to punch transparent holes in the alpha channel (negative/clear polarity
+     * items on transparent exports). Restore with aClear=false when done.
+     */
+    void SetClearCompositing( bool aClear );
+
     virtual void SetViewport( const VECTOR2I& aOffset, double aIusPerDecimil, double aScale, bool aMirror ) override;
 
     // Primitive drawing operations

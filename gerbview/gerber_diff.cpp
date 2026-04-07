@@ -42,7 +42,7 @@ GERBER_DIFF_RESULT CalculateGerberDiff( const SHAPE_POLY_SET& aReference, const 
 {
     GERBER_DIFF_RESULT result;
 
-    constexpr double NM2_TO_MM2 = 1e-12;
+    constexpr double IU2_TO_MM2 = 1e-10;
 
     // overlap = reference ∩ comparison
     result.overlap = aReference;
@@ -56,9 +56,9 @@ GERBER_DIFF_RESULT CalculateGerberDiff( const SHAPE_POLY_SET& aReference, const 
     result.removals = aReference;
     result.removals.BooleanSubtract( aComparison );
 
-    result.overlapArea = result.overlap.Area() * NM2_TO_MM2;
-    result.additionsArea = result.additions.Area() * NM2_TO_MM2;
-    result.removalsArea = result.removals.Area() * NM2_TO_MM2;
+    result.overlapArea = result.overlap.Area() * IU2_TO_MM2;
+    result.additionsArea = result.additions.Area() * IU2_TO_MM2;
+    result.removalsArea = result.removals.Area() * IU2_TO_MM2;
 
     // reference = overlap ∪ removals, comparison = overlap ∪ additions (disjoint)
     result.referenceArea = result.overlapArea + result.removalsArea;
@@ -70,6 +70,12 @@ GERBER_DIFF_RESULT CalculateGerberDiff( const SHAPE_POLY_SET& aReference, const 
         result.removalsPercent = 100.0 * result.removalsArea / result.referenceArea;
         result.netChangePercent = result.additionsPercent - result.removalsPercent;
     }
+
+    // Fracture so that holes become bridge-connected outlines suitable for rendering
+    // with PlotPoly (which only fills outlines, ignoring SHAPE_POLY_SET holes).
+    result.overlap.Fracture();
+    result.additions.Fracture();
+    result.removals.Fracture();
 
     return result;
 }
@@ -239,7 +245,7 @@ bool RenderDiffToPng( const GERBER_DIFF_RESULT& aResult, const wxString& aOutput
     plotter.SetResolution( aOptions.dpi );
     plotter.SetAntialias( aOptions.antialias );
     plotter.SetBackgroundColor( aOptions.colorBackground );
-    plotter.SetViewport( vp.offset, vp.iuPerDecimil, vp.plotScale, true );
+    plotter.SetViewport( vp.offset, vp.iuPerDecimil, vp.plotScale, false );
 
     if( !plotter.StartPlot( wxEmptyString ) )
         return false;

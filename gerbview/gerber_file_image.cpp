@@ -388,8 +388,8 @@ void GERBER_FILE_IMAGE::DisplayImageInfo( GERBVIEW_FRAME* aMainFrame )
 double GERBER_FILE_IMAGE::CalculateCopperArea()
 {
     SHAPE_POLY_SET   merged = ConvertGerberToPolySet( this );
-    constexpr double NM2_TO_MM2 = 1e-12;
-    return merged.Area() * NM2_TO_MM2;
+    constexpr double IU2_TO_MM2 = 1e-10;
+    return merged.Area() * IU2_TO_MM2;
 }
 
 

@@ -161,6 +161,13 @@ void PNG_PLOTTER::SetColor( const COLOR4D& aColor )
 }
 
 
+void PNG_PLOTTER::SetClearCompositing( bool aClear )
+{
+    if( m_context )
+        cairo_set_operator( m_context, aClear ? CAIRO_OPERATOR_CLEAR : CAIRO_OPERATOR_OVER );
+}
+
+
 void PNG_PLOTTER::SetDash( int aLineWidth, LINE_STYLE aLineStyle )
 {
     if( !m_context )

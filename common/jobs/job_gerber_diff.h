@@ -61,6 +61,11 @@ public:
 
     // In strict mode, fail on any parse warnings/errors
     bool m_strict = false;
+
+    // When true, skip bounding-box origin alignment before computing the diff.
+    // Use this in regression tests to catch absolute-placement errors (wrong origin,
+    // sign flip, unit conversion mistake, etc.) that auto-alignment would hide.
+    bool m_noAlign = false;
 };
 
 #endif
