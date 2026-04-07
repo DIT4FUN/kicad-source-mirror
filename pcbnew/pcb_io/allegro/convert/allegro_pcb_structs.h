@@ -1364,7 +1364,7 @@ struct BLK_0x1C_PADSTACK
     // The name of the padstack
     uint32_t m_PadStr;
 
-    // The header fields arevery different between v16x and v17.x+
+    // The header fields are very different between v16x and v17.x+
     using HEADER = std::variant<HEADER_v16x, HEADER_v17x>;
     HEADER m_Header;
 
@@ -1449,50 +1449,43 @@ struct BLK_0x1C_PADSTACK
     std::vector<uint32_t> m_UnknownArrN;
 
 
-    // Dispatch common properties to the header variant
+    // Dispatch common properties to the header variant.
+    // Each method uses a local Visitor struct so that adding a new HEADER alternative
+    // produces a compile error rather than a silent runtime fallback.
     uint32_t GetDrillSize() const
     {
-        if( std::holds_alternative<HEADER_v16x>( m_Header ) )
+        struct Visitor
         {
-            return std::get<HEADER_v16x>( m_Header ).m_DrillSize;
-        }
-        else if( std::holds_alternative<HEADER_v17x>( m_Header ) )
-        {
-            return std::get<HEADER_v17x>( m_Header ).m_DrillSize;
-        }
-        else
-        {
-            throw std::runtime_error( "Unknown header variant" );
-        }
+            uint32_t operator()( const HEADER_v16x& h ) const { return h.m_DrillSize; }
+            uint32_t operator()( const HEADER_v17x& h ) const { return h.m_DrillSize; }
+        };
+        return std::visit( Visitor{}, m_Header );
     }
 
     uint32_t GetLayerCount() const
     {
-        uint32_t count = 0;
-
-        if( std::holds_alternative<HEADER_v16x>( m_Header ) )
-            count = std::get<HEADER_v16x>( m_Header ).m_LayerCount;
-        else if( std::holds_alternative<HEADER_v17x>( m_Header ) )
-            count = std::get<HEADER_v17x>( m_Header ).m_LayerCount;
-        else
-            throw std::runtime_error( "Unknown header variant" );
-
-        if( count > 256 )
-            throw std::runtime_error( "Layer count exceeds maximum of 256" );
-
-        return count;
+        struct Visitor
+        {
+            uint32_t operator()( const HEADER_v16x& h ) const { return h.m_LayerCount; }
+            uint32_t operator()( const HEADER_v17x& h ) const { return h.m_LayerCount; }
+        };
+        return std::visit( Visitor{}, m_Header );
     }
 
     bool IsPlated() const
     {
-        if( std::holds_alternative<HEADER_v17x>( m_Header ) )
+        struct Visitor
         {
-            return ( std::get<HEADER_v17x>( m_Header ).m_Flags & HEADER_v17x::PAD_FLAGS::FLAG_PLATED ) != 0;
-        }
-        else
-        {
-            return ( std::get<HEADER_v16x>( m_Header ).m_Flags & HEADER_v16x::PAD_FLAGS::FLAG_PLATED ) != 0;
-        }
+            bool operator()( const HEADER_v16x& h ) const
+            {
+                return ( h.m_Flags & HEADER_v16x::PAD_FLAGS::FLAG_PLATED ) != 0;
+            }
+            bool operator()( const HEADER_v17x& h ) const
+            {
+                return ( h.m_Flags & HEADER_v17x::PAD_FLAGS::FLAG_PLATED ) != 0;
+            }
+        };
+        return std::visit( Visitor{}, m_Header );
     }
 };
 

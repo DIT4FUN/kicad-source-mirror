@@ -1152,6 +1152,11 @@ static std::unique_ptr<BLOCK_BASE> ParseBlock_0x1C_PADSTACK( FILE_STREAM& aStrea
         ReadCond( aStream, aVer, hdr.m_UnknownArr_v180 );
     }
 
+    // Chekc the layer count isn't massive - malformed files could make this huge
+    static const uint16_t MAX_LAYER_COUNT = 256;
+    if( data.GetLayerCount() > MAX_LAYER_COUNT )
+        throw std::runtime_error( "Layer count exceeds maximum of " + std::to_string( MAX_LAYER_COUNT ) );
+
     // Work out how many fixed slots we have
     if( aVer < FMT_VER::V_165 )
         data.m_NumFixedCompEntries = 10;
