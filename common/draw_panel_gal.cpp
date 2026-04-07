@@ -394,7 +394,7 @@ bool EDA_DRAW_PANEL_GAL::DoRePaint( bool aAllowSkip )
 
     if( isDirty )
     {
-        KI_TRACE( traceGalProfile, "View timing: %s %s %s %s %s\n",
+        wxLogTrace( traceGalProfile, "View timing: %s %s %s %s %s",
             cntTotal.to_string(),
             cntUpd.to_string(),
             cntRedraw.to_string(),
