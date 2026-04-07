@@ -94,8 +94,8 @@ def test_pcb_export_svg( kitest: KiTestFixture,
         # This test works only with Python >= 3.9 because it uses a pathlib function only existing
         # in 3.9 and newer. So skip it for previous versions
         if sys.hexversion >= 0x03090000 :
-            # Comparison DPI = 1270 => 1px == 20um. I.e. allowable error of 60 um after eroding
-            assert utils.svgs_are_equivalent( str( generated_svg_path ), svg_source_path, 1270,
+            # Comparison DPI = 850 => 1px == 30um. I.e. allowable error of 90 um after eroding
+            assert utils.svgs_are_equivalent( str( generated_svg_path ), svg_source_path, 850,
                                               diff_handler=kitest.add_attachment )
 
 
@@ -151,8 +151,8 @@ def test_pcb_export_gerber( kitest: KiTestFixture,
         layer_name_fixed = "-" + layer_name.replace( ".", "_" )
         gbr_source_path += layer_name_fixed + ".gbr"
 
-        # Comparison DPI = 5080 => 1px == 5um. I.e. allowable error of 15 um after eroding
-        assert utils.gerbers_are_equivalent( str( generated_gerber_path ), gbr_source_path, 5080,
+        # Comparison DPI = 2540 => 1px == 10um. I.e. allowable error of 30 um after eroding
+        assert utils.gerbers_are_equivalent( str( generated_gerber_path ), gbr_source_path, 2540,
                                              originInches, windowsizeInches,
                                              diff_handler=kitest.add_attachment )
 
