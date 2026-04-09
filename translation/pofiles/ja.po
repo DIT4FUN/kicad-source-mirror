@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kicad\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-07 19:08+0300\n"
-"PO-Revision-Date: 2026-04-09 18:49+0000\n"
+"PO-Revision-Date: 2026-04-10 23:09+0000\n"
 "Last-Translator: 2tama3 <2tama3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kicad/master-"
 "source/ja/>\n"
@@ -8576,44 +8576,36 @@ msgid "Gerber Diff"
 msgstr "ガーバー 差分"
 
 #: common/jobs/job_gerber_diff.cpp:51
-#, fuzzy
 msgid "Gerber Diff Job Settings"
-msgstr "ガーバーのエクスポートジョブ設定"
+msgstr "ガーバー 差分ジョブ設定"
 
 #: common/jobs/job_gerber_diff.cpp:55
-#, fuzzy
 msgid "Gerber: Diff"
-msgstr "ガーバー ファイル"
+msgstr "ガーバー: 差分"
 
 #: common/jobs/job_gerber_export_png.cpp:39
-#, fuzzy
 msgid "Gerber Export PNG"
-msgstr "PCB SVGとしてエクスポート"
+msgstr "ガーバー PNGとして エクスポート"
 
 #: common/jobs/job_gerber_export_png.cpp:45
-#, fuzzy
 msgid "Gerber Export PNG Job Settings"
-msgstr "HPGLのエクスポートジョブ設定"
+msgstr "ガーバー PNGとして エクスポートのジョブ設定"
 
 #: common/jobs/job_gerber_export_png.cpp:49
-#, fuzzy
 msgid "Gerber: Export PNG"
-msgstr "PCB SVGとしてエクスポート"
+msgstr "ガーバー: PNGとして エクスポート"
 
 #: common/jobs/job_gerber_info.cpp:39
-#, fuzzy
 msgid "Gerber Info"
-msgstr "ガーバー ファイル"
+msgstr "ガーバー 情報"
 
 #: common/jobs/job_gerber_info.cpp:45
-#, fuzzy
 msgid "Gerber Info Job Settings"
-msgstr "ガーバーのエクスポートジョブ設定"
+msgstr "ガーバー 情報のジョブ設定"
 
 #: common/jobs/job_gerber_info.cpp:49
-#, fuzzy
 msgid "Gerber: Info"
-msgstr "ガーバー ファイル"
+msgstr "ガーバー: 情報"
 
 #: common/jobs/job_pcb_drc.cpp:42
 msgid "Perform DRC"
@@ -11496,12 +11488,11 @@ msgid "View load messages"
 msgstr "メッセージを表示"
 
 #: common/widgets/kistatusbar.cpp:509
-#, fuzzy, c-format
+#, c-format
 msgid "View %zu message(s)"
-msgstr "ライブラリ読み込み時のメッセージ( %zu 個)表示"
+msgstr "%zu 個のメッセージを表示"
 
 #: common/widgets/kistatusbar.cpp:522
-#, fuzzy
 msgid "View messages"
 msgstr "メッセージを表示"
 
@@ -13420,9 +13411,8 @@ msgid "Change severity to Error for all '%s' violations"
 msgstr "すべての '%s' 違反の深刻度をエラーに変更"
 
 #: eeschema/dialogs/dialog_erc.cpp:776 eeschema/dialogs/dialog_erc.cpp:783
-#, fuzzy
 msgid "Violation severities can also be edited in Schematic Setup"
-msgstr "違反の深刻度は、回路図の設定... ダイアログで編集することができます"
+msgstr "違反の深刻度は、[回路図の設定...]でも編集することができます"
 
 #: eeschema/dialogs/dialog_erc.cpp:781 pcbnew/dialogs/dialog_drc.cpp:793
 #, c-format
@@ -13444,9 +13434,8 @@ msgstr "ピン競合マップを編集..."
 
 #: eeschema/dialogs/dialog_erc.cpp:797 eeschema/dialogs/dialog_erc.cpp:803
 #: eeschema/dialogs/dialog_erc.cpp:810
-#, fuzzy
 msgid "Open the Schematic Setup dialog"
-msgstr "回路図の設定... ダイアログを開く"
+msgstr "[回路図の設定...] ダイアログを開く"
 
 #: eeschema/dialogs/dialog_erc.cpp:802 pcbnew/dialogs/dialog_drc.cpp:805
 msgid "Edit violation severities..."
@@ -13751,8 +13740,8 @@ msgid ""
 "Intersheet reference visibility is controlled globally from Schematic Setup "
 "> General > Formatting"
 msgstr ""
-"全体的なシート間リファレンスの表示の設定は 回路図の設定 > 一般設定 > フォー"
-"マット から制御できます"
+"全体的なシート間リファレンスの表示の設定は [回路図の設定...] > [一般設定] > "
+"[フォーマット] から制御できます"
 
 #: eeschema/dialogs/dialog_field_properties_base.cpp:85
 #: eeschema/dialogs/dialog_import_symbol_select_base.cpp:56
@@ -17134,9 +17123,8 @@ msgid "Copy Design Variant"
 msgstr "デザイン バリアントのコピー"
 
 #: eeschema/dialogs/dialog_symbol_fields_table.cpp:2947
-#, fuzzy
 msgid "Cannot edit the default variant description."
-msgstr "デフォルトのバリアントを削除できません。"
+msgstr "デフォルトのバリアントの説明は編集できません。"
 
 #: eeschema/dialogs/dialog_symbol_fields_table.cpp:2955
 #: eeschema/sch_edit_frame.cpp:3055
@@ -20519,7 +20507,6 @@ msgid "Resolved Netclass"
 msgstr "解決されたネットクラス"
 
 #: eeschema/sch_bus_entry.cpp:652 eeschema/sch_line.cpp:1286
-#, fuzzy
 msgid "Wire Style"
 msgstr "線のスタイル"
 
@@ -20680,19 +20667,16 @@ msgid "Find in Net Inspector"
 msgstr "ネット インスペクター検索"
 
 #: eeschema/sch_edit_frame.cpp:3037
-#, fuzzy
 msgid "No design variants to edit."
-msgstr "回路図に新しいデザイン バリアントを追加。"
+msgstr "編集可能なデザイン バリアントはありません。"
 
 #: eeschema/sch_edit_frame.cpp:3041
-#, fuzzy
 msgid "Select variant to edit description:"
-msgstr "削除するバリアント名を選択:"
+msgstr "説明を編集するバリアントを選択:"
 
 #: eeschema/sch_edit_frame.cpp:3042
-#, fuzzy
 msgid "Edit Variant Description"
-msgstr "ジョブの説明を編集"
+msgstr "バリアントの説明を編集"
 
 #: eeschema/sch_edit_frame.cpp:3102
 msgid "Select variant name to remove:"
@@ -29889,19 +29873,20 @@ msgid ""
 "View and compare existing Gerber/Excellon files. To export Gerbers from a "
 "PCB, use 'pcb export gerber'"
 msgstr ""
+"既存のガーバー/Excellon ファイルを表示および比較します。ガーバーを"
+"エクスポートするには、'ガーバー としてエクスポート' を使用します"
 
 #: kicad/cli/command_gerber_convert.h:33
 msgid "Convert Gerber/Excellon to other formats"
-msgstr ""
+msgstr "ガーバー/Excellonファイルを他の形式に変換する"
 
 #: kicad/cli/command_gerber_convert_png.cpp:43
 msgid "Convert a Gerber or Excellon file to PNG image"
-msgstr ""
+msgstr "ガーバーまたはExcellon ファイルを PNG 画像に変換する"
 
 #: kicad/cli/command_gerber_convert_png.cpp:48
-#, fuzzy
 msgid "Resolution in DPI (default: 300)"
-msgstr "(オプション; デフォルト 0)"
+msgstr "DPI解像度(デフォルト:300)"
 
 #: kicad/cli/command_gerber_convert_png.cpp:54
 msgid "Output width in pixels (overrides DPI)"
@@ -29922,29 +29907,27 @@ msgstr "解釈に関するエラーまたは警告で失敗"
 
 #: kicad/cli/command_gerber_diff.cpp:46
 msgid "Compare two Gerber or Excellon files and show differences"
-msgstr ""
+msgstr "２つのガーバーまたはExcellon ファイルを比較して違いを表示"
 
 #: kicad/cli/command_gerber_diff.cpp:49
 msgid "Reference file (first Gerber/Excellon file)"
-msgstr ""
+msgstr "リファレンス ファイル (最初のガーバー/Excellon ファイル)"
 
 #: kicad/cli/command_gerber_diff.cpp:53
 msgid "Comparison file (second Gerber/Excellon file)"
-msgstr ""
+msgstr "比較 ファイル(２つ目のガーバー/Excellon ファイル)"
 
 #: kicad/cli/command_gerber_diff.cpp:58
-#, fuzzy
 msgid "Output format: png, text, or json (default: png)"
-msgstr "インポートレポートの形式: none, json, text (デフォルト: none)"
+msgstr "出力フォーマットt: png, text, json (デフォルト: png)"
 
 #: kicad/cli/command_gerber_diff.cpp:64
 msgid "Resolution in DPI for PNG output (default: 300)"
 msgstr "PNG出力時のDPI解像度(デフォルト:300)"
 
 #: kicad/cli/command_gerber_diff.cpp:68
-#, fuzzy
 msgid "Disable anti-aliasing for PNG output"
-msgstr "アンチエイリアシングを無効化"
+msgstr "PNG出力のアンチエイリアシングを無効化"
 
 #: kicad/cli/command_gerber_diff.cpp:72
 msgid "Use transparent background for PNG output"
@@ -29959,28 +29942,25 @@ msgid "Tolerance in nm for floating point comparisons (default: 0)"
 msgstr "浮動小数点比較におけるnm単位の許容差(デフォルト:0)"
 
 #: kicad/cli/command_gerber_diff.cpp:118 kicad/cli/command_gerber_info.cpp:80
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid output format: %s\n"
-msgstr "不正なレポート フォーマット: %s\n"
+msgstr "不正出力フォーマット: %s\n"
 
 #: kicad/cli/command_gerber_info.cpp:40
 msgid "Display information about a Gerber or Excellon file"
-msgstr ""
+msgstr "ガーバーまたはExcellon ファイルに関する情報を表示"
 
 #: kicad/cli/command_gerber_info.cpp:44
-#, fuzzy
 msgid "Output format, options: text, json"
-msgstr "出力ファイル形式, オプション: json, レポート"
+msgstr "出力フォーマット, オプション: text, json"
 
 #: kicad/cli/command_gerber_info.cpp:49
-#, fuzzy
 msgid "Output units, options: mm, inch, mils (default: mm)"
-msgstr "出力単位の有効なオプション: mm,in"
+msgstr "出力単位, オプション: mm, inch, mils (デフォルト: mm)"
 
 #: kicad/cli/command_gerber_info.cpp:53
-#, fuzzy
 msgid "Calculate and display copper area"
-msgstr "メッキされた導体を計算中"
+msgstr "導体面積を計算し表示"
 
 #: kicad/cli/command_gerber_info.cpp:100
 #, c-format
@@ -38419,14 +38399,12 @@ msgid "They will be excluded from the %s list"
 msgstr "%s リストから除外されます"
 
 #: pcbnew/dialogs/dialog_drc.cpp:788 pcbnew/dialogs/dialog_drc.cpp:795
-#, fuzzy
 msgid "Violation severities can also be edited in Board Setup"
-msgstr "違反の深刻度は、基板の設定... ダイアログで編集することができます"
+msgstr "違反の深刻度は、[基板の設定...]でも編集することができます"
 
 #: pcbnew/dialogs/dialog_drc.cpp:806
-#, fuzzy
 msgid "Open the Board Setup dialog"
-msgstr "基板の設定... ダイアログを開く"
+msgstr "基板の設定ダイアログを開く"
 
 #: pcbnew/dialogs/dialog_drc.cpp:1110
 #, c-format
@@ -40537,7 +40515,7 @@ msgstr "フィルターオプションにかかわらず、すべてのティア
 
 #: pcbnew/dialogs/dialog_global_edit_teardrops_base.cpp:131
 msgid "Edit default values in Board Setup"
-msgstr "デフォルト値を[基板の設定]で編集"
+msgstr "デフォルト値を [基板の設定...] で編集"
 
 #: pcbnew/dialogs/dialog_global_edit_teardrops_base.cpp:149
 #: pcbnew/dialogs/dialog_pad_properties_base.cpp:671
@@ -42269,11 +42247,11 @@ msgstr ""
 
 #: pcbnew/dialogs/dialog_plot_base.cpp:208
 msgid "Board setup"
-msgstr "基板セットアップ"
+msgstr "基板の設定"
 
 #: pcbnew/dialogs/dialog_plot_base.cpp:209
 msgid "File > Board Setup..."
-msgstr "ファイル >基板の設定..."
+msgstr "[ファイル] > [基板の設定...]"
 
 #: pcbnew/dialogs/dialog_plot_base.cpp:222
 msgid "Gerber Options"
@@ -43138,7 +43116,7 @@ msgid ""
 "Leave blank to use the value defined in the Board Setup."
 msgstr ""
 "この形状とハンダマスク間のローカル クリアランスです。\n"
-"0 とした場合、基板の設定値が使用されます。"
+"0 とした場合、[基板の設定...]値が使用されます。"
 
 #: pcbnew/dialogs/dialog_swap_layers.cpp:48
 msgid "Move items on:"
@@ -43298,7 +43276,7 @@ msgid ""
 "Leave blank to use the value defined in the Board Setup."
 msgstr ""
 "これは配線とハンダマスク間のローカル クリアランスです。\n"
-"基盤の設定で定義された値を使う場合は空白を指定します。"
+"[基板の設定...]で定義された値を使う場合は空白を指定します。"
 
 #: pcbnew/dialogs/dialog_track_via_properties_base.cpp:310
 #: pcbnew/dialogs/dialog_track_via_size_base.cpp:36
@@ -57319,9 +57297,8 @@ msgstr ""
 "基板をクリアし、PCB エディターで保存した直近のレスキュー ファイルを取得します"
 
 #: pcbnew/tools/pcb_actions.cpp:1215
-#, fuzzy
 msgid "Import Non-KiCad Board File..."
-msgstr "KiCad以外のボード ファイルをインポート..."
+msgstr "KiCad以外の基板 ファイルをインポート..."
 
 #: pcbnew/tools/pcb_actions.cpp:1216
 msgid "Import board file from other applications"
