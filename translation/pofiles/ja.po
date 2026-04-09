@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kicad\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-07 19:08+0300\n"
-"PO-Revision-Date: 2026-04-06 18:09+0000\n"
+"PO-Revision-Date: 2026-04-09 18:49+0000\n"
 "Last-Translator: 2tama3 <2tama3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kicad/master-"
 "source/ja/>\n"
@@ -2065,102 +2065,94 @@ msgstr "APIからの変更"
 #: common/api/api_plugin.cpp:58
 #, c-format
 msgid "invalid plugin configuration at '%s': %s"
-msgstr ""
+msgstr "プラグイン設定が '%s' で不正: %s"
 
 #: common/api/api_plugin.cpp:73
-#, fuzzy, c-format
+#, c-format
 msgid "invalid plugin runtime: %s"
-msgstr "不正なピン名"
+msgstr "不正なプラグイン ランタイム: %s"
 
 #: common/api/api_plugin.cpp:105
-#, fuzzy
 msgid "could not read plugin configuration file"
-msgstr "リポジト構成にアクセスできませんでした"
+msgstr "プラグイン設定ファイルにアクセスできませんでした"
 
 #: common/api/api_plugin.cpp:125
-#, fuzzy, c-format
+#, c-format
 msgid "plugin configuration file error: %s"
-msgstr "構成エラー"
+msgstr "プラグイン 設定ファイル エラー: %s"
 
 #: common/api/api_plugin.cpp:158
-#, fuzzy, c-format
+#, c-format
 msgid "missing or invalid required keys: %s"
-msgstr ""
-"I-Vとスイッチングデータが採取されたときの温度範囲(Temperature Range)値が不正"
-"です。"
+msgstr "必須キーが欠落しているか無効: %s"
 
 #: common/api/api_plugin.cpp:167
-#, fuzzy, c-format
+#, c-format
 msgid "identifier '%s' is invalid"
-msgstr "シンボル ライブラリ識別子 '%s' は有効ではありません。"
+msgstr "識別子 '%s' が不正"
 
 #: common/api/api_plugin.cpp:194
-#, fuzzy, c-format
+#, c-format
 msgid "actions section is invalid: %s"
-msgstr "データベースへの接続に失敗: %s"
+msgstr "アクション セレクションが不正: %s"
 
 #: common/api/api_plugin_manager.cpp:98
-#, fuzzy, c-format
+#, c-format
 msgid "Plugin action '%s': %s"
-msgstr "プラグイン設定:"
+msgstr "プラグイン アクション '%s': %s"
 
 #: common/api/api_plugin_manager.cpp:109
-#, fuzzy, c-format
+#, c-format
 msgid "Plugin '%s': %s"
-msgstr "プラグイン (%d)"
+msgstr "プラグイン '%s': %s"
 
 #: common/api/api_plugin_manager.cpp:124
-#, fuzzy, c-format
+#, c-format
 msgid "exited with code %d"
-msgstr "プロセスがエラーコード %d で終了しました"
+msgstr "終了コード %d"
 
 #: common/api/api_plugin_manager.cpp:335
-#, fuzzy
 msgid "action is not registered"
-msgstr "レイヤーの選択が必須です。"
+msgstr "アクションが登録されていない"
 
 #: common/api/api_plugin_manager.cpp:369 common/api/api_plugin_manager.cpp:779
 #: common/api/api_plugin_manager.cpp:863
-#, fuzzy
 msgid "missing plugin environment"
-msgstr "プラグイン環境を再構築"
+msgstr "プラグイン環境の不正"
 
 #: common/api/api_plugin_manager.cpp:378
-#, fuzzy, c-format
+#, c-format
 msgid "entrypoint '%s' could not be read"
-msgstr "ファイル '%s' を作成できませんでした。"
+msgstr "エントリーポイント '%s' を読み取ることができませんでした"
 
 #: common/api/api_plugin_manager.cpp:446
-#, fuzzy
 msgid "process could not be created"
 msgstr "子プロセスを作成できませんでした"
 
 #: common/api/api_plugin_manager.cpp:490
-#, fuzzy, c-format
+#, c-format
 msgid "entrypoint '%s' is not executable"
-msgstr "ディレクトリー '%s' は書き込み禁止です。"
+msgstr "エントリーポイント '%s' が実行可能では有りません"
 
 #: common/api/api_plugin_manager.cpp:571
-#, fuzzy
 msgid "could not launch plugin"
-msgstr "フットプリント ウィザード '%s' の起動が出来ませんでした"
+msgstr "プラグインを起動できません"
 
 #: common/api/api_plugin_manager.cpp:749 common/api/api_plugin_manager.cpp:831
 #: common/api/api_plugin_manager.cpp:921
-#, fuzzy, c-format
+#, c-format
 msgid "error code %d"
-msgstr "エラー コード: %d"
+msgstr "エラー コード %d"
 
 #: common/api/api_plugin_manager.cpp:751 common/api/api_plugin_manager.cpp:833
 #: common/api/api_plugin_manager.cpp:923
-#, fuzzy, c-format
+#, c-format
 msgid "could not create plugin environment: %s"
-msgstr "プラグイン環境を再構築"
+msgstr "プラグイン環境を作成できません: %s"
 
 #: common/api/api_plugin_manager.cpp:872
-#, fuzzy
 msgid "requirements.txt could not be read"
-msgstr "子プロセスを作成できませんでした"
+msgstr "requirements.txt を読み取ることができませんでした"
 
 #: common/api/python_manager.cpp:138
 msgid "Process could not be created"
@@ -8290,7 +8282,7 @@ msgstr "未知のパラメーター '%s' ( '%s' 中)"
 #: common/io/cadstar/cadstar_archive_parser.h:55
 #, c-format
 msgid "Unable to parse '%s' in '%s'"
-msgstr "'%s' をパース出来ません ('%s' 中)"
+msgstr "'%s' を解釈出来ません ('%s' 中)"
 
 #: common/io/eagle/eagle_parser.cpp:288
 #, c-format
@@ -8305,7 +8297,7 @@ msgstr "不正な円弧 (半径 %0.2f 、角度 %0.2f )"
 #: common/io/easyeda/easyeda_parser_base.cpp:38
 #, c-format
 msgid "Failed to parse number from '%s'"
-msgstr "'%s' から数値の解析に失敗しました"
+msgstr "'%s' から数値の解釈に失敗しました"
 
 #: common/io/easyedapro/easyedapro_import_utils.cpp:181
 #: common/io/easyedapro/easyedapro_import_utils.cpp:236
@@ -8337,7 +8329,7 @@ msgstr "Zipアーカイブ '%s' を読み取れません"
 #: common/io/easyedapro/easyedapro_import_utils.cpp:311
 #, c-format
 msgid "Cannot parse JSON line %d in '%s': %s"
-msgstr "JSONのパースに失敗: %d行目 '%s': %s"
+msgstr "JSONの解釈に失敗: %d行目 '%s': %s"
 
 #: common/io/io_base.cpp:139
 msgid "Loading file canceled by user."
@@ -8580,9 +8572,8 @@ msgid "Schematic PythonBOM export"
 msgstr "回路図 PythonBOM としてエクスポート"
 
 #: common/jobs/job_gerber_diff.cpp:45
-#, fuzzy
 msgid "Gerber Diff"
-msgstr "ガーバー ファイル"
+msgstr "ガーバー 差分"
 
 #: common/jobs/job_gerber_diff.cpp:51
 #, fuzzy
@@ -9427,8 +9418,7 @@ msgstr ""
 #: common/netlist_reader/legacy_netlist_reader.cpp:115
 #: pcbnew/netlist_reader/legacy_netlist_reader.cpp:116
 msgid "Cannot parse time stamp in symbol section of netlist."
-msgstr ""
-"ネットリストのシンボル セクションにあるタイム スタンプを解釈できません。"
+msgstr "ネットリストのシンボル セクションにあるタイム スタンプを解釈できません。"
 
 #: common/netlist_reader/legacy_netlist_reader.cpp:125
 #: pcbnew/netlist_reader/legacy_netlist_reader.cpp:126
@@ -9809,7 +9799,7 @@ msgstr "サポートされていない 提供者 機能 '%s'。"
 #: common/remote_provider_metadata.cpp:147
 #, c-format
 msgid "Unable to parse remote provider metadata: %s"
-msgstr "遠隔提供者付帯情報の解析に失敗しました: %s"
+msgstr "遠隔提供者付帯情報の解釈に失敗しました: %s"
 
 #: common/remote_provider_metadata.cpp:154
 msgid "Remote provider metadata must enable web_ui_v1."
@@ -9838,7 +9828,7 @@ msgstr ""
 #: common/remote_provider_models.cpp:44
 #, c-format
 msgid "Unable to parse OAuth metadata: %s"
-msgstr "OAuth付帯情報の解析に失敗しました: %s"
+msgstr "OAuth付帯情報の解釈に失敗しました: %s"
 
 #: common/remote_provider_models.cpp:50
 msgid "OAuth metadata must include authorization_endpoint and token_endpoint."
@@ -9859,7 +9849,7 @@ msgstr "遠隔提供者目録のスキーマ検証に失敗しました: %s"
 #: common/remote_provider_models.cpp:147
 #, c-format
 msgid "Unable to parse remote provider manifest: %s"
-msgstr "遠隔提供者目録の解析ができません: %s"
+msgstr "遠隔提供者目録の解釈ができません: %s"
 
 #: common/remote_provider_utils.cpp:94
 #, c-format
@@ -17150,9 +17140,9 @@ msgstr "デフォルトのバリアントを削除できません。"
 
 #: eeschema/dialogs/dialog_symbol_fields_table.cpp:2955
 #: eeschema/sch_edit_frame.cpp:3055
-#, fuzzy, c-format
+#, c-format
 msgid "Edit Description for '%s'"
-msgstr "ジョブの説明を編集"
+msgstr "'%s' の説明を編集"
 
 #: eeschema/dialogs/dialog_symbol_fields_table_base.cpp:79
 msgid "Add a new field"
@@ -21291,7 +21281,7 @@ msgstr "EasyEDA (JLCEDA) Std ファイル"
 #: pcbnew/pcb_io/easyedapro/pcb_io_easyedapro_parser.cpp:76
 #, c-format
 msgid "Failed to parse value: '%s'"
-msgstr "値の解析に失敗しました: '%s'"
+msgstr "値の解釈に失敗しました: '%s'"
 
 #: eeschema/sch_io/geda/sch_io_geda.cpp:3646
 #, c-format
@@ -21574,7 +21564,7 @@ msgid ""
 "Saving would permanently lose symbols that could not be loaded.\n"
 "Please fix the library file manually before saving."
 msgstr ""
-"読み込み中に解析エラーが発生したためライブラリ '%s' を保存できません。\n"
+"読み込み中に解釈エラーが発生したためライブラリ '%s' を保存できません。\n"
 "\n"
 "このまま保存すると、読み込めなかったシンボルが永久に失われます。\n"
 "保存する前に、ライブラ リファイルを手動で正しく修正してください。"
@@ -21601,7 +21591,7 @@ msgstr ""
 #: eeschema/sch_io/kicad_sexpr/sch_io_kicad_sexpr_parser.cpp:309
 #, c-format
 msgid "Cannot parse %s as a symbol"
-msgstr "%s をシンボルとして読み込めません"
+msgstr "%s をシンボルとして解釈できません"
 
 #: eeschema/sch_io/kicad_sexpr/sch_io_kicad_sexpr_parser.cpp:336
 msgid "Invalid symbol name"
@@ -21653,7 +21643,7 @@ msgstr "不正なハイパーリンク URL '%s'"
 #: eeschema/sch_io/kicad_sexpr/sch_io_kicad_sexpr_parser.cpp:919
 #, c-format
 msgid "Cannot parse '%s' as a header."
-msgstr "%s をヘッダーとして解析できません。"
+msgstr "%s をヘッダーとして解釈できません。"
 
 #: eeschema/sch_io/kicad_sexpr/sch_io_kicad_sexpr_parser.cpp:956
 #: eeschema/sch_io/kicad_sexpr/sch_io_kicad_sexpr_parser.cpp:1111
@@ -24493,7 +24483,7 @@ msgstr "別のシミュレーションがすでに実行中です。"
 #: eeschema/sim/simulator_frame.cpp:558
 #, c-format
 msgid "Unable to load or parse file %s"
-msgstr "ファイル %s の読み込みもしくは解析ができません"
+msgstr "ファイル %s の読み込みもしくは解釈ができません"
 
 #: eeschema/sim/simulator_frame.cpp:641
 msgid "Save changes to workbook?"
@@ -26711,9 +26701,8 @@ msgid "Import 2D drawing file"
 msgstr "2D 図面ファイルをインポート"
 
 #: eeschema/tools/sch_actions.cpp:1233
-#, fuzzy
 msgid "Import Non-KiCad Schematic..."
-msgstr "KiCad以外の回路図をインポート (&I)"
+msgstr "KiCad以外の回路図をインポートする..."
 
 #: eeschema/tools/sch_actions.cpp:1234
 msgid ""
@@ -27221,14 +27210,12 @@ msgid "Remove an existing design variant from the schematic."
 msgstr "回路図から既存のデザイン バリアントを削除。"
 
 #: eeschema/tools/sch_actions.cpp:1808
-#, fuzzy
 msgid "Edit Variant Description..."
-msgstr "ジョブの説明を編集"
+msgstr "バリアントの説明を編集..."
 
 #: eeschema/tools/sch_actions.cpp:1809
-#, fuzzy
 msgid "Edit the description of an existing design variant."
-msgstr "テキスト エディターでスクリプト ファイルを編集"
+msgstr "既存のデザイン バリアントの説明を編集します。"
 
 #: eeschema/tools/sch_align_tool.cpp:64
 msgid "Align"
@@ -28213,7 +28200,7 @@ msgstr "ダウンロードしたシンボルの保存に失敗しました。"
 #: eeschema/widgets/panel_remote_symbol.cpp:1178
 #, c-format
 msgid "Failed to parse component list: %s"
-msgstr "コンポーネント リストの解析に失敗しました: %s"
+msgstr "コンポーネント リストの解釈に失敗しました: %s"
 
 #: eeschema/widgets/panel_remote_symbol.cpp:1184
 msgid "Component list must be a non-empty array."
@@ -29918,20 +29905,20 @@ msgstr "(オプション; デフォルト 0)"
 
 #: kicad/cli/command_gerber_convert_png.cpp:54
 msgid "Output width in pixels (overrides DPI)"
-msgstr ""
+msgstr "出力幅(ピクセル) (DPIを上書きする)"
 
 #: kicad/cli/command_gerber_convert_png.cpp:60
 msgid "Output height in pixels (overrides DPI)"
-msgstr ""
+msgstr "出力高さ(ピクセル) (DPIを上書きする)"
 
 #: kicad/cli/command_gerber_convert_png.cpp:66
 msgid "Use transparent background (default)"
-msgstr ""
+msgstr "透明な背景とする(デフォルト)"
 
 #: kicad/cli/command_gerber_convert_png.cpp:69
 #: kicad/cli/command_gerber_diff.cpp:85 kicad/cli/command_gerber_info.cpp:56
 msgid "Fail on any parse warnings or errors"
-msgstr ""
+msgstr "解釈に関するエラーまたは警告で失敗"
 
 #: kicad/cli/command_gerber_diff.cpp:46
 msgid "Compare two Gerber or Excellon files and show differences"
@@ -29952,7 +29939,7 @@ msgstr "インポートレポートの形式: none, json, text (デフォルト:
 
 #: kicad/cli/command_gerber_diff.cpp:64
 msgid "Resolution in DPI for PNG output (default: 300)"
-msgstr ""
+msgstr "PNG出力時のDPI解像度(デフォルト:300)"
 
 #: kicad/cli/command_gerber_diff.cpp:68
 #, fuzzy
@@ -29961,15 +29948,15 @@ msgstr "アンチエイリアシングを無効化"
 
 #: kicad/cli/command_gerber_diff.cpp:72
 msgid "Use transparent background for PNG output"
-msgstr ""
+msgstr "PNG出力を透明な背景とする"
 
 #: kicad/cli/command_gerber_diff.cpp:76
 msgid "Only set exit code (0=identical, 1=different), no output"
-msgstr ""
+msgstr "終了コード(0=同一、1=異なる)のみを返し、出力は行わない"
 
 #: kicad/cli/command_gerber_diff.cpp:82
 msgid "Tolerance in nm for floating point comparisons (default: 0)"
-msgstr ""
+msgstr "浮動小数点比較におけるnm単位の許容差(デフォルト:0)"
 
 #: kicad/cli/command_gerber_diff.cpp:118 kicad/cli/command_gerber_info.cpp:80
 #, fuzzy, c-format
@@ -29996,9 +29983,9 @@ msgid "Calculate and display copper area"
 msgstr "メッキされた導体を計算中"
 
 #: kicad/cli/command_gerber_info.cpp:100
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid units: %s\n"
-msgstr "不正な単位が指定されています\n"
+msgstr "不正な単位です: %s\n"
 
 #: kicad/cli/command_jobset.h:32
 msgid "Jobset"
@@ -32212,7 +32199,7 @@ msgstr "リポジトリを取得"
 #: kicad/pcm/pcm.cpp:306
 #, c-format
 msgid "Unable to parse repository: %s"
-msgstr "リポジトリの解析ができません: %s"
+msgstr "リポジトリの解釈が失敗しました: %s"
 
 #: kicad/pcm/pcm.cpp:307
 msgid ""
@@ -32242,13 +32229,13 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"パッケージの付帯情報(Metadata)解析ができません:\n"
+"パッケージの付帯情報(Metadata)解釈ができません:\n"
 "\n"
 "%s"
 
 #: kicad/pcm/pcm.cpp:464
 msgid "Failed to parse locally stored repository.json."
-msgstr "ローカルに保存された repository.json の解析に失敗しました。"
+msgstr "ローカルに保存された repository.json の解釈に失敗しました。"
 
 #: kicad/pcm/pcm.cpp:492
 msgid ""
@@ -32352,7 +32339,7 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"パッケージの付帯情報(Metadata)解析ができません:\n"
+"パッケージの付帯情報(Metadata)の解釈ができません:\n"
 "\n"
 "%s"
 
@@ -32913,7 +32900,7 @@ msgstr "情報の更新をリクエスト"
 #: kicad/update_manager.cpp:268
 #, c-format
 msgid "Unable to parse update response: %s"
-msgstr "更新の応答の解析ができません: %s"
+msgstr "更新の応答の解釈ができません: %s"
 
 #: kicad/widgets/filedlg_new_project.h:36
 msgid "Create a new folder for the project"
@@ -47445,7 +47432,7 @@ msgstr "条件式がありません。"
 #: pcbnew/drc/drc_rule_parser.cpp:333 pcbnew/drc/drc_rule_parser.cpp:407
 #, c-format
 msgid "Could not parse expression '%s'."
-msgstr "式 '%s' を解析できませんでした。"
+msgstr "式 '%s' を解釈できませんでした。"
 
 #: pcbnew/drc/drc_rule_parser.cpp:340 pcbnew/drc/drc_rule_parser.cpp:414
 #: pcbnew/drc/drc_rule_parser.cpp:685
@@ -53436,7 +53423,7 @@ msgstr ""
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.cpp:95
 #, c-format
 msgid "Failed to parse Sprint Layout file '%s'"
-msgstr "Sprint Layout ファイル '%s' の解析に失敗しました"
+msgstr "Sprint Layout ファイル '%s' の解釈に失敗しました"
 
 #: pcbnew/pcb_io/sprint_layout/pcb_io_sprint_layout.cpp:137
 #, c-format
