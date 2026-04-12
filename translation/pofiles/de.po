@@ -36,7 +36,7 @@ msgstr ""
 "Project-Id-Version: KiCad i18n Deutsch\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-07 19:08+0300\n"
-"PO-Revision-Date: 2026-04-09 18:49+0000\n"
+"PO-Revision-Date: 2026-04-12 18:37+0000\n"
 "Last-Translator: \"Pferd O.\" <frank.0228@ich-war-hier.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kicad/master-"
 "source/de/>\n"
@@ -2202,20 +2202,19 @@ msgstr "Konnte den Footprintassistent \"%s\" nicht starten"
 
 #: common/api/api_plugin_manager.cpp:749 common/api/api_plugin_manager.cpp:831
 #: common/api/api_plugin_manager.cpp:921
-#, fuzzy, c-format
+#, c-format
 msgid "error code %d"
-msgstr "Fehlercode: %d"
+msgstr "Fehlercode %d"
 
 #: common/api/api_plugin_manager.cpp:751 common/api/api_plugin_manager.cpp:833
 #: common/api/api_plugin_manager.cpp:923
-#, fuzzy, c-format
+#, c-format
 msgid "could not create plugin environment: %s"
-msgstr "Plugin-Umgebung neu erstellen"
+msgstr "Konnte Plugin-Umgebung nicht erstellen: %s"
 
 #: common/api/api_plugin_manager.cpp:872
-#, fuzzy
 msgid "requirements.txt could not be read"
-msgstr "Prozess konnte nicht erstellt werden"
+msgstr "Konnte requirements.txt nicht lesen"
 
 #: common/api/python_manager.cpp:138
 msgid "Process could not be created"
@@ -8682,24 +8681,20 @@ msgid "Schematic PythonBOM export"
 msgstr "Schaltplan: Pythonstücklistenexport"
 
 #: common/jobs/job_gerber_diff.cpp:45
-#, fuzzy
 msgid "Gerber Diff"
-msgstr "Gerber-Datei"
+msgstr "Gerber-Diff"
 
 #: common/jobs/job_gerber_diff.cpp:51
-#, fuzzy
 msgid "Gerber Diff Job Settings"
-msgstr "Gerberdateien-Export-Auftragseinstellungen"
+msgstr "Gerber-Diff-Auftragseinstellungen"
 
 #: common/jobs/job_gerber_diff.cpp:55
-#, fuzzy
 msgid "Gerber: Diff"
-msgstr "Gerber-Datei"
+msgstr "Gerber: Diff"
 
 #: common/jobs/job_gerber_export_png.cpp:39
-#, fuzzy
 msgid "Gerber Export PNG"
-msgstr "PCB Gerber-Export"
+msgstr "Gerber-Export PNG"
 
 #: common/jobs/job_gerber_export_png.cpp:45
 #, fuzzy
