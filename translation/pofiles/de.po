@@ -36,8 +36,8 @@ msgstr ""
 "Project-Id-Version: KiCad i18n Deutsch\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-07 19:08+0300\n"
-"PO-Revision-Date: 2026-04-13 19:09+0000\n"
-"Last-Translator: Frank Sonnenberg <frasoberg@web.de>\n"
+"PO-Revision-Date: 2026-04-14 21:09+0000\n"
+"Last-Translator: \"Pferd O.\" <frank.0228@ich-war-hier.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kicad/master-"
 "source/de/>\n"
 "Language: de\n"
@@ -2122,7 +2122,7 @@ msgstr "Änderung von API"
 #: common/api/api_plugin.cpp:58
 #, c-format
 msgid "invalid plugin configuration at '%s': %s"
-msgstr ""
+msgstr "Ungültige Plugin-Konfiguration unter \"%s\": %s"
 
 #: common/api/api_plugin.cpp:73
 #, fuzzy, c-format
@@ -30262,14 +30262,16 @@ msgid ""
 "View and compare existing Gerber/Excellon files. To export Gerbers from a "
 "PCB, use 'pcb export gerber'"
 msgstr ""
+"Anzeigen und Vergleichen vorhandener Gerber-/Excellon-Dateien. Um Gerber-"
+"Dateien aus einer Leiterplatte zu exportieren, 'pcb export gerber' verwenden"
 
 #: kicad/cli/command_gerber_convert.h:33
 msgid "Convert Gerber/Excellon to other formats"
-msgstr ""
+msgstr "Gerber/Excellon in andere Formate wandeln"
 
 #: kicad/cli/command_gerber_convert_png.cpp:43
 msgid "Convert a Gerber or Excellon file to PNG image"
-msgstr ""
+msgstr "Gerber- oder Excellon-Datei in PNG-Bild umwandeln"
 
 #: kicad/cli/command_gerber_convert_png.cpp:48
 msgid "Resolution in DPI (default: 300)"
@@ -30277,11 +30279,11 @@ msgstr "Auflösung in DPI (Standard: 300)"
 
 #: kicad/cli/command_gerber_convert_png.cpp:54
 msgid "Output width in pixels (overrides DPI)"
-msgstr ""
+msgstr "Ausgabebreite in Pixeln (überschreibt DPI)"
 
 #: kicad/cli/command_gerber_convert_png.cpp:60
 msgid "Output height in pixels (overrides DPI)"
-msgstr ""
+msgstr "Ausgabehöhe in Pixeln (überschreibt DPI)"
 
 #: kicad/cli/command_gerber_convert_png.cpp:66
 msgid "Use transparent background (default)"
@@ -30290,11 +30292,11 @@ msgstr "Transparenten Hintergrund verwenden (Standard)"
 #: kicad/cli/command_gerber_convert_png.cpp:69
 #: kicad/cli/command_gerber_diff.cpp:85 kicad/cli/command_gerber_info.cpp:56
 msgid "Fail on any parse warnings or errors"
-msgstr ""
+msgstr "Warnungen/Fehler beim Parsen führen zum Abbruch"
 
 #: kicad/cli/command_gerber_diff.cpp:46
 msgid "Compare two Gerber or Excellon files and show differences"
-msgstr ""
+msgstr "Zwei Gerber- oder Excellon-Dateien vergleichen und Unterschiede zeigen"
 
 #: kicad/cli/command_gerber_diff.cpp:49
 msgid "Reference file (first Gerber/Excellon file)"
@@ -30322,11 +30324,11 @@ msgstr "Transparenten Hintergrund für PNG-Ausgabe verwenden"
 
 #: kicad/cli/command_gerber_diff.cpp:76
 msgid "Only set exit code (0=identical, 1=different), no output"
-msgstr ""
+msgstr "Nur exit-Code festlegen (0=identisch, 1=abweichend), keine Ausgabe"
 
 #: kicad/cli/command_gerber_diff.cpp:82
 msgid "Tolerance in nm for floating point comparisons (default: 0)"
-msgstr ""
+msgstr "Toleranz in nm für Gleitkommazahl-Vergleiche (Standard: 0)"
 
 #: kicad/cli/command_gerber_diff.cpp:118 kicad/cli/command_gerber_info.cpp:80
 #, c-format
@@ -38213,12 +38215,12 @@ msgstr "Anzahl vertikal"
 #: pcbnew/dialogs/dialog_create_array.cpp:436
 #, c-format
 msgid "horizontal delta of zero with %ld objects"
-msgstr ""
+msgstr "horizontales Delta von Null bei %ld Objekten"
 
 #: pcbnew/dialogs/dialog_create_array.cpp:442
 #, c-format
 msgid "vertical delta of zero with %ld objects"
-msgstr ""
+msgstr "vertikales Delta von Null bei %ld Objekten"
 
 #: pcbnew/dialogs/dialog_create_array.cpp:451
 msgid "stagger"
@@ -38231,7 +38233,7 @@ msgstr "Anzahl Löcher"
 #: pcbnew/dialogs/dialog_create_array.cpp:517
 #, c-format
 msgid "angular delta of zero with %ld objects"
-msgstr ""
+msgstr "Winkeldelta von Null bei %ld Objekten"
 
 #: pcbnew/dialogs/dialog_create_array.cpp:564
 msgid "Bad parameters"
