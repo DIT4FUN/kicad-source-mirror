@@ -181,6 +181,7 @@ PANEL_FP_PROPERTIES_3D_MODEL::~PANEL_FP_PROPERTIES_3D_MODEL()
     m_extrusionColorSwatch->Unbind( COLOR_SWATCH_CHANGED, &PANEL_FP_PROPERTIES_3D_MODEL::onExtrusionColorChanged,
                                     this );
     m_extrusionMaterialChoice->Unbind( wxEVT_CHOICE, &PANEL_FP_PROPERTIES_3D_MODEL::onExtrusionMaterialChanged, this );
+    m_showExtrusionCheckbox->Unbind( wxEVT_CHECKBOX, &PANEL_FP_PROPERTIES_3D_MODEL::onExtrusionControlChanged, this );
 
     // free the memory used by all models, otherwise models which were
     // browsed but not used would consume memory
