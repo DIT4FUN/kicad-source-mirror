@@ -36,7 +36,7 @@ msgstr ""
 "Project-Id-Version: KiCad i18n Deutsch\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-07 19:08+0300\n"
-"PO-Revision-Date: 2026-04-14 21:09+0000\n"
+"PO-Revision-Date: 2026-04-15 16:10+0000\n"
 "Last-Translator: \"Pferd O.\" <frank.0228@ich-war-hier.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kicad/master-"
 "source/de/>\n"
@@ -45,7 +45,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 "X-Poedit-Basepath: ../../../../../../mnt/kicad\n"
 "X-Poedit-KeywordsList: _;_HKI\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -2135,19 +2135,19 @@ msgid "could not read plugin configuration file"
 msgstr "Konnte Repository-Konfiguration nicht abrufen"
 
 #: common/api/api_plugin.cpp:125
-#, fuzzy, c-format
+#, c-format
 msgid "plugin configuration file error: %s"
-msgstr "Konfigurationsfehler"
+msgstr "Fehler in Plugin-Konfigurationsdatei: %s"
 
 #: common/api/api_plugin.cpp:158
-#, fuzzy, c-format
+#, c-format
 msgid "missing or invalid required keys: %s"
-msgstr "Fehlender oder ungültiger Temperaturbereich."
+msgstr "Fehlende oder ungültige benötigte Schlüssel: %s"
 
 #: common/api/api_plugin.cpp:167
-#, fuzzy, c-format
+#, c-format
 msgid "identifier '%s' is invalid"
-msgstr "Symbolbibliotheksbezeichner %s ist ungültig."
+msgstr "Bezeichner \"%s\" ist ungültig"
 
 #: common/api/api_plugin.cpp:194
 #, fuzzy, c-format
@@ -2155,14 +2155,14 @@ msgid "actions section is invalid: %s"
 msgstr "Datenbankverbindung fehlgeschlagen: %s"
 
 #: common/api/api_plugin_manager.cpp:98
-#, fuzzy, c-format
+#, c-format
 msgid "Plugin action '%s': %s"
-msgstr "Plugin-Optionen"
+msgstr "Plugin-Aktion \"%s\": %s"
 
 #: common/api/api_plugin_manager.cpp:109
-#, fuzzy, c-format
+#, c-format
 msgid "Plugin '%s': %s"
-msgstr "Plugins (%d)"
+msgstr "Plugin \"%s\": %s"
 
 #: common/api/api_plugin_manager.cpp:124
 #, fuzzy, c-format
@@ -2170,9 +2170,8 @@ msgid "exited with code %d"
 msgstr "Prozess mit Rückgabewert %d fehlgeschlagen"
 
 #: common/api/api_plugin_manager.cpp:335
-#, fuzzy
 msgid "action is not registered"
-msgstr "Lagenauswahl ist erforderlich."
+msgstr "Aktion ist nicht registriert."
 
 #: common/api/api_plugin_manager.cpp:369 common/api/api_plugin_manager.cpp:779
 #: common/api/api_plugin_manager.cpp:863
@@ -2181,9 +2180,9 @@ msgid "missing plugin environment"
 msgstr "Plugin-Umgebung neu erstellen"
 
 #: common/api/api_plugin_manager.cpp:378
-#, fuzzy, c-format
+#, c-format
 msgid "entrypoint '%s' could not be read"
-msgstr "Konnte die Datei \"%s\" nicht erstellen."
+msgstr "Einstiegspunkt \"%s\" konnte nicht gelesen werden"
 
 #: common/api/api_plugin_manager.cpp:446
 #, fuzzy
@@ -2191,9 +2190,9 @@ msgid "process could not be created"
 msgstr "Prozess konnte nicht erstellt werden"
 
 #: common/api/api_plugin_manager.cpp:490
-#, fuzzy, c-format
+#, c-format
 msgid "entrypoint '%s' is not executable"
-msgstr "Verzeichnis \"%s\" ist nicht beschreibbar."
+msgstr "Einstiegspunkt \"%s\" ist nicht ausführbar"
 
 #: common/api/api_plugin_manager.cpp:571
 #, fuzzy
@@ -17339,9 +17338,9 @@ msgstr "Die Standardvariantenbeschreibung kann nicht bearbeitet werden."
 
 #: eeschema/dialogs/dialog_symbol_fields_table.cpp:2955
 #: eeschema/sch_edit_frame.cpp:3055
-#, fuzzy, c-format
+#, c-format
 msgid "Edit Description for '%s'"
-msgstr "Auftragsbeschreibung bearbeiten"
+msgstr "Beschreibung von \"%s\" bearbeiten"
 
 #: eeschema/dialogs/dialog_symbol_fields_table_base.cpp:79
 msgid "Add a new field"
@@ -27564,9 +27563,8 @@ msgid "Edit Variant Description..."
 msgstr "Variantenbeschreibung bearbeiten ..."
 
 #: eeschema/tools/sch_actions.cpp:1809
-#, fuzzy
 msgid "Edit the description of an existing design variant."
-msgstr "Skript-Datei im Texteditor bearbeiten"
+msgstr "Die Beschreibung einer vorhandenen Designvariante bearbeiten."
 
 #: eeschema/tools/sch_align_tool.cpp:64
 msgid "Align"
